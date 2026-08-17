@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand — sampled from supplied NordGate assets */
+  --navy-950: #000c26;
+  --navy-900: #04123a;
+  --navy-800: #0a1f52;
+  --blue-700: #003d9e;
+  --blue-600: #0b4fc0;
+  --blue-500: #1a63d6;
+  --blue-400: #4a8fe8;
+  --cyan-400: #00aeef;
+  --cyan-300: #5fd4f7;
+
+  --white: #ffffff;
+  --bg-soft: #f5f8fc;
+  --bg-soft-2: #eef3fa;
+
+  --ink-900: #0a1626;
+  --ink-700: #1f2f45;
+  --ink-500: #5b6c85;
+  --ink-400: #7c8ba3;
+
+  --border-soft: #e2e8f1;
+  --border-strong: #ccd6e6;
+
+  --background: var(--white);
+  --foreground: var(--ink-900);
+
+  /* Motion */
+  --ease-nordgate: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-blue-700: var(--blue-700);
+  --color-blue-600: var(--blue-600);
+  --color-blue-500: var(--blue-500);
+  --color-blue-400: var(--blue-400);
+  --color-cyan-400: var(--cyan-400);
+  --color-cyan-300: var(--cyan-300);
+
+  --color-bg-soft: var(--bg-soft);
+  --color-bg-soft-2: var(--bg-soft-2);
+
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+  --color-ink-400: var(--ink-400);
+
+  --color-border-soft: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --container-page: 1360px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--white);
+    --foreground: var(--ink-900);
+  }
+}
+
+* {
+  border-color: var(--border-soft);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01" 1, "cv11" 1;
+}
+
+::selection {
+  background: var(--blue-700);
+  color: var(--white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Recurring motifs used across sections */
+.container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2.5rem;
+  }
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.coord-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
