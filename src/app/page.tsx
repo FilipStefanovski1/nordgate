@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { TrustStrip } from "@/components/sections/TrustStrip";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { PositioningStatement } from "@/components/sections/PositioningStatement";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustStrip />
       <ProblemSection />
       <PositioningStatement />
       <ProcessSteps />

@@ -29,7 +29,7 @@ export default async function InsightArticlePage({
   if (!article) notFound();
 
   return (
-    <article className="bg-white py-20 sm:py-24">
+    <article className="bg-white pt-32 pb-20 sm:pt-36 sm:pb-24">
       <Container className="max-w-3xl">
         <Eyebrow>{article.category}</Eyebrow>
         <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl">

@@ -5,10 +5,11 @@ export type NavLink = {
 
 export const primaryNav: NavLink[] = [
   { label: "Nordic Market Entry", href: "/nordic-market-entry" },
-  { label: "Capabilities", href: "/capabilities" },
   { label: "How It Works", href: "/how-it-works" },
+  { label: "Capabilities", href: "/capabilities" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const headerCta: NavLink = {
