@@ -2,12 +2,16 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { team } from "@/data/team";
+import { cn } from "@/lib/utils/cn";
 
 const clipFrame = "polygon(0 0, 88% 0, 100% 12%, 100% 100%, 12% 100%, 0 88%)";
 
-export function TeamSection() {
+export function TeamSection({ background = "white" }: { background?: "white" | "soft" }) {
   return (
-    <section id="team" className="scroll-mt-24 bg-white py-24 sm:py-28">
+    <section
+      id="team"
+      className={cn("scroll-mt-24 py-24 sm:py-28", background === "soft" ? "bg-bg-soft" : "bg-white")}
+    >
       <Container>
         <ScrollReveal>
           <h2 className="max-w-xl text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl md:text-[2.75rem]">

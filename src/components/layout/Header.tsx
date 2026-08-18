@@ -150,7 +150,7 @@ export function Header() {
         transparent
           ? "border-transparent bg-transparent py-5"
           : scrolled
-            ? "border-border-soft bg-white/90 backdrop-blur-sm py-2.5"
+            ? "border-border-soft bg-white py-2.5"
             : "border-border-soft bg-white py-4",
         isHome && "transition-opacity duration-700 motion-reduce:transition-none",
         isHome && !mounted && "opacity-0"
