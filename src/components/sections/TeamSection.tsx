@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { team } from "@/data/team";
@@ -18,12 +19,22 @@ export function TeamSection() {
           {team.map((member) => (
             <ScrollReveal key={member.name}>
               <div
-                className="relative aspect-[4/5] w-full bg-gradient-to-br from-navy-900 to-blue-700"
+                className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-br from-navy-900 to-blue-700"
                 style={{ clipPath: clipFrame }}
               >
-                <span className="absolute bottom-6 left-6 text-6xl font-semibold text-white/25">
-                  {member.initials}
-                </span>
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 90vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <span className="absolute bottom-6 left-6 text-6xl font-semibold text-white/25">
+                    {member.initials}
+                  </span>
+                )}
               </div>
               <p className="mt-6 text-xl font-semibold text-ink-900">{member.name}</p>
               <p className="mt-1 text-sm text-ink-500">{member.role}</p>

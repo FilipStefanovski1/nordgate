@@ -2,6 +2,7 @@ export type TeamMember = {
   name: string;
   role: string;
   initials: string;
+  photo?: string;
   bio: string[];
 };
 
@@ -10,6 +11,7 @@ export const team: TeamMember[] = [
     name: "Anders Hansen",
     role: "Co-Founder & Head of Partnerships",
     initials: "AH",
+    photo: "/team/anders-hansen.jpg",
     bio: [
       "5+ years of experience in sales and commercial management across the Danish energy and telecom sectors.",
       "A network across the Nordic political system, including a background in the Nordic Council.",
@@ -20,6 +22,7 @@ export const team: TeamMember[] = [
     name: "Samuel N. Vickius",
     role: "Co-Founder & Head of Sales",
     initials: "SV",
+    photo: "/team/samuel-vickius.jpg",
     bio: [
       "Background in business development, stakeholder relations and cross-border cooperation across European markets.",
       "Understands both Nordic and Southeast European business environments.",
