@@ -3,17 +3,96 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { primaryNav, headerCta } from "@/data/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { primaryNav, headerCta, headerSecondaryCta, type NavEntry } from "@/data/navigation";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils/cn";
+
+function DesktopDropdown({
+  entry,
+  transparent,
+  isOpen,
+  onToggle,
+  onClose,
+  active,
+}: {
+  entry: Extract<NavEntry, { type: "dropdown" }>;
+  transparent: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+  active: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    };
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("keydown", onEscape);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("keydown", onEscape);
+    };
+  }, [isOpen, onClose]);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className={cn(
+          "flex items-center gap-1.5 text-[13px] font-medium uppercase tracking-wide transition-colors duration-200",
+          transparent
+            ? active
+              ? "text-white"
+              : "text-white/75 hover:text-white"
+            : active
+              ? "text-blue-700"
+              : "text-ink-700 hover:text-blue-700"
+        )}
+      >
+        {entry.label}
+        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", isOpen && "rotate-180")} aria-hidden="true" />
+      </button>
+
+      {isOpen && (
+        <div
+          role="menu"
+          className="absolute left-1/2 top-full z-10 mt-3 w-64 -translate-x-1/2 rounded-lg border border-border-soft bg-white p-2 shadow-lg shadow-navy-950/5"
+        >
+          {entry.items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              role="menuitem"
+              onClick={onClose}
+              className="block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-bg-soft"
+            >
+              <span className="block text-sm font-medium normal-case text-ink-900">{item.label}</span>
+              {item.description && <span className="mt-0.5 block text-xs normal-case text-ink-500">{item.description}</span>}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
@@ -22,12 +101,14 @@ export function Header() {
     return () => window.clearTimeout(id);
   }, []);
 
-  // Close the mobile menu when the route changes — derived during render
-  // (rather than in an effect) so it can't cascade an extra render.
+  // Close menus when the route changes — derived during render (rather than
+  // in an effect) so it can't cascade an extra render.
   const [menuPathname, setMenuPathname] = useState(pathname);
   if (menuPathname !== pathname) {
     setMenuPathname(pathname);
     setOpen(false);
+    setOpenDropdown(null);
+    setExpandedMobile(null);
   }
 
   useEffect(() => {
@@ -58,6 +139,9 @@ export function Header() {
   const isHome = pathname === "/";
   const transparent = isHome && !scrolled && !open;
 
+  const isEntryActive = (entry: NavEntry): boolean =>
+    entry.type === "link" ? pathname === entry.href : entry.items.some((item) => pathname === item.href.split("#")[0]);
+
   return (
     <header
       ref={headerRef}
@@ -72,34 +156,52 @@ export function Header() {
         isHome && !mounted && "opacity-0"
       )}
     >
-      <Container className="flex items-center justify-between">
+      <Container className="flex items-center justify-between gap-6">
         <Logo variant={transparent ? "white" : "color"} />
 
-        <nav className="hidden xl:flex items-center gap-6" aria-label="Primary">
-          {primaryNav.map((link) => {
-            const active = pathname === link.href;
-            return (
+        <nav className="hidden xl:flex items-center gap-8" aria-label="Primary">
+          {primaryNav.map((entry) =>
+            entry.type === "link" ? (
               <Link
-                key={link.href}
-                href={link.href}
+                key={entry.href}
+                href={entry.href}
                 className={cn(
                   "text-[13px] font-medium uppercase tracking-wide transition-colors duration-200",
                   transparent
-                    ? active
+                    ? pathname === entry.href
                       ? "text-white"
                       : "text-white/75 hover:text-white"
-                    : active
+                    : pathname === entry.href
                       ? "text-blue-700"
                       : "text-ink-700 hover:text-blue-700"
                 )}
               >
-                {link.label}
+                {entry.label}
               </Link>
-            );
-          })}
+            ) : (
+              <DesktopDropdown
+                key={entry.label}
+                entry={entry}
+                transparent={transparent}
+                isOpen={openDropdown === entry.label}
+                onToggle={() => setOpenDropdown((v) => (v === entry.label ? null : entry.label))}
+                onClose={() => setOpenDropdown(null)}
+                active={isEntryActive(entry)}
+              />
+            )
+          )}
         </nav>
 
-        <div className="hidden xl:block">
+        <div className="hidden xl:flex items-center gap-3">
+          <Link
+            href={headerSecondaryCta.href}
+            className={cn(
+              "text-[13px] font-medium uppercase tracking-wide transition-colors duration-200",
+              transparent ? "text-white/75 hover:text-white" : "text-ink-700 hover:text-blue-700"
+            )}
+          >
+            {headerSecondaryCta.label}
+          </Link>
           <Link
             href={headerCta.href}
             className={cn(
@@ -132,19 +234,54 @@ export function Header() {
           className="xl:hidden fixed inset-x-0 bottom-0 z-40 bg-white"
           style={{ top: headerHeight || undefined }}
         >
-          <div className="flex h-full flex-col justify-between overflow-y-auto px-6 py-10">
-            <nav className="flex flex-col gap-1" aria-label="Mobile primary">
-              {primaryNav.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="border-b border-border-soft py-4 text-2xl font-semibold text-ink-900"
-                >
-                  {link.label}
-                </Link>
-              ))}
+          <div className="flex h-full flex-col justify-between overflow-y-auto px-6 py-8">
+            <nav className="flex flex-col" aria-label="Mobile primary">
+              {primaryNav.map((entry) =>
+                entry.type === "link" ? (
+                  <Link
+                    key={entry.href}
+                    href={entry.href}
+                    className="border-b border-border-soft py-4 text-xl font-semibold text-ink-900"
+                  >
+                    {entry.label}
+                  </Link>
+                ) : (
+                  <div key={entry.label} className="border-b border-border-soft">
+                    <button
+                      type="button"
+                      onClick={() => setExpandedMobile((v) => (v === entry.label ? null : entry.label))}
+                      aria-expanded={expandedMobile === entry.label}
+                      className="flex w-full items-center justify-between py-4 text-xl font-semibold text-ink-900"
+                    >
+                      {entry.label}
+                      <ChevronDown
+                        className={cn(
+                          "h-5 w-5 text-ink-400 transition-transform duration-200",
+                          expandedMobile === entry.label && "rotate-180"
+                        )}
+                        aria-hidden="true"
+                      />
+                    </button>
+                    {expandedMobile === entry.label && (
+                      <div className="flex flex-col gap-1 pb-4 pl-1">
+                        {entry.items.map((item) => (
+                          <Link key={item.href} href={item.href} className="rounded-md px-3 py-2.5 text-base text-ink-700 hover:bg-bg-soft">
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
             </nav>
             <div className="mt-10 flex flex-col gap-4">
+              <Link
+                href={headerSecondaryCta.href}
+                className="inline-flex items-center justify-center rounded-md border border-border-strong px-6 py-4 text-base font-semibold text-ink-900"
+              >
+                {headerSecondaryCta.label}
+              </Link>
               <Link
                 href={headerCta.href}
                 className="inline-flex items-center justify-center rounded-md bg-blue-700 px-6 py-4 text-base font-semibold text-white"

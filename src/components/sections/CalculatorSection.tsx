@@ -5,7 +5,7 @@ import { RoiCalculator } from "@/components/calculator/RoiCalculator";
 
 export function CalculatorSection() {
   return (
-    <section className="bg-white py-24 sm:py-28">
+    <section id="calculator" className="scroll-mt-24 bg-white py-24 sm:py-28">
       <Container>
         <ScrollReveal>
           <SectionHeading

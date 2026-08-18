@@ -1,35 +1,32 @@
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { team } from "@/data/team";
 
+const clipFrame = "polygon(0 0, 88% 0, 100% 12%, 100% 100%, 12% 100%, 0 88%)";
+
 export function TeamSection() {
   return (
-    <section className="bg-bg-soft py-24 sm:py-28">
+    <section id="team" className="scroll-mt-24 bg-white py-24 sm:py-28">
       <Container>
         <ScrollReveal>
-          <SectionHeading size="compact" eyebrow="Team" title="The people behind NordGate." />
+          <h2 className="max-w-xl text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-ink-900 sm:text-4xl md:text-[2.75rem]">
+            A team built for cross-border growth
+          </h2>
         </ScrollReveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2 lg:max-w-3xl">
           {team.map((member) => (
-            <ScrollReveal key={member.name} className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10">
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-blue-700 text-sm font-semibold text-blue-700">
+            <ScrollReveal key={member.name}>
+              <div
+                className="relative aspect-[4/5] w-full bg-gradient-to-br from-navy-900 to-blue-700"
+                style={{ clipPath: clipFrame }}
+              >
+                <span className="absolute bottom-6 left-6 text-6xl font-semibold text-white/25">
                   {member.initials}
-                </div>
-                <div>
-                  <p className="text-lg font-semibold text-ink-900">{member.name}</p>
-                  <p className="text-sm text-blue-600">{member.role}</p>
-                </div>
+                </span>
               </div>
-              <ul className="mt-6 flex flex-col gap-3">
-                {member.bio.map((line) => (
-                  <li key={line} className="text-sm leading-relaxed text-ink-500">
-                    {line}
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-6 text-xl font-semibold text-ink-900">{member.name}</p>
+              <p className="mt-1 text-sm text-ink-500">{member.role}</p>
             </ScrollReveal>
           ))}
         </div>
