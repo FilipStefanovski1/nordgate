@@ -23,16 +23,16 @@ export default function NordicMarketEntryPage() {
       <PageHeader
         eyebrow="Nordic market entry"
         title="Build your Nordic market before you build a Nordic office."
-        description="From market assessment to booked meetings — NordGate runs the full commercial motion so you can validate and grow in the Nordics without a local team on day one."
+        description="From market assessment to booked meetings, NordGate runs the full commercial motion so you can validate and grow in the Nordics without a local team on day one."
       />
 
-      <section className="bg-white py-24 sm:py-28">
+      <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
           <ScrollReveal>
             <SectionHeading
               eyebrow="What's included"
               title="Three phases. One accountable partner."
-              description="Market insight defines where to play. Sales setup builds the infrastructure. Sales execution turns it into meetings — all delivered by the same team."
+              description="Market insight defines where to play. Sales setup builds the infrastructure. Sales execution turns it into meetings, delivered by the same team throughout."
             />
           </ScrollReveal>
           <div className="mt-14">

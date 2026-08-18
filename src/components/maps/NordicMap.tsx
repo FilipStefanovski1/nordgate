@@ -4,11 +4,11 @@ import { useState } from "react";
 import { markets, type MarketInfo } from "@/data/markets";
 import { cn } from "@/lib/utils/cn";
 
-const positions: Record<MarketInfo["code"], { top: string; left: string; width: string }> = {
-  NO: { top: "6%", left: "6%", width: "34%" },
-  SE: { top: "10%", left: "38%", width: "34%" },
-  FI: { top: "6%", left: "70%", width: "26%" },
-  DK: { top: "68%", left: "22%", width: "30%" },
+const gridArea: Record<MarketInfo["code"], string> = {
+  NO: "no",
+  SE: "se",
+  FI: "fi",
+  DK: "dk",
 };
 
 export function NordicMap() {
@@ -17,19 +17,15 @@ export function NordicMap() {
 
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-      <div className="relative aspect-[5/4] w-full rounded-2xl border border-border-soft bg-bg-soft">
-        <svg
-          className="absolute inset-0 h-full w-full text-border-strong"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="0.2" strokeDasharray="1 2" />
-          <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" strokeWidth="0.2" strokeDasharray="1 2" />
-        </svg>
-
+      <div
+        className="grid aspect-[5/4] w-full gap-3 rounded-2xl border border-border-soft bg-bg-soft p-3"
+        style={{
+          gridTemplateAreas: `"no se fi" "no se ." ". dk ."`,
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateRows: "1fr 0.5fr 0.7fr",
+        }}
+      >
         {markets.map((m) => {
-          const pos = positions[m.code];
           const isActive = m.code === active;
           return (
             <button
@@ -39,10 +35,9 @@ export function NordicMap() {
               onFocus={() => setActive(m.code)}
               onClick={() => setActive(m.code)}
               aria-pressed={isActive}
-              style={{ top: pos.top, left: pos.left, width: pos.width }}
+              style={{ gridArea: gridArea[m.code] }}
               className={cn(
-                "absolute aspect-square rounded-xl border text-left transition-all duration-300",
-                "flex flex-col justify-between p-4",
+                "flex min-h-16 flex-col justify-between rounded-xl border p-4 text-left transition-all duration-300",
                 isActive
                   ? "border-blue-700 bg-navy-950 text-white shadow-lg shadow-blue-700/20"
                   : "border-border-strong bg-white text-ink-700 hover:border-blue-500"

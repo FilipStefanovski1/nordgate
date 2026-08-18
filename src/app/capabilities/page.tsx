@@ -12,7 +12,7 @@ import { capabilityCategories } from "@/data/capabilities";
 export const metadata: Metadata = {
   title: "Capabilities",
   description:
-    "NordGate helps Nordic companies access vetted international service providers and operational capacity — selected, vetted and coordinated on your behalf.",
+    "NordGate helps Nordic companies access vetted international service providers and operational capacity, selected, vetted and coordinated on your behalf.",
 };
 
 export default function CapabilitiesPage() {
@@ -21,7 +21,7 @@ export default function CapabilitiesPage() {
       <PageHeader
         eyebrow="International capabilities"
         title="Nordic company? Access the right international capabilities."
-        description="NordGate identifies, vets and coordinates international service providers, specialists and operational capacity — so you gain capacity without managing a new vendor relationship from scratch."
+        description="NordGate identifies, vets and coordinates international service providers, specialists and operational capacity, so you gain capacity without managing a new vendor relationship from scratch."
       />
 
       <section className="bg-white py-24 sm:py-28">
@@ -52,7 +52,7 @@ export default function CapabilitiesPage() {
           <ScrollReveal>
             <SectionHeading
               eyebrow="How it works"
-              title="Selection, vetting and coordination — handled for you."
+              title="Selection, vetting and coordination, handled for you."
               description="You bring the requirement. NordGate handles the search, the evaluation and the ongoing coordination."
             />
           </ScrollReveal>
@@ -79,7 +79,7 @@ export default function CapabilitiesPage() {
             <SectionHeading
               eyebrow="Not a marketplace"
               title="A coordination layer, not a directory."
-              description="Generic outsourcing directories and vendor marketplaces hand you a list and leave the evaluation, onboarding and ongoing coordination to you. Recruitment agencies focus on placing individuals rather than delivering outcomes. NordGate stays involved — understanding requirements, shortlisting vetted partners, supporting evaluation and remaining your single point of contact for as long as the cooperation runs."
+              description="Generic outsourcing directories and vendor marketplaces hand you a list and leave the evaluation, onboarding and ongoing coordination to you. Recruitment agencies focus on placing individuals rather than delivering outcomes. NordGate stays involved: understanding requirements, shortlisting vetted partners, supporting evaluation and remaining your single point of contact for as long as the cooperation runs."
             />
           </ScrollReveal>
         </Container>

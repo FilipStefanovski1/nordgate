@@ -23,8 +23,8 @@ export function OutreachCycle() {
       <div className="mt-8 flex items-center justify-center gap-3 border-t border-border-soft pt-8">
         <RefreshCw className="h-4 w-4 text-ink-400" aria-hidden="true" />
         <p className="text-sm text-ink-500">
-          Every qualified meeting feeds market feedback back into positioning and messaging — a
-          continuous loop, not a one-off campaign.
+          Every qualified meeting feeds market feedback back into positioning and messaging. It
+          runs as a continuous loop, not a one-off campaign.
         </p>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { calculateRoi } from "@/lib/calculator/roi";
-import { formatCurrency, formatMultiple, formatDecimal } from "@/lib/calculator/format";
+import { formatCurrency, formatDecimal } from "@/lib/calculator/format";
 import { calculatorDefaults, currencies, type CurrencyCode } from "@/data/pricing";
 import { CountUp } from "@/components/animations/CountUp";
 import { Button } from "@/components/ui/Button";
@@ -145,56 +145,52 @@ export function RoiCalculator() {
           />
         </div>
 
+        {/* Result panel — one clear focal number, then the breakdown that earns it */}
         <div className="rounded-2xl bg-navy-950 p-6 text-white sm:p-8">
-          <p className="eyebrow text-white/50">Projected outcome</p>
+          <p className="eyebrow text-white/50">Return per {currency} invested</p>
+          <p className="mt-2 text-5xl font-semibold sm:text-6xl">
+            <CountUp value={result.returnMultiple} decimals={1} suffix="×" />
+          </p>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
+            Every {currency} invested corresponds to approximately{" "}
+            <span className="font-medium text-white/85">{formatDecimal(result.returnMultiple, 1)}×</span> in projected
+            customer lifetime value, based on the assumptions on the left.
+          </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4">
-            <Stat label="Meetings" value={<CountUp value={result.totalMeetings} decimals={0} />} />
-            <Stat label="New customers" value={<CountUp value={result.expectedCustomers} decimals={1} />} />
-            <Stat label="Direct revenue" value={<CountUp value={result.directRevenue} decimals={0} prefix="" />} raw={fmt(result.directRevenue)} />
-            <Stat label="Lifetime value" value={fmt(result.lifetimeValue)} />
-          </div>
-
-          <div className="mt-8 border-t border-white/10 pt-8">
-            <p className="text-sm text-white/50">Return per {currency} invested</p>
-            <p className="mt-1 text-4xl font-semibold sm:text-5xl">{formatMultiple(result.returnMultiple)}</p>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">
-              In this scenario, every {currency} invested corresponds to approximately{" "}
-              {formatMultiple(result.returnMultiple)} in projected customer lifetime value.
-            </p>
-          </div>
-
-          <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/10 pt-6 text-sm">
+          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-7 text-sm">
+            <div>
+              <p className="text-white/50">Lifetime value</p>
+              <p className="mt-1 text-base font-semibold">{fmt(result.lifetimeValue)}</p>
+            </div>
             <div>
               <p className="text-white/50">Total NordGate cost</p>
-              <p className="mt-1 font-semibold">{fmt(result.totalCosts)}</p>
+              <p className="mt-1 text-base font-semibold">{fmt(result.totalCosts)}</p>
             </div>
             <div>
               <p className="text-white/50">Net value</p>
-              <p className="mt-1 font-semibold">{fmt(result.netValue)}</p>
+              <p className="mt-1 text-base font-semibold">{fmt(result.netValue)}</p>
             </div>
             <div>
               <p className="text-white/50">Deals to break even</p>
-              <p className="mt-1 font-semibold">{formatDecimal(result.breakEvenDeals, 1)}</p>
-            </div>
-            <div>
-              <p className="text-white/50">Success fee (5% of direct revenue)</p>
-              <p className="mt-1 font-semibold">{fmt(result.successFee)}</p>
+              <p className="mt-1 text-base font-semibold">{formatDecimal(result.breakEvenDeals, 1)}</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Equation walkthrough */}
-      <div className="mt-12 overflow-x-auto">
-        <div className="flex min-w-max items-center gap-3 rounded-2xl border border-border-soft bg-bg-soft px-6 py-6 sm:gap-4 sm:px-8">
-          <EquationStep label="Meetings" value={formatDecimal(result.totalMeetings, 0)} />
-          <Arrow />
-          <EquationStep label="Expected new customers" value={formatDecimal(result.expectedCustomers, 1)} />
-          <Arrow />
-          <EquationStep label="Direct revenue" value={fmt(result.directRevenue)} />
-          <Arrow />
-          <EquationStep label="Estimated lifetime value" value={fmt(result.lifetimeValue)} highlight />
+      {/* How the number is built — the education, not a repeat of the result */}
+      <div className="mt-12">
+        <p className="eyebrow text-ink-400">How this is calculated</p>
+        <div className="mt-4 overflow-x-auto">
+          <div className="flex min-w-max items-center gap-3 rounded-2xl border border-border-soft bg-bg-soft px-6 py-6 sm:gap-4 sm:px-8">
+            <EquationStep label="Meetings" sub={`${meetingsPerMonth}/mo × ${projectMonths} mo`} value={formatDecimal(result.totalMeetings, 0)} />
+            <Arrow />
+            <EquationStep label="Expected new customers" sub={`× ${conversionRate}% conversion`} value={formatDecimal(result.expectedCustomers, 1)} />
+            <Arrow />
+            <EquationStep label="Direct revenue" sub={`× ${fmt(averageOrderValue)}`} value={fmt(result.directRevenue)} />
+            <Arrow />
+            <EquationStep label="Estimated lifetime value" sub={`× ${customerLifetimeMonths} mo ÷ 12`} value={fmt(result.lifetimeValue)} highlight />
+          </div>
         </div>
       </div>
 
@@ -211,24 +207,16 @@ export function RoiCalculator() {
   );
 }
 
-function Stat({ label, value, raw }: { label: string; value: React.ReactNode; raw?: string }) {
-  return (
-    <div>
-      <p className="text-xs text-white/50">{label}</p>
-      <p className="mt-1 text-xl font-semibold sm:text-2xl">{raw ?? value}</p>
-    </div>
-  );
-}
-
-function EquationStep({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+function EquationStep({ label, sub, value, highlight }: { label: string; sub: string; value: string; highlight?: boolean }) {
   return (
     <div
-      className={`flex min-w-[140px] flex-col items-center gap-1 rounded-xl px-4 py-3 text-center ${
+      className={`flex min-w-[150px] flex-col items-center gap-1 rounded-xl px-4 py-3 text-center ${
         highlight ? "bg-navy-950 text-white" : "bg-white"
       }`}
     >
       <span className="text-lg font-semibold sm:text-xl">{value}</span>
       <span className={`text-xs ${highlight ? "text-white/60" : "text-ink-500"}`}>{label}</span>
+      <span className={`coord-label ${highlight ? "text-white/35" : "text-ink-400"}`}>{sub}</span>
     </div>
   );
 }

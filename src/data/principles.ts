@@ -3,7 +3,7 @@ export type Principle = { title: string; description: string };
 export const principles: Principle[] = [
   {
     title: "Local understanding",
-    description: "Every Nordic market has its own culture, expectations and decision-making process — we treat them as distinct.",
+    description: "Every Nordic market has its own culture, expectations and decision-making process. We treat them as distinct.",
   },
   {
     title: "Relevant relationships",
@@ -15,7 +15,7 @@ export const principles: Principle[] = [
   },
   {
     title: "Tailor-made solutions",
-    description: "No two market-entry plans look the same — we build around your product and ambition.",
+    description: "No two market-entry plans look the same. We build around your product and ambition.",
   },
   {
     title: "Controlled growth",

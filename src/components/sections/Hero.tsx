@@ -8,8 +8,10 @@ export function Hero() {
       <Container>
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
-            <span className="eyebrow text-blue-600">Nordic market entry &amp; business development</span>
-            <h1 className="mt-6 text-balance text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-ink-900 sm:text-6xl lg:text-[4rem]">
+            <span className="eyebrow text-blue-600 tracking-[0.1em] sm:tracking-[0.14em]">
+              Nordic market entry &amp; business development
+            </span>
+            <h1 className="mt-6 text-balance text-[2.25rem] font-semibold leading-[1.12] tracking-tight text-ink-900 sm:text-6xl sm:leading-[1.05] lg:text-[4rem]">
               Your gateway to the Nordic market.
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-500 sm:text-xl">

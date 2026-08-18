@@ -1,10 +1,11 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { cn } from "@/lib/utils/cn";
 
-export function FinalCta() {
+export function FinalCta({ background = "white" }: { background?: "white" | "soft" }) {
   return (
-    <section className="bg-bg-soft py-24 sm:py-28">
+    <section className={cn("py-24 sm:py-28", background === "soft" ? "bg-bg-soft" : "bg-white")}>
       <Container>
         <ScrollReveal className="flex flex-col items-start gap-8 rounded-3xl bg-navy-950 px-8 py-14 sm:px-14 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
           <div>

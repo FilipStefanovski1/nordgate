@@ -23,7 +23,7 @@ export function PositioningStatement() {
             We sell in it.
           </p>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
-            NordGate operates as an extension of the client&apos;s commercial team — defining
+            NordGate operates as an extension of the client&apos;s commercial team, defining
             targets, identifying accounts, performing outreach, creating qualified meetings and
             developing the market.
           </p>

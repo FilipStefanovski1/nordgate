@@ -14,7 +14,7 @@ export const markets: MarketInfo[] = [
     characteristics:
       "A large, digitally mature market with a strong culture of consensus and flat organisational structures. Decisions are thorough and often involve several stakeholders.",
     salesEnvironment:
-      "Buyers expect well-prepared, data-backed conversations. Trust is built gradually — early meetings tend to focus on understanding rather than closing.",
+      "Buyers expect well-prepared, data-backed conversations. Trust is built gradually, and early meetings tend to focus on understanding rather than closing.",
     entryConsiderations:
       "Sweden rewards patience and precision. A credible local presence and fluent account handling matter more than aggressive outreach volume.",
     businessBehavior:
@@ -40,7 +40,7 @@ export const markets: MarketInfo[] = [
     salesEnvironment:
       "Relationship-led and cautious with new suppliers. Local reference points and a demonstrated understanding of Norwegian business practice matter early on.",
     entryConsiderations:
-      "Sector concentration (energy, maritime, public sector) means account selection is critical — the right ten accounts outperform the wrong hundred.",
+      "Sector concentration (energy, maritime, public sector) means account selection is critical. The right ten accounts outperform the wrong hundred.",
     businessBehavior:
       "Egalitarian and consensus-driven, with a preference for long-term supplier relationships over transactional deals.",
   },

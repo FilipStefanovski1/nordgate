@@ -4,46 +4,48 @@ export type OnboardingStage = {
   description: string;
 };
 
-/**
- * Provisional onboarding structure — not yet verified against an official
- * NordGate onboarding document. Content lives here so it can be replaced
- * without touching the timeline component.
- */
+/** Centralised so NordGate can edit onboarding copy without touching the timeline component. */
 export const onboardingStages: OnboardingStage[] = [
   {
     index: "01",
     title: "Discovery & commercial alignment",
     description:
-      "We map your product, existing customers and international experience to confirm fit and align on ambition.",
+      "We start by understanding your product, your existing customers and what you've already learned from selling internationally. This confirms fit before anything else moves forward.",
   },
   {
     index: "02",
-    title: "Market and ICP definition",
+    title: "Market and opportunity assessment",
     description:
-      "We select the most relevant Nordic market and define the ideal customer profile within it.",
+      "We assess the Nordic markets against your product and prioritise where the opportunity is strongest, based on competitive landscape, buying behaviour and market access.",
   },
   {
     index: "03",
-    title: "Target list and sales setup",
+    title: "ICP and target account definition",
     description:
-      "We build the target account list, identify decision-makers and prepare the commercial infrastructure.",
+      "We define the ideal customer profile for the chosen market and build a working list of target accounts and the people inside them worth reaching.",
   },
   {
     index: "04",
-    title: "Messaging and outreach preparation",
+    title: "Sales setup and messaging",
     description:
-      "We adapt positioning and messaging to local expectations and prepare outreach across every channel.",
+      "We prepare the commercial infrastructure: positioning, messaging and outreach sequencing, adapted to how the local market actually buys.",
   },
   {
     index: "05",
-    title: "Nordic outreach launches",
+    title: "Outreach launch",
     description:
-      "We begin direct outreach — calls, email, LinkedIn and meeting requests — on your behalf.",
+      "We begin direct outreach on your behalf across calls, email and LinkedIn, and start booking qualified meetings with the accounts we've prioritised.",
   },
   {
     index: "06",
     title: "Meetings, feedback and optimisation",
     description:
-      "We book qualified meetings, gather market feedback and continuously refine targeting and messaging.",
+      "Every meeting generates market feedback. We use it to sharpen targeting, messaging and follow-up as the campaign runs.",
+  },
+  {
+    index: "07",
+    title: "Ongoing commercial development",
+    description:
+      "Once the motion is working, we keep developing the account base: expanding outreach, deepening relationships and reporting on what's moving.",
   },
 ];

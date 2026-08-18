@@ -16,7 +16,7 @@ export default function InsightsPage() {
       <PageHeader
         eyebrow="Insights"
         title="Perspectives on Nordic market entry and sales."
-        description="Notes from the field on entering Sweden, Denmark, Norway and Finland — published as NordGate develops them."
+        description="Notes from the field on entering Sweden, Denmark, Norway and Finland, published as NordGate develops them."
       />
 
       <section className="bg-white py-20 sm:py-24">

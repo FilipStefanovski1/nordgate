@@ -15,19 +15,19 @@ export function OnboardingTimeline() {
     () => {
       if (!containerRef.current || !lineRef.current) return;
       if (prefersReducedMotion()) {
-        gsap.set(lineRef.current, { scaleX: 1 });
+        gsap.set(lineRef.current, { scaleY: 1 });
         return;
       }
 
-      gsap.set(lineRef.current, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(lineRef.current, { scaleY: 0, transformOrigin: "top center" });
 
       gsap.to(lineRef.current, {
-        scaleX: 1,
+        scaleY: 1,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 70%",
-          end: "bottom 40%",
+          start: "top 65%",
+          end: "bottom 65%",
           scrub: 0.6,
         },
       });
@@ -36,8 +36,8 @@ export function OnboardingTimeline() {
       stages.forEach((stage, i) => {
         ScrollTrigger.create({
           trigger: stage,
-          start: "top 55%",
-          end: "bottom 45%",
+          start: "top 60%",
+          end: "bottom 40%",
           onToggle: (self) => {
             if (self.isActive) setActiveIndex(i);
           },
@@ -48,39 +48,30 @@ export function OnboardingTimeline() {
   );
 
   return (
-    <div ref={containerRef}>
-      {/* Desktop progress rail */}
-      <div className="relative mb-14 hidden h-[2px] w-full bg-border-soft lg:block">
-        <div ref={lineRef} className="absolute inset-0 bg-blue-700" />
+    <div ref={containerRef} className="relative">
+      {/* Connecting rail */}
+      <div className="absolute left-[15px] top-2 bottom-2 w-px bg-border-soft sm:left-[19px]">
+        <div ref={lineRef} className="h-full w-full origin-top bg-blue-700" />
       </div>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-6 lg:gap-6">
+      <ol className="flex flex-col gap-10 sm:gap-12">
         {onboardingStages.map((stage, i) => (
-          <div
-            key={stage.index}
-            data-stage
-            className={cn(
-              "relative border-l-2 pl-5 lg:border-l-0 lg:pl-0 lg:text-left transition-opacity duration-300",
-              i > activeIndex ? "lg:opacity-40" : "opacity-100",
-              i <= activeIndex ? "border-blue-700" : "border-border-soft"
-            )}
-          >
-            <div className="hidden lg:flex lg:items-center lg:gap-3">
-              <span
-                className={cn(
-                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-300",
-                  i <= activeIndex ? "bg-blue-700 text-white" : "bg-border-soft text-ink-400"
-                )}
-              >
-                {stage.index}
-              </span>
+          <li key={stage.index} data-stage className="relative flex gap-6 pl-0 sm:gap-8">
+            <span
+              className={cn(
+                "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-colors duration-300 sm:h-10 sm:w-10",
+                i <= activeIndex ? "border-blue-700 bg-blue-700 text-white" : "border-border-strong bg-white text-ink-400"
+              )}
+            >
+              {stage.index}
+            </span>
+            <div className={cn("pt-0.5 transition-opacity duration-300 sm:pt-1", i > activeIndex ? "opacity-50" : "opacity-100")}>
+              <h3 className="text-base font-semibold text-ink-900 sm:text-lg">{stage.title}</h3>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-500">{stage.description}</p>
             </div>
-            <p className="coord-label mt-4 text-ink-400 lg:hidden">{stage.index}</p>
-            <h3 className="mt-3 text-base font-semibold text-ink-900 sm:text-lg">{stage.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-500">{stage.description}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   );
 }

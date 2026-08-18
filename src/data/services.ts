@@ -29,7 +29,7 @@ export const marketEntryServices: ServiceGroup[] = [
   },
   {
     title: "Sales execution",
-    description: "NordGate executes the selling — not just the planning.",
+    description: "NordGate executes the selling, not just the planning.",
     items: [
       "Cold calling, email and LinkedIn outreach",
       "Physical meetings and account development",

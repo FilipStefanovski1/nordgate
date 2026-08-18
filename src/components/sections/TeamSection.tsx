@@ -5,17 +5,17 @@ import { team } from "@/data/team";
 
 export function TeamSection() {
   return (
-    <section className="bg-white py-24 sm:py-28">
+    <section className="bg-bg-soft py-24 sm:py-28">
       <Container>
         <ScrollReveal>
-          <SectionHeading eyebrow="Team" title="The people behind NordGate." />
+          <SectionHeading size="compact" eyebrow="Team" title="The people behind NordGate." />
         </ScrollReveal>
 
         <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2">
           {team.map((member) => (
-            <ScrollReveal key={member.name} className="rounded-2xl border border-border-soft p-8 sm:p-10">
+            <ScrollReveal key={member.name} className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10">
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy-950 text-sm font-semibold text-white">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-blue-700 text-sm font-semibold text-blue-700">
                   {member.initials}
                 </div>
                 <div>

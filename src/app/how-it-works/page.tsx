@@ -13,7 +13,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "The complete NordGate process — from market assessment to onboarding, outreach execution and continuous market feedback.",
+    "The complete NordGate process, from market assessment to onboarding, outreach execution and continuous market feedback.",
 };
 
 export default function HowItWorksPage() {
@@ -22,7 +22,7 @@ export default function HowItWorksPage() {
       <PageHeader
         eyebrow="How it works"
         title="From market insight to a running Nordic sales motion."
-        description="A single, accountable process — not a report handed over at the end of a project."
+        description="A single, accountable process, not a report handed over at the end of a project."
       />
 
       <ProcessSteps />
@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
       </section>
 
       <CalculatorSection />
-      <FinalCta />
+      <FinalCta background="soft" />
     </>
   );
 }

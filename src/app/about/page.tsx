@@ -13,7 +13,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "NordGate is a commercial bridge between the Nordic region and Eastern Europe — our purpose, mission, vision and the team behind it.",
+    "NordGate is a commercial bridge between the Nordic region and Eastern Europe. Our purpose, mission, vision and the team behind it.",
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About NordGate"
         title="Two regions. One commercial bridge."
-        description="NordGate connects companies, capabilities and opportunities across the Nordic region and international markets — built on local knowledge and hands-on execution, not slide decks."
+        description="NordGate connects companies, capabilities and opportunities across the Nordic region and international markets. Built on local knowledge and hands-on execution, not slide decks."
       />
 
       <section className="bg-white py-24 sm:py-28">
@@ -31,7 +31,7 @@ export default function AboutPage() {
             <ScrollReveal>
               <Eyebrow>Purpose</Eyebrow>
               <p className="mt-4 text-lg leading-relaxed text-ink-700">
-                To simplify how companies grow across borders — connecting the right companies,
+                To simplify how companies grow across borders, connecting the right companies,
                 people and opportunities on both sides of the Nordic gateway.
               </p>
             </ScrollReveal>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                   We sell on their behalf.
                 </>
               }
-              description="NordGate is a commercial execution partner, not just an advisory firm. That distinction shapes everything — from how we scope engagements to how we measure success."
+              description="NordGate is a commercial execution partner, not just an advisory firm. That distinction shapes how we scope engagements and how we measure success."
             />
           </ScrollReveal>
         </Container>
