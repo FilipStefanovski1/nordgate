@@ -81,11 +81,11 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* The final visual moment of the site — enormous, almost full width, barely cropped */}
+      {/* The final visual moment of the site — enormous, centered, barely cropped */}
       <ScrollReveal as="div" start="top 100%" end="top 97%" className="overflow-hidden">
         <p
           aria-hidden="true"
-          className="select-none whitespace-nowrap pl-5 text-[clamp(3.4rem,18vw,15rem)] font-bold leading-[0.8] tracking-tight sm:pl-8 lg:pl-10"
+          className="select-none whitespace-nowrap text-center text-[clamp(3.4rem,18vw,15rem)] font-bold leading-[0.8] tracking-tight"
           style={{ color: "rgba(129, 166, 219, 0.22)" }}
         >
           NORDGATE
