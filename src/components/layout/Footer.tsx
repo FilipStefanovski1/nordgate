@@ -3,7 +3,6 @@ import { footerNav } from "@/data/navigation";
 import { locations } from "@/data/locations";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -52,16 +51,15 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* The final visual moment of the site — enormous, centered, barely cropped */}
-      <ScrollReveal as="div" start="top 100%" end="top 97%" className="overflow-hidden">
+      {/* The final visual moment of the site — enormous wordmark, cropped through its lower half */}
+      <div className="relative h-[clamp(1.9rem,9.5vw,8rem)] w-full overflow-hidden" aria-hidden="true">
         <p
-          aria-hidden="true"
-          className="select-none whitespace-nowrap text-center text-[clamp(3.4rem,18vw,15rem)] font-bold leading-[0.8] tracking-tight"
+          className="absolute inset-x-0 top-0 select-none whitespace-nowrap text-center text-[clamp(3.4rem,18vw,15rem)] font-bold leading-none tracking-tight"
           style={{ color: "rgba(129, 166, 219, 0.22)" }}
         >
           NORDGATE
         </p>
-      </ScrollReveal>
+      </div>
     </footer>
   );
 }

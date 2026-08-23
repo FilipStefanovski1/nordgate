@@ -1,4 +1,3 @@
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const clientProvides = [
   "A proven product or service with existing customers",
@@ -19,7 +18,7 @@ const nordgateProvides = [
 export function ResponsibilitySplit() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      <ScrollReveal className="rounded-2xl border border-border-soft p-8 sm:p-10">
+      <div className="rounded-2xl border border-border-soft p-8 sm:p-10">
         <p className="eyebrow text-ink-400">What you provide</p>
         <ul className="mt-6 flex flex-col gap-4">
           {clientProvides.map((item) => (
@@ -28,8 +27,8 @@ export function ResponsibilitySplit() {
             </li>
           ))}
         </ul>
-      </ScrollReveal>
-      <ScrollReveal className="rounded-2xl bg-navy-950 p-8 text-white sm:p-10">
+      </div>
+      <div className="rounded-2xl bg-navy-950 p-8 text-white sm:p-10">
         <p className="eyebrow text-white/50">What NordGate provides</p>
         <ul className="mt-6 flex flex-col gap-4">
           {nordgateProvides.map((item) => (
@@ -38,7 +37,7 @@ export function ResponsibilitySplit() {
             </li>
           ))}
         </ul>
-      </ScrollReveal>
+      </div>
     </div>
   );
 }

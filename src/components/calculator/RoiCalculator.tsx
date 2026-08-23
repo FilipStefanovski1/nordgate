@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { calculateRoi } from "@/lib/calculator/roi";
 import { formatCurrency, formatDecimal } from "@/lib/calculator/format";
 import { calculatorDefaults, currencies, type CurrencyCode } from "@/data/pricing";
-import { CountUp } from "@/components/animations/CountUp";
 import { Button } from "@/components/ui/Button";
 
 function Field({
@@ -149,7 +148,7 @@ export function RoiCalculator() {
         <div className="rounded-2xl bg-navy-950 p-6 text-white sm:p-8">
           <p className="eyebrow text-white/50">Return per {currency} invested</p>
           <p className="mt-2 text-5xl font-semibold sm:text-6xl">
-            <CountUp value={result.returnMultiple} decimals={1} suffix="×" />
+            {formatDecimal(result.returnMultiple, 1)}×
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
             Every {currency} invested corresponds to approximately{" "}

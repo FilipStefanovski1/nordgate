@@ -89,17 +89,11 @@ function DesktopDropdown({
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const id = window.setTimeout(() => setMounted(true), 20);
-    return () => window.clearTimeout(id);
-  }, []);
 
   // Close menus when the route changes — derived during render (rather than
   // in an effect) so it can't cascade an extra render.
@@ -151,9 +145,7 @@ export function Header() {
           ? "border-transparent bg-transparent py-5"
           : scrolled
             ? "border-border-soft bg-white py-2.5"
-            : "border-border-soft bg-white py-4",
-        isHome && "transition-opacity duration-700 motion-reduce:transition-none",
-        isHome && !mounted && "opacity-0"
+            : "border-border-soft bg-white py-4"
       )}
     >
       <Container className="flex items-center justify-between gap-6">

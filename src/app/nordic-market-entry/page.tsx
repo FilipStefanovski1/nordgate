@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ServiceGroups } from "@/components/sections/ServiceGroups";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { OnboardingTimeline } from "@/components/timeline/OnboardingTimeline";
@@ -28,13 +27,13 @@ export default function NordicMarketEntryPage() {
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
-          <ScrollReveal>
+          <div>
             <SectionHeading
               eyebrow="What's included"
               title="Three phases. One accountable partner."
               description="Market insight defines where to play. Sales setup builds the infrastructure. Sales execution turns it into meetings, delivered by the same team throughout."
             />
-          </ScrollReveal>
+          </div>
           <div className="mt-14">
             <ServiceGroups groups={marketEntryServices} />
           </div>
@@ -45,12 +44,12 @@ export default function NordicMarketEntryPage() {
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
-          <ScrollReveal>
+          <div>
             <SectionHeading
               eyebrow="Onboarding"
               title="From first conversation to live outreach."
             />
-          </ScrollReveal>
+          </div>
           <div className="mt-16">
             <OnboardingTimeline />
           </div>

@@ -1,6 +1,5 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { locations } from "@/data/locations";
 
 const networks = [
@@ -23,7 +22,7 @@ export function NetworkAdvantage() {
     <section className="relative overflow-hidden bg-navy-950 py-24 text-white sm:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <ScrollReveal>
+          <div>
             <SectionHeading
               tone="light"
               size="compact"
@@ -31,9 +30,9 @@ export function NetworkAdvantage() {
               title="Access is useful. Connected access is better."
               description="NordGate combines chamber networks, companies, decision-makers, agencies, development organisations and service providers, reached through a presence in Copenhagen, Stockholm and Skopje. The value isn't one relationship. It's the ability to connect multiple ecosystems commercially."
             />
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal>
+          <div>
             <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 sm:p-10">
               <svg className="absolute inset-0 h-full w-full" viewBox="0 0 300 220" aria-hidden="true">
                 <g stroke="rgba(0,174,239,0.3)" strokeWidth="1" fill="none">
@@ -68,7 +67,7 @@ export function NetworkAdvantage() {
                 ))}
               </ul>
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </Container>
     </section>

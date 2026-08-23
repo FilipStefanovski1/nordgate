@@ -1,7 +1,6 @@
 import { Check, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const readyFor = [
   "A proven offering with existing customers",
@@ -16,16 +15,16 @@ export function WhoWeWorkWith() {
     <section className="bg-bg-soft py-24 sm:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <ScrollReveal>
+          <div>
             <SectionHeading
               size="compact"
               eyebrow="Who we work with"
               title="Built for companies that are ready for the next market."
               description="NordGate works best with businesses that already know how to sell. They just don't yet know how to sell in the Nordics."
             />
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal>
+          <div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border-soft bg-white p-7">
                 <div className="flex items-center gap-2 text-blue-700">
@@ -53,7 +52,7 @@ export function WhoWeWorkWith() {
                 </p>
               </div>
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </Container>
     </section>

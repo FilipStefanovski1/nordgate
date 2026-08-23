@@ -30,7 +30,7 @@ export function SectionHeading({
       {eyebrow && <Eyebrow tone={tone === "light" ? "white" : "blue"}>{eyebrow}</Eyebrow>}
       <h2
         className={cn(
-          "mt-4 text-balance font-semibold tracking-tight",
+          "mt-4 text-balance font-serif font-medium tracking-tight",
           titleSizes[size],
           tone === "light" ? "text-white" : "text-ink-900"
         )}

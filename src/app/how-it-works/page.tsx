@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { OnboardingTimeline } from "@/components/timeline/OnboardingTimeline";
 import { OutreachCycle } from "@/components/sections/OutreachCycle";
@@ -29,9 +28,9 @@ export default function HowItWorksPage() {
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
-          <ScrollReveal>
+          <div>
             <SectionHeading eyebrow="Onboarding" title="Getting from signed to selling." />
-          </ScrollReveal>
+          </div>
           <div className="mt-16">
             <OnboardingTimeline />
           </div>
@@ -40,12 +39,12 @@ export default function HowItWorksPage() {
 
       <section className="bg-white py-24 sm:py-28">
         <Container>
-          <ScrollReveal>
+          <div>
             <SectionHeading
               eyebrow="Sales execution"
               title="Outreach runs across every relevant channel, continuously."
             />
-          </ScrollReveal>
+          </div>
           <div className="mt-14">
             <OutreachCycle />
           </div>
@@ -54,9 +53,9 @@ export default function HowItWorksPage() {
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
-          <ScrollReveal>
+          <div>
             <SectionHeading eyebrow="Division of work" title="What you bring. What NordGate runs." />
-          </ScrollReveal>
+          </div>
           <div className="mt-14">
             <ResponsibilitySplit />
           </div>
