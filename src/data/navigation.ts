@@ -3,68 +3,15 @@ export type NavLink = {
   href: string;
 };
 
-export type NavDropdownItem = NavLink & {
-  description?: string;
-};
-
-export type NavEntry =
-  | { type: "link"; label: string; href: string }
-  | { type: "dropdown"; label: string; items: NavDropdownItem[] };
-
-export const primaryNav: NavEntry[] = [
-  { type: "link", label: "Nordic Market Entry", href: "/nordic-market-entry" },
-  {
-    type: "dropdown",
-    label: "Services",
-    items: [
-      {
-        label: "International Capabilities",
-        href: "/capabilities",
-        description: "Vetted international capacity for Nordic companies.",
-      },
-    ],
-  },
-  {
-    type: "dropdown",
-    label: "Resources",
-    items: [
-      {
-        label: "How It Works",
-        href: "/how-it-works",
-        description: "The full NordGate process, end to end.",
-      },
-      {
-        label: "Insights",
-        href: "/insights",
-        description: "Perspectives on Nordic market entry and sales.",
-      },
-    ],
-  },
-  {
-    type: "dropdown",
-    label: "People",
-    items: [
-      {
-        label: "About",
-        href: "/about",
-        description: "Our story, philosophy and team.",
-      },
-      {
-        label: "Contact",
-        href: "/contact",
-        description: "Get in touch with NordGate.",
-      },
-    ],
-  },
+export const primaryNav: NavLink[] = [
+  { label: "Services", href: "/nordic-market-entry" },
+  { label: "Approach", href: "/how-it-works" },
+  { label: "About", href: "/about" },
+  { label: "Insights", href: "/insights" },
 ];
 
-export const headerSecondaryCta: NavLink = {
-  label: "Calculate ROI",
-  href: "/how-it-works#calculator",
-};
-
 export const headerCta: NavLink = {
-  label: "Book meeting",
+  label: "Book a meeting",
   href: "/contact",
 };
 
