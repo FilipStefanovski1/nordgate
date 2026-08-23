@@ -1,8 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
+import { CompanyMarquee } from "@/components/sections/CompanyMarquee";
+import { OfferAccordion } from "@/components/sections/OfferAccordion";
 import { MarketEntryProblem } from "@/components/sections/MarketEntryProblem";
 import { NordicMarketsSimple } from "@/components/sections/NordicMarketsSimple";
-import { Services } from "@/components/sections/Services";
-import { CompanyMarquee } from "@/components/sections/CompanyMarquee";
 import { MarketEntryStages } from "@/components/sections/MarketEntryStages";
 import { WhyModelMakesSense } from "@/components/sections/WhyModelMakesSense";
 import { HumanStory } from "@/components/sections/HumanStory";
@@ -16,10 +16,10 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <CompanyMarquee />
+      <OfferAccordion />
       <MarketEntryProblem />
       <NordicMarketsSimple />
-      <Services />
-      <CompanyMarquee />
       <MarketEntryStages />
       <WhyModelMakesSense />
       <HumanStory />

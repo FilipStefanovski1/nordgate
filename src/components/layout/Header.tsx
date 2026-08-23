@@ -52,19 +52,19 @@ export function Header() {
       ref={headerRef}
       className={cn(
         "fixed inset-x-0 top-0 z-50 w-full border-b border-border-soft bg-white transition-[padding] duration-300",
-        scrolled ? "py-2.5" : "py-4"
+        scrolled ? "py-2.5" : "py-3.5"
       )}
     >
       <Container className="flex items-center justify-between gap-6">
         <Logo variant="color" />
 
-        <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Primary">
           {primaryNav.map((entry) => (
             <Link
               key={entry.href}
               href={entry.href}
               className={cn(
-                "text-[13px] font-medium uppercase tracking-wide transition-colors duration-200",
+                "text-sm font-medium transition-colors duration-200",
                 pathname === entry.href ? "text-blue-700" : "text-ink-700 hover:text-blue-700"
               )}
             >
@@ -76,9 +76,10 @@ export function Header() {
         <div className="hidden lg:block">
           <Link
             href={headerCta.href}
-            className="inline-flex items-center justify-center rounded-sm border border-navy-950 bg-navy-950 px-5 py-2.5 text-[13px] font-semibold uppercase tracking-wide text-white transition-colors duration-200 hover:border-blue-700 hover:bg-blue-700"
+            className="inline-flex items-center gap-1.5 rounded-sm bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-900"
           >
             {headerCta.label}
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
 
@@ -113,9 +114,10 @@ export function Header() {
             <div className="mt-10 flex flex-col gap-4">
               <Link
                 href={headerCta.href}
-                className="inline-flex items-center justify-center rounded-sm bg-navy-950 px-6 py-4 text-base font-semibold text-white"
+                className="inline-flex items-center justify-center gap-1.5 rounded-sm bg-blue-700 px-6 py-4 text-base font-semibold text-white"
               >
                 {headerCta.label}
+                <span aria-hidden="true">→</span>
               </Link>
               <p className="coord-label text-center text-ink-400">
                 Copenhagen · Stockholm · Skopje
