@@ -1,27 +1,32 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function HumanStory() {
   return (
     <section className="bg-white py-24 sm:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.45fr_0.55fr] lg:gap-16">
-          {/* Photograph — order-first on mobile via natural DOM order */}
-          <div>
-            <div className="flex aspect-[4/5] w-full flex-col items-center justify-center border border-dashed border-border-strong bg-bg-soft px-8 text-center">
-              <p className="text-sm font-medium text-ink-500">Event photograph pending</p>
-              <p className="mt-2 max-w-[220px] text-xs leading-relaxed text-ink-400">
-                Add the real photograph here — a vertical crop works best for this layout.
-              </p>
+          {/* Photograph — order-first on mobile via natural DOM order, reveals ~80ms after the copy */}
+          <Reveal delay>
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-bg-soft">
+              <Image
+                src="/samuelandanders.jpeg"
+                alt="Samuel and Anders, Co-Founders of NordGate"
+                fill
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                className="object-cover"
+              />
             </div>
             <p className="coord-label mt-3 text-ink-400">
-              [ Caption pending — add event name, location and date ]
+              Samuel and Anders, Co-Founders of NordGate
             </p>
-          </div>
+          </Reveal>
 
           {/* Story */}
-          <div className="flex flex-col justify-center">
-            <Eyebrow>The story behind NordGate</Eyebrow>
+          <Reveal className="flex flex-col justify-center">
+            <Eyebrow>Built through real relationships</Eyebrow>
             <h2 className="mt-5 max-w-lg text-balance font-serif text-3xl font-medium leading-[1.15] tracking-tight text-ink-900 sm:text-4xl">
               Nordgate started with a simple observation.
             </h2>
@@ -39,7 +44,7 @@ export function HumanStory() {
               Nordgate is built around relationships, local understanding and the belief that
               expansion works better when someone helps open the right doors.
             </p>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

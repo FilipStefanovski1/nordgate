@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 
 const scope = [
   "Target-market assessment",
@@ -14,7 +15,7 @@ export function MarketReadinessSprint() {
   return (
     <section className="bg-white py-24 sm:py-28">
       <Container>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <Reveal className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <p className="eyebrow text-blue-600">A clear starting point</p>
             <h2 className="mt-4 max-w-sm text-balance font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl">
@@ -37,7 +38,7 @@ export function MarketReadinessSprint() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

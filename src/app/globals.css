@@ -29,6 +29,26 @@
 
   /* Motion */
   --ease-nordgate: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-fast: 180ms;
+  --motion-base: 360ms;
+  --motion-slow: 560ms;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Hero overlay — blue-gray to deep-navy readability gradient */
+  --hero-heading: var(--nordgate-off-white);
+  --hero-accent: var(--nordgate-blue-soft);
+
+  /* Nordgate button/CTA system — deep navy, off-white and one controlled
+     desaturated blue. No purple, no cyan, no neon. */
+  --nordgate-navy: #07172f;
+  --nordgate-navy-hover: #102a50;
+  --nordgate-blue: #1f5fc4;
+  --nordgate-blue-soft: #8eb8ee;
+  --nordgate-blue-pale: #dceaff;
+  --nordgate-off-white: #f7f9fc;
+  --nordgate-slate: #64748b;
+  --nordgate-border: #d9e1ec;
 }
 
 @theme inline {
@@ -60,7 +80,7 @@
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-fraunces);
 
-  --container-page: 1360px;
+  --container-page: 1480px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -154,5 +174,475 @@ body {
   .animate-marquee {
     animation: none;
     transform: none;
+  }
+}
+
+/* Standard Nordgate button fill — flat deep navy, no gradient, no glow.
+   Shared by the nav CTA, the contact-form submit button and small
+   in-flow badges that use the same brand fill. */
+.btn-nordgate {
+  background: var(--nordgate-navy);
+  color: var(--nordgate-off-white);
+  transition: background-color 200ms ease;
+}
+
+.btn-nordgate:hover {
+  background: var(--nordgate-navy-hover);
+}
+
+.btn-nordgate:active {
+  transform: translateY(1px);
+}
+
+/* Inverse of .btn-nordgate — off-white fill, navy text. Used for the hero
+   primary CTA, sitting on a dark photograph rather than a light page. */
+.btn-nordgate-inverse {
+  background: var(--nordgate-off-white);
+  color: var(--nordgate-navy);
+  transition: background-color 200ms ease;
+}
+
+.btn-nordgate-inverse:hover {
+  background: var(--nordgate-blue-pale);
+}
+
+.btn-nordgate-inverse:active {
+  transform: translateY(1px);
+}
+
+/* Same gradient + grain, clipped to text — for large blue brand typography. */
+.text-gradient-noise {
+  background-image:
+    linear-gradient(90deg, #4e4e4e 0%, #170089 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.43'/></svg>");
+  background-blend-mode: overlay;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero readability overlay — controlled deep-navy directional gradient.
+   Darkest behind the copy; the right side keeps the photograph's real
+   warmth and detail (painting, flags, room lighting) visible. */
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(7, 23, 47, 0.92) 0%,
+    rgba(7, 23, 47, 0.72) 38%,
+    rgba(7, 23, 47, 0.34) 68%,
+    rgba(7, 23, 47, 0.12) 100%
+  );
+}
+
+@media (max-width: 640px) {
+  .hero-overlay {
+    background: linear-gradient(
+      165deg,
+      rgba(7, 23, 47, 0.92) 0%,
+      rgba(7, 23, 47, 0.8) 45%,
+      rgba(7, 23, 47, 0.5) 75%,
+      rgba(7, 23, 47, 0.32) 100%
+    );
+  }
+}
+
+.hero-overlay-bottom {
+  background: linear-gradient(0deg, rgba(7, 23, 47, 0.28) 0%, rgba(7, 23, 47, 0) 42%);
+}
+
+/* Noise sits between the readability gradient and the content — full-surface
+   coverage (density), kept visually subtle via low opacity. */
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Mobile menu — deep Nordgate navy, diagonal for a full-screen surface. */
+.mobile-menu-gradient {
+  background: linear-gradient(145deg, var(--nordgate-navy-hover) 0%, var(--nordgate-navy) 100%);
+}
+
+.mobile-menu-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+
+/* ————————————————————————————————————————————————
+   Motion system — accordion, section reveals, links,
+   buttons, editorial photography. See AGENTS notes.
+   ———————————————————————————————————————————————— */
+
+/* Accordion — grid-row expansion instead of JS height measurement. */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--motion-base) var(--ease-out-expo),
+    opacity 240ms ease;
+}
+.accordion-content[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.accordion-content-inner {
+  overflow: hidden;
+  min-height: 0;
+  transform: translateY(-6px);
+  transition: transform var(--motion-base) var(--ease-out-expo);
+}
+.accordion-content[data-open="true"] .accordion-content-inner {
+  transform: translateY(0);
+}
+
+.accordion-title {
+  transition:
+    transform var(--motion-fast) var(--ease-out-expo),
+    color var(--motion-fast) ease;
+}
+.accordion-row:hover .accordion-title {
+  transform: translateX(6px);
+}
+
+.accordion-plus-v {
+  transform-origin: center;
+  transition: transform var(--motion-fast) var(--ease-out-expo);
+}
+[data-open="true"] .accordion-plus-v {
+  transform: scaleY(0);
+}
+
+/* Section reveal — one unit fades/lifts in on first intersection.
+   The hidden state only applies once `.js` is confirmed on <html> (set by a
+   blocking inline script in <head>), so content stays visible by default if
+   JavaScript fails or the observer never fires. */
+.reveal {
+  transition:
+    opacity var(--motion-slow) var(--ease-out-expo),
+    transform var(--motion-slow) var(--ease-out-expo);
+}
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay {
+  transition-delay: 80ms;
+}
+
+/* Hero entrance — label+headline, then CTA group. */
+.hero-enter {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: hero-enter var(--motion-slow) var(--ease-out-expo) forwards;
+}
+.hero-enter-cta {
+  animation-delay: 80ms;
+}
+@keyframes hero-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero emphasis — a single restrained underline drawn once beneath
+   "the Nordics." after the headline has entered. The SVG stretches to the
+   phrase's own width, so it follows wrapping and viewport changes. */
+.hero-emphasis {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  width: 100%;
+  height: 0.16em;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hero-underline path {
+  fill: none;
+  stroke: var(--nordgate-blue-soft);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  /* Keeps the stroke an even weight despite the non-uniform viewBox scale. */
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hero-underline-draw 850ms var(--ease-out-expo) 620ms forwards;
+}
+
+@keyframes hero-underline-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Text-link underline growth. */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transition: right var(--motion-fast) var(--ease-standard);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  right: 0;
+}
+
+/* Editorial photography — subtle zoom for genuinely clickable images only. */
+.photo-zoom {
+  overflow: hidden;
+}
+.photo-zoom img {
+  transition: transform var(--motion-base) var(--ease-standard);
+}
+.photo-zoom:hover img,
+.photo-zoom:focus-within img {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content,
+  .accordion-content-inner,
+  .accordion-title,
+  .accordion-plus-v,
+  .reveal,
+  .link-underline::after,
+  .photo-zoom img {
+    transition: none !important;
+  }
+  .hero-enter,
+  .hero-enter-cta {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Show the finished underline rather than hiding it. */
+  .hero-underline path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Pre-footer CTA — full-coverage noise, kept subtle and static. */
+.pre-footer-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.pre-footer-gradient {
+  background: linear-gradient(135deg, #202226 0%, #182334 52%, #102b61 100%);
+}
+
+/* Offer accordion — two-column layout with a honeycomb photo cluster.
+   Mobile/tablet stack in order: copy, accordion, gallery. Desktop places
+   the gallery in its own column, vertically centered against the full
+   copy+accordion height. */
+.offer-grid {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.offer-copy {
+  order: 1;
+}
+
+.offer-accordion-col {
+  order: 2;
+}
+
+.offer-gallery {
+  order: 3;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .offer-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    column-gap: clamp(4rem, 7vw, 6rem);
+    row-gap: 3rem;
+    align-items: start;
+  }
+
+  .offer-copy {
+    grid-column: 1;
+    grid-row: 1;
+    order: initial;
+  }
+
+  .offer-accordion-col {
+    grid-column: 1;
+    grid-row: 2;
+    order: initial;
+  }
+
+  .offer-gallery {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    order: initial;
+    align-self: center;
+  }
+}
+
+/* Honeycomb gallery — two offset columns of hexagonal photographs,
+   interlocking via a slight horizontal overlap. Sizing is driven by
+   --hex-w; everything else derives from it so columns stay in sync. */
+.honeycomb {
+  --hex-w: clamp(96px, 26vw, 130px);
+  --hex-h: calc(var(--hex-w) * 0.866);
+  --hex-gap-y: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.honeycomb-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hex-gap-y);
+}
+
+.honeycomb-col-offset {
+  margin-left: calc(var(--hex-w) * -0.22);
+  margin-top: calc((var(--hex-h) + var(--hex-gap-y)) / 2);
+}
+
+.honeycomb-hex {
+  position: relative;
+  width: var(--hex-w);
+  height: var(--hex-h);
+  flex-shrink: 0;
+  overflow: hidden;
+  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0 50%);
+}
+
+@media (min-width: 640px) {
+  .honeycomb {
+    --hex-w: clamp(120px, 18vw, 150px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .honeycomb {
+    --hex-w: clamp(150px, 15vw, 210px);
+  }
+}
+
+/* Horizontal process flow — one continuous curved information route behind
+   the onboarding stage nodes. Static base path + a separate animated dashed
+   "current" path per lane, so the moving layer can be disabled independently
+   under reduced motion without losing the line itself. */
+.flow-static {
+  fill: none;
+  stroke: var(--nordgate-slate);
+  stroke-width: 1;
+  opacity: 0.28;
+}
+
+.flow-current {
+  fill: none;
+  stroke: var(--nordgate-blue);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 14;
+  opacity: 0.8;
+  animation-name: information-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* The single feedback route (06 back toward 04) — wider, fainter, drawn
+   behind the primary lanes, moving in its own (opposite) direction. */
+.flow-feedback-static {
+  fill: none;
+  stroke: var(--nordgate-slate);
+  stroke-width: 1;
+  opacity: 0.18;
+}
+
+.flow-feedback {
+  fill: none;
+  stroke: var(--nordgate-blue);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 1 16;
+  opacity: 0.35;
+  animation-name: information-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes information-flow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.process-flow-vline {
+  position: absolute;
+  left: 19px;
+  top: 44px;
+  bottom: -40px;
+  width: 1px;
+  background: var(--nordgate-border);
+  overflow: hidden;
+}
+
+.process-flow-vline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--nordgate-blue) 40%, transparent 40%);
+  background-size: 1px 13px;
+  animation: flow-current-vertical 4.5s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes flow-current-vertical {
+  to {
+    background-position: 0 -52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-current,
+  .flow-feedback {
+    animation: none;
+  }
+  .process-flow-vline::after {
+    animation: none;
   }
 }

@@ -4,6 +4,7 @@ export type TeamMember = {
   initials: string;
   photo?: string;
   bio: string[];
+  linkedin?: string;
 };
 
 export const team: TeamMember[] = [
@@ -17,6 +18,7 @@ export const team: TeamMember[] = [
       "A network across the Nordic political system, including a background in the Nordic Council.",
       "Master's in Business Economics and Administration from Aalborg University.",
     ],
+    linkedin: "https://www.linkedin.com/in/anders-peter-hansen1995/",
   },
   {
     name: "Samuel N. Vickius",
@@ -28,5 +30,6 @@ export const team: TeamMember[] = [
       "Understands both Nordic and Southeast European business environments.",
       "Focused on commercial opportunities and long-term partnerships.",
     ],
+    linkedin: "https://www.linkedin.com/in/samuelnvickius/",
   },
 ];

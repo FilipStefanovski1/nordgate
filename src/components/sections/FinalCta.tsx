@@ -1,22 +1,51 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils/cn";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Reveal } from "@/components/ui/Reveal";
+import { headerCta } from "@/data/navigation";
 
-export function FinalCta({ background = "white" }: { background?: "white" | "soft" }) {
+// One real, existing project image. Swap this path if a better asset
+// becomes available — keep the alt text matching whatever is actually shown.
+const preFooterImage = {
+  src: "/images/pre-footer/nordgate-laptop-mockup.png",
+  alt: "A laptop displaying a photograph from a Nordgate-connected business event",
+  position: "center",
+};
+
+export function FinalCta() {
   return (
-    <section className={cn("py-24 sm:py-28", background === "soft" ? "bg-bg-soft" : "bg-white")}>
-      <Container>
-        <div className="flex flex-col items-start gap-8 rounded-lg bg-navy-950 px-8 py-14 sm:px-14 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-balance max-w-xl font-serif text-2xl font-medium leading-tight text-white sm:text-3xl">
-              Considering the Nordics? Start by testing the opportunity.
-            </p>
-            <p className="coord-label mt-4 text-white/40">Copenhagen · Stockholm · Skopje</p>
+    <section className="relative overflow-hidden bg-[var(--nordgate-navy)] py-16 sm:py-24 lg:py-28">
+      <Container className="relative grid grid-cols-1 gap-12 lg:grid-cols-[0.5fr_0.5fr] lg:items-center lg:gap-16">
+        <Reveal>
+          <Eyebrow tone="cyan">Start a conversation</Eyebrow>
+          <h2 className="mt-5 max-w-md text-balance font-serif text-3xl font-medium leading-[1.2] tracking-tight text-white sm:text-4xl">
+            Ready to test the Nordic opportunity?
+          </h2>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-white/65">
+            Tell us where you want to grow. We&apos;ll help assess the opportunity, identify the
+            right market and define how Nordgate can execute the commercial work.
+          </p>
+          <Link
+            href={headerCta.href}
+            className="btn-nordgate-inverse mt-8 inline-flex h-[50px] items-center rounded px-6 text-[15px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nordgate-blue-soft)]"
+          >
+            Book a meeting
+          </Link>
+        </Reveal>
+
+        <Reveal delay>
+          <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <Image
+              src={preFooterImage.src}
+              alt={preFooterImage.alt}
+              fill
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+              style={{ objectPosition: preFooterImage.position }}
+            />
           </div>
-          <Button href="/contact" variant="onDark" className="shrink-0">
-            Book a market assessment
-          </Button>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

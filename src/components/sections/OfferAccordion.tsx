@@ -1,6 +1,13 @@
+"use client";
+
+import { useId, useState } from "react";
 import Link from "next/link";
-import { Plus, Minus, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { HoneycombGallery } from "@/components/ui/HoneycombGallery";
+import { Reveal } from "@/components/ui/Reveal";
+import { whatWeDoGalleryImages } from "@/data/honeycomb-images";
+import { cn } from "@/lib/utils/cn";
 
 const offerItems: { title: string; description: string; href?: string; linkLabel?: string }[] = [
   {
@@ -29,73 +36,96 @@ const offerItems: { title: string; description: string; href?: string; linkLabel
     description:
       "Once conversations start, we manage follow-up, qualification and relationship-building so validated interest turns into real commercial traction.",
     href: "/how-it-works",
-    linkLabel: "See how we work",
+    linkLabel: "Explore our approach",
   },
 ];
 
 export function OfferAccordion() {
+  const [openIndex, setOpenIndex] = useState(0);
+  const baseId = useId();
+
   return (
     <section className="bg-white py-24 sm:py-28">
       <Container>
-        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-x-20 lg:gap-y-0">
-          <div className="lg:col-start-1 lg:row-start-1">
+        <div className="offer-grid">
+          <Reveal className="offer-copy max-w-2xl">
             <p className="eyebrow text-blue-600">What we do</p>
             <h2 className="mt-4 max-w-md text-balance font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl">
               Market entry built around what you actually need.
             </h2>
-          </div>
-
-          <div className="lg:col-start-1 lg:row-start-2 lg:mt-5">
-            <p className="max-w-md text-base leading-relaxed text-ink-500">
-              Nordgate helps B2B companies understand the Nordic opportunity before making
-              expensive commitments. Start with the market, then build the right route into it.
+            <p className="mt-5 max-w-md text-base leading-relaxed text-ink-500">
+              Nordgate helps B2B companies understand the Nordic opportunity before making expensive
+              commitments. Start with the market, then build the right route into it.
             </p>
-          </div>
+          </Reveal>
 
-          {/* Photograph — PENDING. Needed: one strong vertical real photograph of a
-              founder conversation, business event or Nordic work moment, editorially
-              cropped (no card, no shadow, square corners). Do not invent names,
-              locations or dates for the caption below. */}
-          <div className="lg:col-start-2 lg:row-start-1 lg:row-span-3">
-            <div className="flex aspect-[3/4] w-full flex-col items-center justify-center border border-dashed border-border-strong bg-bg-soft px-8 text-center">
-              <p className="text-sm font-medium text-ink-500">Photograph pending</p>
-              <p className="mt-2 max-w-[240px] text-xs leading-relaxed text-ink-400">
-                Add a real vertical photograph here — a founder conversation, business event or
-                Nordic work moment.
-              </p>
-            </div>
-            <p className="coord-label mt-3 text-ink-400">
-              [ Caption pending — add name, context and date if available ]
-            </p>
-          </div>
-
-          <div className="lg:col-start-1 lg:row-start-3 lg:mt-10">
-            <div className="border-t border-border-soft">
-              {offerItems.map((item) => (
-                <details key={item.title} className="group border-b border-border-soft py-5" name="offer-accordion">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
-                    <span className="text-base font-semibold text-ink-900 sm:text-lg">{item.title}</span>
-                    <span className="relative flex h-5 w-5 shrink-0 items-center justify-center text-ink-400">
-                      <Plus className="h-4 w-4 group-open:hidden" aria-hidden="true" />
-                      <Minus className="hidden h-4 w-4 group-open:block" aria-hidden="true" />
+          <Reveal className="offer-accordion-col max-w-3xl border-t border-border-soft">
+          {offerItems.map((item, i) => {
+            const open = openIndex === i;
+            const triggerId = `${baseId}-trigger-${i}`;
+            const panelId = `${baseId}-panel-${i}`;
+            return (
+              <div
+                key={item.title}
+                className="accordion-row border-b border-border-soft transition-colors duration-200 hover:border-border-strong"
+              >
+                <h3>
+                  <button
+                    type="button"
+                    id={triggerId}
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    onClick={() => setOpenIndex(open ? -1 : i)}
+                    className="flex w-full cursor-pointer items-center justify-between gap-4 rounded-sm py-5 text-left transition-colors duration-200 hover:bg-bg-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                  >
+                    <span
+                      className={cn(
+                        "accordion-title text-base font-semibold sm:text-lg",
+                        open ? "text-blue-600" : "text-ink-900"
+                      )}
+                    >
+                      {item.title}
                     </span>
-                  </summary>
-                  <div className="mt-3 max-w-md">
-                    <p className="text-sm leading-relaxed text-ink-500 sm:text-base">{item.description}</p>
-                    {item.href && (
-                      <Link
-                        href={item.href}
-                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-700"
-                      >
-                        {item.linkLabel}
-                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                      </Link>
-                    )}
+                    <span
+                      data-open={open}
+                      className="relative flex h-5 w-5 shrink-0 items-center justify-center text-ink-400"
+                      aria-hidden="true"
+                    >
+                      <span className="absolute h-[2px] w-3.5 bg-current" />
+                      <span className="accordion-plus-v absolute h-3.5 w-[2px] bg-current" />
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  data-open={open}
+                  className="accordion-content"
+                >
+                  <div className="accordion-content-inner">
+                    <div className="max-w-md pb-5">
+                      <p className="text-sm leading-relaxed text-ink-500 sm:text-base">{item.description}</p>
+                      {item.href && (
+                        <Link
+                          href={item.href}
+                          className="link-underline mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
+                        >
+                          {item.linkLabel}
+                          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </details>
-              ))}
-            </div>
-          </div>
+                </div>
+              </div>
+            );
+          })}
+          </Reveal>
+
+          <Reveal delay className="offer-gallery">
+            <HoneycombGallery images={whatWeDoGalleryImages} />
+          </Reveal>
         </div>
       </Container>
     </section>

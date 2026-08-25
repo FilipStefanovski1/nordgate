@@ -1,26 +1,23 @@
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Reveal } from "@/components/ui/Reveal";
 
 const frictionPoints = [
   {
-    title: "Local market context",
-    description: "Understanding how buying decisions actually get made in each Nordic market.",
+    title: "Missing local context",
+    description: "How buying decisions actually get made rarely matches the assumptions in a plan written elsewhere.",
   },
   {
-    title: "Demand visibility",
-    description: "A clear, evidence-based view of where real interest exists before committing resources.",
+    title: "Committing before validating demand",
+    description: "Hires and infrastructure get built before there's evidence anyone is buying.",
   },
   {
-    title: "Buyer relationships",
-    description: "Access to the people who can actually say yes, not just a list of company names.",
+    title: "Targeting the wrong buyers",
+    description: "Outreach reaches the easiest contacts, not the people who can actually say yes.",
   },
   {
-    title: "Business-culture fluency",
-    description: "Knowing how Nordic companies communicate, decide and build trust over time.",
-  },
-  {
-    title: "A realistic route to market",
-    description: "A sequence of steps that leads somewhere, rather than a strategy document on a shelf.",
+    title: "Treating the Nordics as one market",
+    description: "Sweden, Denmark, Norway and Finland each have their own commercial culture and decision pace.",
   },
 ];
 
@@ -28,7 +25,7 @@ export function MarketEntryProblem() {
   return (
     <section className="bg-navy-950 py-24 sm:py-32">
       <Container>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+        <Reveal className="grid grid-cols-1 gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <div>
             <Eyebrow tone="cyan">The market-entry problem</Eyebrow>
             <p className="mt-6 max-w-lg text-balance font-serif text-3xl font-medium leading-[1.2] tracking-tight text-white sm:text-4xl lg:text-[2.6rem]">
@@ -51,7 +48,7 @@ export function MarketEntryProblem() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

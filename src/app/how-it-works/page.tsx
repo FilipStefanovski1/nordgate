@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { OnboardingTimeline } from "@/components/timeline/OnboardingTimeline";
 import { OutreachCycle } from "@/components/sections/OutreachCycle";
 import { ResponsibilitySplit } from "@/components/sections/ResponsibilitySplit";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { editorialImages } from "@/data/editorial-images";
 
 export const metadata: Metadata = {
   title: "How It Works",
@@ -37,6 +39,13 @@ export default function HowItWorksPage() {
         </Container>
       </section>
 
+      <EditorialImage
+        background="soft"
+        src={editorialImages.eventSpeaker.src}
+        alt={editorialImages.eventSpeaker.alt}
+        position={editorialImages.eventSpeaker.position}
+      />
+
       <section className="bg-white py-24 sm:py-28">
         <Container>
           <div>
@@ -63,7 +72,7 @@ export default function HowItWorksPage() {
       </section>
 
       <CalculatorSection />
-      <FinalCta background="soft" />
+      <FinalCta />
     </>
   );
 }

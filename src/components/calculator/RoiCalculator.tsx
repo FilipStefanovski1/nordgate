@@ -220,10 +220,8 @@ function EquationStep({ label, sub, value, highlight }: { label: string; sub: st
   );
 }
 
+/** Neutral separator between equation steps — reads as "then" without
+ *  introducing an arrow glyph. */
 function Arrow() {
-  return (
-    <span className="text-ink-400" aria-hidden="true">
-      →
-    </span>
-  );
+  return <span className="h-px w-5 shrink-0 bg-border-strong" aria-hidden="true" />;
 }

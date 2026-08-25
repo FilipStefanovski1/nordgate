@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { EditorialImage } from "@/components/ui/EditorialImage";
+import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { CoordinationSteps } from "@/components/sections/CoordinationSteps";
 import { PartnerCriteria } from "@/components/sections/PartnerCriteria";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { capabilityCategories } from "@/data/capabilities";
+import { editorialImages } from "@/data/editorial-images";
 
 export const metadata: Metadata = {
   title: "Capabilities",
@@ -60,6 +63,12 @@ export default function CapabilitiesPage() {
         </Container>
       </section>
 
+      <EditorialImage
+        src={editorialImages.eventAuditorium.src}
+        alt={editorialImages.eventAuditorium.alt}
+        position={editorialImages.eventAuditorium.position}
+      />
+
       <section className="bg-white py-24 sm:py-28">
         <Container>
           <div>
@@ -71,17 +80,20 @@ export default function CapabilitiesPage() {
         </Container>
       </section>
 
-      <section className="bg-bg-soft py-24 sm:py-28">
-        <Container>
-          <div className="max-w-3xl">
-            <SectionHeading
-              eyebrow="Not a marketplace"
-              title="A coordination layer, not a directory."
-              description="Generic outsourcing directories and vendor marketplaces hand you a list and leave the evaluation, onboarding and ongoing coordination to you. Recruitment agencies focus on placing individuals rather than delivering outcomes. NordGate stays involved: understanding requirements, shortlisting vetted partners, supporting evaluation and remaining your single point of contact for as long as the cooperation runs."
-            />
-          </div>
-        </Container>
-      </section>
+      <ImageTextSplit
+        background="soft"
+        imageSide="right"
+        image={editorialImages.eventPanelSkopje}
+        eyebrow="Not a marketplace"
+        title="A coordination layer, not a directory."
+        description="Directories hand you a list and leave the evaluation to you. Recruitment agencies focus on placing individuals, not outcomes."
+      >
+        <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-500">
+          NordGate stays involved throughout: understanding requirements, shortlisting vetted
+          partners, supporting evaluation and remaining your single point of contact for as long
+          as the cooperation runs.
+        </p>
+      </ImageTextSplit>
 
       <FinalCta />
     </>

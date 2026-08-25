@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 import { ServiceGroups } from "@/components/sections/ServiceGroups";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { OnboardingTimeline } from "@/components/timeline/OnboardingTimeline";
+import { HorizontalProcessFlow } from "@/components/process/HorizontalProcessFlow";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { WhoWeWorkWith } from "@/components/sections/WhoWeWorkWith";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { marketEntryServices } from "@/data/services";
+import { editorialImages } from "@/data/editorial-images";
 
 export const metadata: Metadata = {
   title: "Nordic Market Entry",
@@ -42,16 +45,25 @@ export default function NordicMarketEntryPage() {
 
       <ProcessSteps />
 
-      <section className="bg-bg-soft py-24 sm:py-28">
+      <EditorialImage
+        src={editorialImages.eventAuditorium.src}
+        alt={editorialImages.eventAuditorium.alt}
+        position={editorialImages.eventAuditorium.position}
+      />
+
+      <section className="bg-bg-soft py-12 sm:py-14">
         <Container>
           <div>
-            <SectionHeading
-              eyebrow="Onboarding"
-              title="From first conversation to live outreach."
-            />
+            <Eyebrow>Onboarding</Eyebrow>
+            <h2
+              className="mt-4 max-w-[760px] text-balance font-serif font-medium tracking-tight text-ink-900"
+              style={{ fontSize: "clamp(3rem, 5vw, 4.75rem)", lineHeight: 0.98 }}
+            >
+              From first conversation to live outreach.
+            </h2>
           </div>
-          <div className="mt-16">
-            <OnboardingTimeline />
+          <div className="mt-6">
+            <HorizontalProcessFlow />
           </div>
         </Container>
       </section>

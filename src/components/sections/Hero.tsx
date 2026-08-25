@@ -1,32 +1,29 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[max(748px,100svh)] w-full flex-col overflow-hidden bg-navy-950 pt-[68px]">
-      {/*
-        Hero photograph — PENDING.
-        Needed: a wide, cinematic, real photograph connected to Nordgate —
-        a Nordic city/landscape, a Nordic business environment, founder
-        activity in Sweden/Northern Europe, or a real cross-border
-        conference/event. No stock businesspeople, handshakes or maps.
-        Drop the file in /public and swap this placeholder div for an
-        <Image fill> using it.
-      */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-6 top-[84px] max-w-[160px] text-right sm:right-10"
-      >
-        <p className="text-[11px] leading-relaxed text-white/20">
-          Hero photograph pending — see implementation notes.
-        </p>
+    <section className="relative flex min-h-[max(620px,calc(100svh-96px))] w-full flex-col overflow-hidden bg-navy-950 pt-[68px]">
+      <div className="absolute inset-0">
+        <Image
+          src="/event1.jpeg"
+          alt="Attendees at a cross-border business event"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[68%_38%] [filter:saturate(0.9)_contrast(1.02)]"
+        />
       </div>
 
-      {/* Small localized gradient for lower text legibility only */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-950/70 to-transparent"
-      />
+      {/* Readability gradient — darkest behind the copy, fading toward the
+          photograph's brighter right side. Stronger, top-heavy on mobile
+          since the content spans the full width there. */}
+      <div aria-hidden="true" className="hero-overlay pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="hero-overlay-bottom pointer-events-none absolute inset-0" />
+      {/* Noise — full-surface density, kept subtle via low opacity. Sits above
+          the gradients and below the content. */}
+      <div aria-hidden="true" className="hero-noise" />
 
       {/* Vertical edge detail */}
       <div
@@ -37,36 +34,40 @@ export function Hero() {
       </div>
 
       <Container className="relative flex flex-1 flex-col py-14 sm:py-16">
-        <div className="flex flex-1 flex-col justify-center">
-          <p className="coord-label text-cyan-300">Nordic market entry</p>
-
-          <h1 className="mt-5 max-w-[14ch] text-balance text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-[5.25rem]">
-            <span className="text-white">Your route into</span>
+        <div className="flex max-w-[900px] flex-1 flex-col justify-center">
+          <h1
+            className="hero-enter text-balance font-bold text-[var(--nordgate-off-white)]"
+            style={{
+              fontSize: "clamp(3rem, 6.2vw, 6rem)",
+              lineHeight: 0.92,
+              letterSpacing: "-0.04em",
+            }}
+          >
+            Your route into
             <br />
-            <span className="text-cyan-300">the Nordics.</span>
+            <span className="hero-emphasis">
+              the Nordics.
+              <svg
+                aria-hidden="true"
+                className="hero-underline"
+                viewBox="0 0 200 10"
+                preserveAspectRatio="none"
+              >
+                <path pathLength={1} d="M2,7 C38,2.5 74,8.5 112,4.5 C144,1.5 176,6.5 198,3.5" />
+              </svg>
+            </span>
           </h1>
 
-          <div className="mt-8">
+          <div className="hero-enter hero-enter-cta mt-10">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-sm bg-white px-7 py-3.5 text-[15px] font-semibold text-navy-950 transition-colors duration-200 hover:bg-cyan-300"
+              className="btn-nordgate-inverse inline-flex h-[52px] items-center rounded px-6 text-[16px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+              style={{ outlineColor: "var(--nordgate-blue-soft)" }}
             >
               Book a market assessment
             </Link>
           </div>
-
-          <Link
-            href="/how-it-works"
-            className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors duration-200 hover:text-white"
-          >
-            See how we work <span aria-hidden="true">→</span>
-          </Link>
         </div>
-
-        <p className="mt-10 max-w-[280px] self-start text-sm leading-relaxed text-white/60 lg:self-end lg:text-right">
-          Market validation, local understanding and business development for international B2B
-          companies entering Northern Europe.
-        </p>
       </Container>
     </section>
   );

@@ -9,7 +9,7 @@ export function OnboardingTimeline() {
       <ol className="flex flex-col gap-10 sm:gap-12">
         {onboardingStages.map((stage) => (
           <li key={stage.index} className="relative flex gap-6 pl-0 sm:gap-8">
-            <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-blue-700 bg-blue-700 text-xs font-semibold text-white sm:h-10 sm:w-10">
+            <span className="btn-nordgate relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold sm:h-10 sm:w-10">
               {stage.index}
             </span>
             <div className="pt-0.5 sm:pt-1">

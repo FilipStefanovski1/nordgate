@@ -7,7 +7,6 @@ export const primaryNav: NavLink[] = [
   { label: "Services", href: "/nordic-market-entry" },
   { label: "Approach", href: "/how-it-works" },
   { label: "About", href: "/about" },
-  { label: "Insights", href: "/insights" },
 ];
 
 export const headerCta: NavLink = {

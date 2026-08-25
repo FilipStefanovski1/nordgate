@@ -95,7 +95,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group mt-8 inline-flex items-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-900 disabled:cursor-not-allowed disabled:opacity-70"
+      className="btn-nordgate group mt-8 inline-flex h-[50px] items-center gap-2.5 rounded px-6 text-[15px] font-semibold disabled:cursor-not-allowed disabled:opacity-70"
     >
       {pending ? (
         <>
@@ -130,7 +130,7 @@ export function ContactForm() {
   if (state.status === "success") {
     return (
       <div className="rounded-2xl border border-border-soft bg-bg-soft p-10 text-center" role="status">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-white">
+        <div className="btn-nordgate mx-auto flex h-12 w-12 items-center justify-center rounded-full">
           <Check className="h-5 w-5" aria-hidden="true" />
         </div>
         <p className="mt-6 text-lg font-semibold text-ink-900">Thank you. We&apos;ll be in touch shortly.</p>

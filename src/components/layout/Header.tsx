@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -9,19 +9,28 @@ import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils/cn";
 
+const MENU_ID = "mobile-nav-menu";
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+    menuButtonRef.current?.focus();
+  }, []);
 
   // Close the mobile menu when the route changes — derived during render
   // (rather than in an effect) so it can't cascade an extra render.
   const [menuPathname, setMenuPathname] = useState(pathname);
   if (menuPathname !== pathname) {
     setMenuPathname(pathname);
-    setOpen(false);
+    if (open) setOpen(false);
   }
 
   useEffect(() => {
@@ -47,81 +56,149 @@ export function Header() {
     setHeaderHeight(headerRef.current.getBoundingClientRect().height);
   }, [open]);
 
+  // Keyboard: Escape closes; Tab is trapped inside the panel while open.
+  useEffect(() => {
+    if (!open) return;
+    const panel = menuPanelRef.current;
+
+    const focusables = () =>
+      panel
+        ? Array.from(panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'))
+        : [];
+
+    // Move focus into the panel as soon as it opens.
+    focusables()[0]?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, closeMenu]);
+
   return (
     <header
       ref={headerRef}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full border-b border-border-soft bg-white transition-[padding] duration-300",
+        "fixed inset-x-0 top-0 z-50 w-full border-b transition-[padding,background-color] duration-300",
+        open ? "mobile-menu-gradient border-white/10" : "border-border-soft bg-white",
         scrolled ? "py-2.5" : "py-3.5"
       )}
     >
-      <Container className="flex items-center justify-between gap-6">
-        <Logo variant="color" />
+      <Container className="relative flex items-center justify-between gap-6">
+        <Logo variant={open ? "white" : "color"} />
 
-        <nav className="hidden lg:flex items-center gap-8" aria-label="Primary">
-          {primaryNav.map((entry) => (
-            <Link
-              key={entry.href}
-              href={entry.href}
-              className={cn(
-                "text-sm font-medium transition-colors duration-200",
-                pathname === entry.href ? "text-blue-700" : "text-ink-700 hover:text-blue-700"
-              )}
-            >
-              {entry.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden lg:flex lg:items-center lg:gap-8">
+          <nav className="flex items-center gap-8" aria-label="Primary">
+            {primaryNav.map((entry) => (
+              <Link
+                key={entry.href}
+                href={entry.href}
+                className={cn(
+                  "link-underline text-sm font-medium transition-colors duration-200",
+                  pathname === entry.href ? "text-blue-700" : "text-ink-700 hover:text-blue-700"
+                )}
+              >
+                {entry.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="hidden lg:block">
           <Link
             href={headerCta.href}
-            className="inline-flex items-center gap-1.5 rounded-sm bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-900"
+            className="btn-nordgate inline-flex h-[42px] items-center rounded px-5 text-sm font-semibold"
           >
             {headerCta.label}
-            <span aria-hidden="true">→</span>
           </Link>
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-soft text-ink-900 transition-colors duration-200"
+          className={cn(
+            "lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+            open
+              ? "text-white hover:bg-white/10 focus-visible:outline-white"
+              : "text-navy-950 hover:bg-navy-950/5 focus-visible:outline-blue-600"
+          )}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls={MENU_ID}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
         </button>
       </Container>
 
       {open && (
         <div
-          className="lg:hidden fixed inset-x-0 bottom-0 z-40 bg-white"
+          id={MENU_ID}
+          ref={menuPanelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+          className="mobile-menu-gradient lg:hidden fixed inset-x-0 bottom-0 z-40 overflow-hidden"
           style={{ top: headerHeight || undefined }}
         >
-          <div className="flex h-full flex-col justify-between overflow-y-auto px-6 py-8">
-            <nav className="flex flex-col" aria-label="Mobile primary">
-              {primaryNav.map((entry) => (
-                <Link
-                  key={entry.href}
-                  href={entry.href}
-                  className="border-b border-border-soft py-4 text-xl font-semibold text-ink-900"
-                >
-                  {entry.label}
-                </Link>
-              ))}
+          <div className="mobile-menu-noise" aria-hidden="true" />
+
+          <div
+            className="relative z-10 flex h-full flex-col overflow-y-auto px-6"
+            style={{ paddingBottom: "calc(20px + env(safe-area-inset-bottom))" }}
+          >
+            <nav aria-label="Mobile primary" className="mt-[110px] sm:mt-[130px]">
+              <ul className="flex flex-col">
+                {primaryNav.map((entry, i) => (
+                  <li key={entry.href}>
+                    <Link
+                      href={entry.href}
+                      onClick={closeMenu}
+                      className="group flex items-center justify-between gap-4 py-3.5"
+                    >
+                      <span className="flex items-baseline gap-4">
+                        <span className="coord-label" style={{ color: "var(--hero-accent)" }}>
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span
+                          className="text-[clamp(1.5rem,6vw,2.25rem)] font-medium leading-tight"
+                          style={{ color: "var(--hero-heading)" }}
+                        >
+                          {entry.label}
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-1 border-b border-white/15" />
+              <p className="mt-5 text-sm text-white/50">Nordic market entry · Business development</p>
             </nav>
-            <div className="mt-10 flex flex-col gap-4">
+
+            <div className="mt-auto flex flex-col gap-4 pt-10">
               <Link
                 href={headerCta.href}
-                className="inline-flex items-center justify-center gap-1.5 rounded-sm bg-blue-700 px-6 py-4 text-base font-semibold text-white"
+                onClick={closeMenu}
+                className="btn-nordgate-inverse inline-flex h-[52px] items-center justify-center rounded px-6 text-base font-semibold"
               >
                 {headerCta.label}
-                <span aria-hidden="true">→</span>
               </Link>
-              <p className="coord-label text-center text-ink-400">
-                Copenhagen · Stockholm · Skopje
-              </p>
             </div>
           </div>
         </div>

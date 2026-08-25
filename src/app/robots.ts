@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://nordgate.com/sitemap.xml",
+    sitemap: "https://thenordgate.com/sitemap.xml",
   };
 }

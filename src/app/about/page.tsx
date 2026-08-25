@@ -3,11 +3,14 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { EditorialImage } from "@/components/ui/EditorialImage";
+import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { LocationsGrid } from "@/components/sections/LocationsGrid";
 import { PrinciplesGrid } from "@/components/sections/PrinciplesGrid";
 import { NetworkAdvantage } from "@/components/sections/NetworkAdvantage";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { editorialImages } from "@/data/editorial-images";
 
 export const metadata: Metadata = {
   title: "About",
@@ -52,10 +55,16 @@ export default function AboutPage() {
         </Container>
       </section>
 
+      <EditorialImage
+        src={editorialImages.eventSpeaker.src}
+        alt={editorialImages.eventSpeaker.alt}
+        position={editorialImages.eventSpeaker.position}
+      />
+
       <section className="bg-navy-950 py-24 sm:py-28">
         <Container>
           <div>
-            <SectionHeading tone="light" eyebrow="Where we operate" title="Copenhagen · Stockholm · Skopje" />
+            <SectionHeading tone="light" eyebrow="Where we operate" title="Local presence, not a distant HQ." />
           </div>
           <div className="mt-14">
             <LocationsGrid />
@@ -63,23 +72,19 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-24 sm:py-28">
-        <Container>
-          <div className="max-w-3xl">
-            <SectionHeading
-              eyebrow="Operating philosophy"
-              title={
-                <>
-                  We don&apos;t simply tell companies how to sell in the Nordics.
-                  <br />
-                  We sell on their behalf.
-                </>
-              }
-              description="NordGate is a commercial execution partner, not just an advisory firm. That distinction shapes how we scope engagements and how we measure success."
-            />
-          </div>
-        </Container>
-      </section>
+      <ImageTextSplit
+        imageSide="left"
+        image={editorialImages.founders}
+        eyebrow="Operating philosophy"
+        title={
+          <>
+            We don&apos;t simply tell companies how to sell in the Nordics.
+            <br />
+            We sell on their behalf.
+          </>
+        }
+        description="NordGate is a commercial execution partner, not just an advisory firm. That distinction shapes how we scope engagements and how we measure success."
+      />
 
       <NetworkAdvantage />
 
