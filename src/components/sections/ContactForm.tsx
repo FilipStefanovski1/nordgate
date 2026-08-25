@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { ArrowUpRight, Check, Loader2, TriangleAlert } from "lucide-react";
-import { submitContactForm } from "@/app/contact/actions";
+import { submitContactForm } from "@/app/[locale]/contact/actions";
 import { initialContactFormState, type ContactFormState } from "@/lib/contact/state";
 import { nordicMarketOptions } from "@/lib/contact/schema";
 import { cn } from "@/lib/utils/cn";
