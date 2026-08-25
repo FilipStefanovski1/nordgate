@@ -10,42 +10,46 @@ const COLUMN_W = VIEW_W / 6;
 
 const NODE_X = Array.from({ length: 6 }, (_, i) => COLUMN_W * i + COLUMN_W / 2);
 
-type Lane = { d: string; duration: number; delay: number };
+type Lane = { d: string; delay: number };
 
-/** A single lane between two same-baseline points, bowing to `offset` at
- * its midpoint and returning to the baseline at both ends — so lanes exit
- * and converge cleanly behind the node circles. */
-function lane(xa: number, xb: number, offset: number, duration: number, delay: number): Lane {
-  const dx = xb - xa;
-  const c1x = xa + dx * 0.32;
-  const c2x = xa + dx * 0.68;
-  return {
-    d: `M${xa},${BASELINE} C${c1x},${BASELINE + offset} ${c2x},${BASELINE + offset} ${xb},${BASELINE}`,
-    duration,
-    delay,
-  };
+/**
+ * One lane between two node centres. The lane holds its own constant vertical
+ * offset for the whole span — both endpoints sit at `baseline + offset`, so
+ * parallel lanes never meet and cannot form an eye/leaf outline. `bend` is a
+ * shared, very shallow deflection applied identically to every lane in the
+ * same connection, keeping the group parallel.
+ *
+ * fromX/toX are node centres, so each path's first and last ~25px run inside
+ * the circle and are masked by the node rendered above this layer.
+ */
+function createLanePath(fromX: number, toX: number, offset: number, bend: number) {
+  const distance = toX - fromX;
+  const y = BASELINE + offset;
+  const c = y + bend;
+  return `M ${fromX} ${y} C ${fromX + distance * 0.33} ${c} ${fromX + distance * 0.66} ${c} ${toX} ${y}`;
 }
 
-// Lane counts narrow toward the middle and widen again — the funnel: three
-// inputs converging on assessment, one primary route through targeting and
-// setup, then multiple outreach/feedback channels fanning back out.
-const SEGMENT_OFFSETS: number[][] = [
-  [-20, 0, 20], // 01 → 02: three inputs
-  [-15, 15], // 02 → 03: two lanes
-  [0], // 03 → 04: one primary lane
-  [-15, 15], // 04 → 05: two execution lanes
-  [-20, 0, 20], // 05 → 06: three outreach lanes
+// The funnel is expressed by how many lanes run between stages — 3 → 2 → 1 →
+// 2 → 3 — not by individual connections expanding and contracting.
+const CONNECTION_LANE_OFFSETS: number[][] = [
+  [-7, 0, 7], // 01 → 02
+  [-4, 4], //    02 → 03
+  [0], //        03 → 04
+  [-4, 4], //    04 → 05
+  [-7, 0, 7], // 05 → 06
 ];
 
-const funnelLanes: Lane[] = SEGMENT_OFFSETS.flatMap((offsets, seg) =>
-  offsets.map((offset, i) =>
-    lane(NODE_X[seg], NODE_X[seg + 1], offset, 5.4 + i * 0.5, -(seg * 0.8 + i * 1.3))
-  )
-);
+// One shared bend per connection; every lane in that connection uses it, so
+// they curve together instead of against each other.
+const CONNECTION_BENDS = [2, -2, 0, 2, -2];
 
-// One subtle feedback lane — 06 back toward 04 — riding just beneath the
-// main channel rather than looping under the whole section.
-const FEEDBACK: Lane = lane(NODE_X[5], NODE_X[3], 30, 8, -2);
+const funnelLanes: Lane[] = CONNECTION_LANE_OFFSETS.flatMap((offsets, seg) =>
+  offsets.map((offset, i) => ({
+    d: createLanePath(NODE_X[seg], NODE_X[seg + 1], offset, CONNECTION_BENDS[seg]),
+    // Same speed everywhere; only the phase differs between parallel lanes.
+    delay: -(seg * 0.9 + i * 1.7),
+  }))
+);
 
 export function HorizontalProcessFlow() {
   const stages = processFlowStages;
@@ -62,22 +66,15 @@ export function HorizontalProcessFlow() {
           aria-hidden="true"
           focusable="false"
         >
-          <path d={FEEDBACK.d} className="flow-feedback-static" />
-          <path
-            d={FEEDBACK.d}
-            className="flow-feedback"
-            style={{ animationDuration: `${FEEDBACK.duration}s`, animationDelay: `${FEEDBACK.delay}s` }}
-          />
-
           {funnelLanes.map((l) => (
-            <path key={`static-${l.d}`} d={l.d} className="flow-static" />
+            <path key={`base-${l.d}`} d={l.d} className="flow-lane-base" />
           ))}
           {funnelLanes.map((l) => (
             <path
               key={`current-${l.d}`}
               d={l.d}
-              className="flow-current"
-              style={{ animationDuration: `${l.duration}s`, animationDelay: `${l.delay}s` }}
+              className="flow-lane-current"
+              style={{ animationDelay: `${l.delay}s` }}
             />
           ))}
         </svg>

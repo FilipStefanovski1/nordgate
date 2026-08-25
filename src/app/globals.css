@@ -561,53 +561,30 @@ html.js .reveal.is-visible {
   }
 }
 
-/* Horizontal process flow — one continuous curved information route behind
-   the onboarding stage nodes. Static base path + a separate animated dashed
-   "current" path per lane, so the moving layer can be disabled independently
-   under reduced motion without losing the line itself. */
-.flow-static {
+/* Horizontal process flow — parallel information lanes between the six
+   onboarding nodes. Base and current layers share identical geometry; each
+   lane holds a constant vertical offset so lanes never converge. Paths start
+   and end at node centres and are masked by the circles drawn above them. */
+.flow-lane-base {
   fill: none;
-  stroke: var(--nordgate-slate);
+  stroke: rgba(31, 95, 196, 0.2);
   stroke-width: 1;
-  opacity: 0.28;
+  stroke-linecap: round;
 }
 
-.flow-current {
+.flow-lane-current {
   fill: none;
   stroke: var(--nordgate-blue);
-  stroke-width: 1.5;
+  stroke-width: 1.35;
   stroke-linecap: round;
-  stroke-dasharray: 1 14;
-  opacity: 0.8;
-  animation-name: information-flow;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  /* Period 13; the keyframe travels an exact multiple so the loop is seamless. */
+  stroke-dasharray: 1 12;
+  animation: flow-current 5.5s linear infinite;
 }
 
-/* The single feedback route (06 back toward 04) — wider, fainter, drawn
-   behind the primary lanes, moving in its own (opposite) direction. */
-.flow-feedback-static {
-  fill: none;
-  stroke: var(--nordgate-slate);
-  stroke-width: 1;
-  opacity: 0.18;
-}
-
-.flow-feedback {
-  fill: none;
-  stroke: var(--nordgate-blue);
-  stroke-width: 1.25;
-  stroke-linecap: round;
-  stroke-dasharray: 1 16;
-  opacity: 0.35;
-  animation-name: information-flow;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes information-flow {
+@keyframes flow-current {
   to {
-    stroke-dashoffset: -120;
+    stroke-dashoffset: -130;
   }
 }
 
@@ -638,8 +615,7 @@ html.js .reveal.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flow-current,
-  .flow-feedback {
+  .flow-lane-current {
     animation: none;
   }
   .process-flow-vline::after {
