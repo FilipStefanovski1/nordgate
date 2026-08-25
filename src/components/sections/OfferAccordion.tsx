@@ -1,10 +1,9 @@
 "use client";
 
 import { useId, useState } from "react";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { HoneycombGallery } from "@/components/ui/HoneycombGallery";
 import { Reveal } from "@/components/ui/Reveal";
-import { whatWeDoGalleryImages } from "@/data/honeycomb-images";
 import { cn } from "@/lib/utils/cn";
 
 const offerItems: { title: string; description: string }[] = [
@@ -104,8 +103,17 @@ export function OfferAccordion() {
           })}
           </Reveal>
 
-          <Reveal delay className="offer-gallery">
-            <HoneycombGallery images={whatWeDoGalleryImages} />
+          <Reveal delay className="offer-image">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded">
+              <Image
+                src="/event2.jpeg"
+                alt="A panel discussion in a chandelier-lit hall at a Nordgate-connected business event"
+                fill
+                sizes="(min-width: 1024px) 500px, 90vw"
+                className="object-cover"
+                style={{ objectPosition: "center 45%" }}
+              />
+            </div>
           </Reveal>
         </div>
       </Container>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/sections/PageHeader";
+import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EditorialImage } from "@/components/ui/EditorialImage";
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
+      <PageIntro
         eyebrow="About NordGate"
         title="Two regions. One bridge."
         description="We connect companies, capabilities and opportunities across the Nordics and international markets."

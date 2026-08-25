@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/sections/PageHeader";
+import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function NordicMarketEntryPage() {
   return (
     <>
-      <PageHeader
+      <PageIntro
         eyebrow="Nordic market entry"
         title="Build the market before the office."
         description="Validate and grow in the Nordics without standing up a local team on day one."

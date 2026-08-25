@@ -468,10 +468,10 @@ html.js .reveal.is-visible {
   background: linear-gradient(135deg, #202226 0%, #182334 52%, #102b61 100%);
 }
 
-/* Offer accordion — two-column layout with a honeycomb photo cluster.
-   Mobile/tablet stack in order: copy, accordion, gallery. Desktop places
-   the gallery in its own column, vertically centered against the full
-   copy+accordion height. */
+/* Offer accordion — two-column layout with a single portrait photograph.
+   Mobile/tablet stack in order: copy, accordion, image. Desktop places the
+   image in its own column, vertically centred against the full
+   copy + accordion height. */
 .offer-grid {
   display: grid;
   gap: 2.25rem;
@@ -485,7 +485,7 @@ html.js .reveal.is-visible {
   order: 2;
 }
 
-.offer-gallery {
+.offer-image {
   order: 3;
   width: 100%;
 }
@@ -510,54 +510,14 @@ html.js .reveal.is-visible {
     order: initial;
   }
 
-  .offer-gallery {
+  .offer-image {
     grid-column: 2;
     grid-row: 1 / span 2;
     order: initial;
+    /* Vertically centred against the full copy + accordion column. */
     align-self: center;
-  }
-}
-
-/* Honeycomb gallery — two offset columns of hexagonal photographs,
-   interlocking via a slight horizontal overlap. Sizing is driven by
-   --hex-w; everything else derives from it so columns stay in sync. */
-.honeycomb {
-  --hex-w: clamp(96px, 26vw, 130px);
-  --hex-h: calc(var(--hex-w) * 0.866);
-  --hex-gap-y: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.honeycomb-col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--hex-gap-y);
-}
-
-.honeycomb-col-offset {
-  margin-left: calc(var(--hex-w) * -0.22);
-  margin-top: calc((var(--hex-h) + var(--hex-gap-y)) / 2);
-}
-
-.honeycomb-hex {
-  position: relative;
-  width: var(--hex-w);
-  height: var(--hex-h);
-  flex-shrink: 0;
-  overflow: hidden;
-  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0 50%);
-}
-
-@media (min-width: 640px) {
-  .honeycomb {
-    --hex-w: clamp(120px, 18vw, 150px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .honeycomb {
-    --hex-w: clamp(150px, 15vw, 210px);
+    max-width: 500px;
+    margin-inline: auto;
   }
 }
 

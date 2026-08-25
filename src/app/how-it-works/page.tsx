@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/sections/PageHeader";
+import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EditorialImage } from "@/components/ui/EditorialImage";
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <>
-      <PageHeader
+      <PageIntro
         eyebrow="How it works"
         title="One process, start to finish."
         description="A single accountable team, not a report handed over at the end of a project."
