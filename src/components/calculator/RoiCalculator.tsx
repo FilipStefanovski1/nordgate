@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { calculateRoi } from "@/lib/calculator/roi";
+import { useTranslations } from "next-intl";
 import { formatCurrency, formatDecimal } from "@/lib/calculator/format";
 import { calculatorDefaults, currencies, type CurrencyCode } from "@/data/pricing";
 import { Button } from "@/components/ui/Button";
@@ -47,6 +48,7 @@ function Field({
 }
 
 export function RoiCalculator() {
+  const t = useTranslations("roiCalculator");
   const [currency, setCurrency] = useState<CurrencyCode>(calculatorDefaults.currency);
   const [averageOrderValue, setAverageOrderValue] = useState(calculatorDefaults.averageOrderValue);
   const [customerLifetimeMonths, setCustomerLifetimeMonths] = useState(calculatorDefaults.customerLifetimeMonths);
@@ -72,12 +74,12 @@ export function RoiCalculator() {
     <div className="rounded-3xl border border-border-soft bg-white p-6 sm:p-10 lg:p-12">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="eyebrow text-blue-600">Scenario inputs</p>
-          <h3 className="mt-2 text-xl font-semibold text-ink-900 sm:text-2xl">Your assumptions</h3>
+          <p className="eyebrow text-blue-600">{t("scenarioInputs")}</p>
+          <h3 className="mt-2 text-xl font-semibold text-ink-900 sm:text-2xl">{t("yourAssumptions")}</h3>
         </div>
         <div className="flex items-center gap-2">
           <label htmlFor="currency" className="text-sm text-ink-500">
-            Currency
+            {t("currency")}
           </label>
           <select
             id="currency"
@@ -96,9 +98,9 @@ export function RoiCalculator() {
 
       <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr]">
         <div className="flex flex-col gap-8">
-          <p className="eyebrow text-ink-400">Customer economics</p>
+          <p className="eyebrow text-ink-400">{t("customerEconomics")}</p>
           <Field
-            label="Average order value"
+            label={t("averageOrderValue")}
             value={averageOrderValue}
             onChange={setAverageOrderValue}
             min={1000}
@@ -106,16 +108,16 @@ export function RoiCalculator() {
             step={1000}
           />
           <Field
-            label="Average customer lifetime"
+            label={t("customerLifetime")}
             value={customerLifetimeMonths}
             onChange={setCustomerLifetimeMonths}
             min={1}
             max={60}
             step={1}
-            suffix=" months"
+            suffix={` ${t("months")}`}
           />
           <Field
-            label="Conversion rate per qualified meeting"
+            label={t("conversionRate")}
             value={conversionRate}
             onChange={setConversionRate}
             min={1}
@@ -124,9 +126,9 @@ export function RoiCalculator() {
             suffix="%"
           />
 
-          <p className="eyebrow mt-2 text-ink-400">NordGate delivery</p>
+          <p className="eyebrow mt-2 text-ink-400">{t("delivery")}</p>
           <Field
-            label="Meetings per month"
+            label={t("meetingsPerMonth")}
             value={meetingsPerMonth}
             onChange={setMeetingsPerMonth}
             min={1}
@@ -134,43 +136,44 @@ export function RoiCalculator() {
             step={1}
           />
           <Field
-            label="Project length"
+            label={t("projectLength")}
             value={projectMonths}
             onChange={setProjectMonths}
             min={1}
             max={24}
             step={1}
-            suffix=" months"
+            suffix={` ${t("months")}`}
           />
         </div>
 
         {/* Result panel — one clear focal number, then the breakdown that earns it */}
         <div className="rounded-2xl bg-navy-950 p-6 text-white sm:p-8">
-          <p className="eyebrow text-white/50">Return per {currency} invested</p>
+          <p className="eyebrow text-white/50">{t("returnPer", { currency })}</p>
           <p className="mt-2 text-5xl font-semibold sm:text-6xl">
             {formatDecimal(result.returnMultiple, 1)}×
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
-            Every {currency} invested corresponds to approximately{" "}
-            <span className="font-medium text-white/85">{formatDecimal(result.returnMultiple, 1)}×</span> in projected
-            customer lifetime value, based on the assumptions on the left.
+            {t("returnExplain", {
+              currency,
+              multiple: `${formatDecimal(result.returnMultiple, 1)}×`,
+            })}
           </p>
 
           <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-7 text-sm">
             <div>
-              <p className="text-white/50">Lifetime value</p>
+              <p className="text-white/50">{t("lifetimeValue")}</p>
               <p className="mt-1 text-base font-semibold">{fmt(result.lifetimeValue)}</p>
             </div>
             <div>
-              <p className="text-white/50">Total NordGate cost</p>
+              <p className="text-white/50">{t("totalCost")}</p>
               <p className="mt-1 text-base font-semibold">{fmt(result.totalCosts)}</p>
             </div>
             <div>
-              <p className="text-white/50">Net value</p>
+              <p className="text-white/50">{t("netValue")}</p>
               <p className="mt-1 text-base font-semibold">{fmt(result.netValue)}</p>
             </div>
             <div>
-              <p className="text-white/50">Deals to break even</p>
+              <p className="text-white/50">{t("dealsToBreakEven")}</p>
               <p className="mt-1 text-base font-semibold">{formatDecimal(result.breakEvenDeals, 1)}</p>
             </div>
           </div>
@@ -179,27 +182,27 @@ export function RoiCalculator() {
 
       {/* How the number is built — the education, not a repeat of the result */}
       <div className="mt-12">
-        <p className="eyebrow text-ink-400">How this is calculated</p>
+        <p className="eyebrow text-ink-400">{t("howCalculated")}</p>
         <div className="mt-4 overflow-x-auto">
           <div className="flex min-w-max items-center gap-3 rounded-2xl border border-border-soft bg-bg-soft px-6 py-6 sm:gap-4 sm:px-8">
-            <EquationStep label="Meetings" sub={`${meetingsPerMonth}/mo × ${projectMonths} mo`} value={formatDecimal(result.totalMeetings, 0)} />
+            <EquationStep label={t("meetings")} sub={`${meetingsPerMonth}${t("perMonth")} × ${projectMonths}`} value={formatDecimal(result.totalMeetings, 0)} />
             <Arrow />
-            <EquationStep label="Expected new customers" sub={`× ${conversionRate}% conversion`} value={formatDecimal(result.expectedCustomers, 1)} />
+            <EquationStep label={t("expectedCustomers")} sub={`× ${conversionRate}% ${t("conversionSuffix")}`} value={formatDecimal(result.expectedCustomers, 1)} />
             <Arrow />
-            <EquationStep label="Direct revenue" sub={`× ${fmt(averageOrderValue)}`} value={fmt(result.directRevenue)} />
+            <EquationStep label={t("directRevenue")} sub={`× ${fmt(averageOrderValue)}`} value={fmt(result.directRevenue)} />
             <Arrow />
-            <EquationStep label="Estimated lifetime value" sub={`× ${customerLifetimeMonths} mo ÷ 12`} value={fmt(result.lifetimeValue)} highlight />
+            <EquationStep label={t("estimatedLifetimeValue")} sub={`× ${customerLifetimeMonths} ÷ 12`} value={fmt(result.lifetimeValue)} highlight />
           </div>
         </div>
       </div>
 
       <p className="mt-6 text-xs leading-relaxed text-ink-400">
-        This is a projection based on the assumptions entered and is not a guarantee of future results.
+        {t("disclaimer")}
       </p>
 
       <div className="mt-8">
         <Button href="/contact" variant="primary">
-          Talk to NordGate about this scenario
+          {t("ctaScenario")}
         </Button>
       </div>
     </div>

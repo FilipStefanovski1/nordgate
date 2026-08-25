@@ -1,6 +1,9 @@
+import { useTranslations } from "next-intl";
 import { locations } from "@/data/locations";
 
 export function LocationsGrid() {
+  const t = useTranslations("about");
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       {locations.map((loc) => (
@@ -10,7 +13,7 @@ export function LocationsGrid() {
           </p>
           <p className="mt-3 text-xl font-semibold text-white">{loc.city}</p>
           <p className="mt-1 text-sm text-white/50">{loc.country}</p>
-          <p className="mt-4 text-sm leading-relaxed text-white/60">{loc.role}</p>
+          <p className="mt-4 text-sm leading-relaxed text-white/60">{loc.city === "Skopje" ? t("hubBridge") : t("hubNordic")}</p>
         </div>
       ))}
     </div>

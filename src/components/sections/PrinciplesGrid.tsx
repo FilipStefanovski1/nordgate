@@ -1,6 +1,12 @@
-import { principles } from "@/data/principles";
+import { useTranslations } from "next-intl";
 
 export function PrinciplesGrid() {
+  const t = useTranslations("about");
+  const principles = [1, 2, 3, 4].map((n) => ({
+    title: t(`principle${n}Title`),
+    description: t(`principle${n}Body`),
+  }));
+
   return (
     <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border-soft bg-border-soft sm:grid-cols-2 lg:grid-cols-3">
       {principles.map((p, i) => (

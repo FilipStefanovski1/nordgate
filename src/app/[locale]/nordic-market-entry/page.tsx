@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -8,22 +11,37 @@ import { ServiceGroups } from "@/components/sections/ServiceGroups";
 import { WhoWeWorkWith } from "@/components/sections/WhoWeWorkWith";
 import { MarketReadinessSprint } from "@/components/sections/MarketReadinessSprint";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { marketEntryServices } from "@/data/services";
 import { editorialImages } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
-  title: "Nordic Market Entry",
-  description:
-    "Build your Nordic market before you build a Nordic office. NordGate assesses, targets and executes Nordic sales on behalf of established international companies.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.services" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/nordic-market-entry", locale as Locale),
+  };
+}
 
-export default function NordicMarketEntryPage() {
+export default async function NordicMarketEntryPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("services");
+
   return (
     <>
       <PageIntro
-        eyebrow="Nordic market entry"
-        title="Build the market before the office."
-        description="Validate and grow in the Nordics without standing up a local team on day one."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <WhoWeWorkWith />
@@ -31,22 +49,22 @@ export default function NordicMarketEntryPage() {
       <ImageTextSplit
         imageSide="left"
         image={editorialImages.eventSpeaker}
-        eyebrow="Why local matters"
-        title="Four markets, four ways of deciding."
-        description="Sweden, Denmark, Norway and Finland each have their own commercial culture and buying rhythm. Treating them as one market is where most entries stall."
+        eyebrow={t("localEyebrow")}
+        title={t("localTitle")}
+        description={t("localBody")}
       />
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
           <Reveal>
             <SectionHeading
-              eyebrow="What's included"
-              title="Three phases. One partner."
-              description="Insight defines where to play. Setup builds the infrastructure. Execution turns it into meetings."
+              eyebrow={t("phasesEyebrow")}
+              title={t("phasesTitle")}
+              description={t("phasesBody")}
             />
           </Reveal>
           <Reveal delay className="mt-12">
-            <ServiceGroups groups={marketEntryServices} />
+            <ServiceGroups />
           </Reveal>
         </Container>
       </section>

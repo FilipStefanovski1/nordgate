@@ -1,36 +1,17 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useId, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { ArrowUpRight, Check, Loader2, TriangleAlert } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import { Check, Loader2, TriangleAlert } from "lucide-react";
 import { submitContactForm } from "@/app/[locale]/contact/actions";
 import { initialContactFormState, type ContactFormState } from "@/lib/contact/state";
-import { nordicMarketOptions } from "@/lib/contact/schema";
+import { contactTopics } from "@/lib/contact/schema";
 import { cn } from "@/lib/utils/cn";
 
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-  website: string;
-  currentMarket: string;
-  nordicMarkets: string[];
-  goal: string;
-  message: string;
-};
-
-const emptyValues: FormValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  company: "",
-  website: "",
-  currentMarket: "",
-  nordicMarkets: [],
-  goal: "",
-  message: "",
-};
+const CONTACT_EMAIL = "info@thenordgate.com";
+const CONTACT_PHONE = "+45 52 58 65 80";
 
 function Field({
   label,
@@ -51,158 +32,209 @@ function Field({
   value: string;
   onChange: (value: string) => void;
 }) {
-  const baseClass = cn(
+  const errorId = `${name}-error`;
+  const base = cn(
     "mt-2 w-full rounded-lg border bg-white px-4 py-3 text-sm text-ink-900 outline-none transition-colors focus:border-blue-600",
     error ? "border-red-400" : "border-border-strong"
   );
+  const shared = {
+    id: name,
+    name,
+    required,
+    className: base,
+    "aria-invalid": error ? (true as const) : undefined,
+    "aria-describedby": error ? errorId : undefined,
+    value,
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      onChange(e.target.value),
+  };
+
   return (
     <div>
       <label htmlFor={name} className="text-sm font-medium text-ink-700">
         {label}
         {required && <span className="text-blue-600"> *</span>}
       </label>
-      {as === "textarea" ? (
-        <textarea
-          id={name}
-          name={name}
-          required={required}
-          rows={4}
-          className={baseClass}
-          aria-invalid={Boolean(error)}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        />
-      ) : (
-        <input
-          id={name}
-          name={name}
-          type={type}
-          required={required}
-          className={baseClass}
-          aria-invalid={Boolean(error)}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        />
+      {as === "textarea" ? <textarea rows={5} {...shared} /> : <input type={type} {...shared} />}
+      {error && (
+        <p id={errorId} className="mt-1.5 text-xs text-red-600">
+          {error}
+        </p>
       )}
-      {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
     </div>
   );
 }
 
 function SubmitButton() {
+  const t = useTranslations("contact");
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
       disabled={pending}
-      className="btn-nordgate group mt-8 inline-flex h-[50px] items-center gap-2.5 rounded px-6 text-[15px] font-semibold disabled:cursor-not-allowed disabled:opacity-70"
+      className="btn-nordgate mt-8 inline-flex h-[50px] w-full items-center justify-center gap-2.5 rounded px-6 text-[15px] font-semibold disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
     >
       {pending ? (
         <>
-          Sending
+          {t("sending")}
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
         </>
       ) : (
-        <>
-          Discuss market entry
-          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-        </>
+        t("submit")
       )}
     </button>
   );
 }
 
 export function ContactForm() {
-  const [state, formAction] = useActionState<ContactFormState, FormData>(submitContactForm, initialContactFormState);
-  const [values, setValues] = useState<FormValues>(emptyValues);
+  const t = useTranslations("contact");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const [state, formAction] = useActionState<ContactFormState, FormData>(
+    submitContactForm,
+    initialContactFormState
+  );
+  const statusRef = useRef<HTMLDivElement>(null);
+  const consentId = useId();
+
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    company: "",
+    topic: "",
+    message: "",
+  });
+  const set = (k: keyof typeof values) => (v: string) => setValues((p) => ({ ...p, [k]: v }));
   const errors = state.fieldErrors ?? {};
+  const err = (k: string) => (errors[k] ? t(errors[k]) : undefined);
 
-  const setField = (name: keyof FormValues) => (value: string) => setValues((prev) => ({ ...prev, [name]: value }));
-
-  // Clear the form once a submission succeeds — derived during render (rather
-  // than in an effect) so it can't cascade an extra render.
-  const [clearedForStatus, setClearedForStatus] = useState<ContactFormState["status"] | null>(null);
-  if (state.status === "success" && clearedForStatus !== state.status) {
-    setClearedForStatus(state.status);
-    setValues(emptyValues);
-  }
+  // Move focus to the status message so it is announced and reachable.
+  useEffect(() => {
+    if (state.status !== "idle") statusRef.current?.focus();
+  }, [state.status]);
 
   if (state.status === "success") {
     return (
-      <div className="rounded-2xl border border-border-soft bg-bg-soft p-10 text-center" role="status">
+      <div
+        ref={statusRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="rounded-2xl border border-border-soft bg-bg-soft p-10 text-center"
+      >
         <div className="btn-nordgate mx-auto flex h-12 w-12 items-center justify-center rounded-full">
           <Check className="h-5 w-5" aria-hidden="true" />
         </div>
-        <p className="mt-6 text-lg font-semibold text-ink-900">Thank you. We&apos;ll be in touch shortly.</p>
-        <p className="mt-2 text-sm text-ink-500">
-          A member of the NordGate team will review your details and reach out to discuss next steps.
-        </p>
+        <p className="mt-6 text-lg font-semibold text-ink-900">{t("successTitle")}</p>
+        <p className="mt-2 text-sm text-ink-500">{t("successBody")}</p>
       </div>
     );
   }
 
   return (
     <form action={formAction} className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10" noValidate>
+      {/* Context for the notification email */}
+      <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="page" value={pathname} />
+
       {/* Honeypot — hidden from real users, catches simple bots */}
       <div className="hidden" aria-hidden="true">
-        <label htmlFor="company_website_2">Leave this field empty</label>
+        <label htmlFor="company_website_2">{t("honeypotLabel")}</label>
         <input id="company_website_2" name="company_website_2" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <Field label="First name" name="firstName" required error={errors.firstName} value={values.firstName} onChange={setField("firstName")} />
-        <Field label="Last name" name="lastName" required error={errors.lastName} value={values.lastName} onChange={setField("lastName")} />
-        <Field label="Work email" name="email" type="email" required error={errors.email} value={values.email} onChange={setField("email")} />
-        <Field label="Company" name="company" required error={errors.company} value={values.company} onChange={setField("company")} />
-        <Field label="Company website" name="website" type="url" error={errors.website} value={values.website} onChange={setField("website")} />
-        <Field label="Current market" name="currentMarket" value={values.currentMarket} onChange={setField("currentMarket")} />
-      </div>
+        <Field label={t("nameLabel")} name="name" required error={err("name")} value={values.name} onChange={set("name")} />
+        <Field label={t("emailLabel")} name="email" type="email" required error={err("email")} value={values.email} onChange={set("email")} />
+        <Field label={t("companyLabel")} name="company" required error={err("company")} value={values.company} onChange={set("company")} />
 
-      <div className="mt-6">
-        <label htmlFor="nordicMarkets" className="text-sm font-medium text-ink-700">
-          Nordic market(s) of interest
-        </label>
-        <select
-          id="nordicMarkets"
-          name="nordicMarkets"
-          multiple
-          value={values.nordicMarkets}
-          onChange={(e) =>
-            setValues((prev) => ({
-              ...prev,
-              nordicMarkets: Array.from(e.target.selectedOptions, (o) => o.value),
-            }))
-          }
-          className="mt-2 h-32 w-full rounded-lg border border-border-strong bg-white px-4 py-3 text-sm text-ink-900 outline-none focus:border-blue-600"
-        >
-          {nordicMarketOptions.map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label htmlFor="topic" className="text-sm font-medium text-ink-700">
+            {t("topicLabel")}
+            <span className="text-blue-600"> *</span>
+          </label>
+          <select
+            id="topic"
+            name="topic"
+            required
+            value={values.topic}
+            onChange={(e) => set("topic")(e.target.value)}
+            aria-invalid={errors.topic ? true : undefined}
+            aria-describedby={errors.topic ? "topic-error" : undefined}
+            className={cn(
+              "mt-2 h-[46px] w-full rounded-lg border bg-white px-4 text-sm text-ink-900 outline-none transition-colors focus:border-blue-600",
+              errors.topic ? "border-red-400" : "border-border-strong"
+            )}
+          >
+            <option value="">{t("topicPlaceholder")}</option>
+            {contactTopics.map((topic) => (
+              <option key={topic} value={topic}>
+                {t(`topic${topic.charAt(0).toUpperCase()}${topic.slice(1)}`)}
+              </option>
+            ))}
+          </select>
+          {errors.topic && (
+            <p id="topic-error" className="mt-1.5 text-xs text-red-600">
+              {t(errors.topic)}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="mt-6">
         <Field
-          label="What are you trying to achieve?"
-          name="goal"
+          label={t("messageLabel")}
+          name="message"
           as="textarea"
           required
-          error={errors.goal}
-          value={values.goal}
-          onChange={setField("goal")}
+          error={err("message")}
+          value={values.message}
+          onChange={set("message")}
         />
       </div>
 
-      <div className="mt-6">
-        <Field label="Message (optional)" name="message" as="textarea" error={errors.message} value={values.message} onChange={setField("message")} />
+      <div className="mt-6 flex items-start gap-3">
+        <input
+          id={consentId}
+          name="consent"
+          type="checkbox"
+          required
+          aria-invalid={errors.consent ? true : undefined}
+          aria-describedby={errors.consent ? `${consentId}-error` : undefined}
+          className="mt-1 h-4 w-4 shrink-0 accent-[var(--nordgate-navy)]"
+        />
+        <div>
+          <label htmlFor={consentId} className="text-sm leading-relaxed text-ink-700">
+            {t("consent")}
+          </label>
+          {errors.consent && (
+            <p id={`${consentId}-error`} className="mt-1 text-xs text-red-600">
+              {t(errors.consent)}
+            </p>
+          )}
+        </div>
       </div>
 
       {state.status === "error" && (
-        <div className="mt-6 flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+        <div
+          ref={statusRef}
+          tabIndex={-1}
+          role="alert"
+          aria-live="assertive"
+          className="mt-6 flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
           <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-          <p>{state.message}</p>
+          <div>
+            <p>{t(state.messageKey ?? "errorGeneric")}</p>
+            {state.messageKey !== "errorFields" && (
+              <p className="mt-1">
+                {t.rich("errorFallback", {
+                  email: () => <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold underline">{CONTACT_EMAIL}</a>,
+                  phone: () => <a href="tel:+4552586580" className="font-semibold underline">{CONTACT_PHONE}</a>,
+                })}
+              </p>
+            )}
+          </div>
         </div>
       )}
 

@@ -1,124 +1,156 @@
 "use server";
 
+import { headers } from "next/headers";
+import { getTranslations } from "next-intl/server";
 import { contactSchema } from "@/lib/contact/schema";
-import { getResendClient, isEmailConfigured } from "@/lib/email/resend";
+import { getResendClient, isEmailConfigured, escapeHtml } from "@/lib/email/resend";
 import type { ContactFormState } from "@/lib/contact/state";
+import { routing } from "@/i18n/routing";
 
-// Best-effort duplicate-submission guard, scoped to a single server instance.
-// The primary guard is disabling the submit button while the action is pending.
+/**
+ * Best-effort in-memory guards, scoped to one server instance. The primary
+ * protections are the disabled submit button and the honeypot; these just
+ * blunt repeated automated posts.
+ */
 const recentSubmissions = new Map<string, number>();
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 const DUPLICATE_WINDOW_MS = 30_000;
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60_000;
 
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+/** Coarse, privacy-conscious identifier — never stored or logged. */
+async function requestKey(): Promise<string> {
+  const h = await headers();
+  const ip = (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+  const ua = h.get("user-agent") ?? "";
+  let hash = 0;
+  const raw = `${ip}|${ua}`;
+  for (let i = 0; i < raw.length; i++) hash = (hash * 31 + raw.charCodeAt(i)) | 0;
+  return String(hash);
+}
+
+function rateLimited(key: string): boolean {
+  const now = Date.now();
+  const bucket = rateBuckets.get(key);
+  if (!bucket || now > bucket.resetAt) {
+    rateBuckets.set(key, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  bucket.count += 1;
+  return bucket.count > RATE_LIMIT;
 }
 
 export async function submitContactForm(
-  _prevState: ContactFormState,
+  _prev: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  const raw = {
-    firstName: formData.get("firstName")?.toString() ?? "",
-    lastName: formData.get("lastName")?.toString() ?? "",
+  const parsed = contactSchema.safeParse({
+    name: formData.get("name")?.toString() ?? "",
     email: formData.get("email")?.toString() ?? "",
     company: formData.get("company")?.toString() ?? "",
-    website: formData.get("website")?.toString() || undefined,
-    currentMarket: formData.get("currentMarket")?.toString() || undefined,
-    nordicMarkets: formData.getAll("nordicMarkets").map(String),
-    goal: formData.get("goal")?.toString() ?? "",
-    message: formData.get("message")?.toString() || undefined,
+    topic: formData.get("topic")?.toString() ?? "",
+    message: formData.get("message")?.toString() ?? "",
+    consent: formData.get("consent") === "on" || formData.get("consent") === "true",
+    locale: formData.get("locale")?.toString() || undefined,
+    page: formData.get("page")?.toString() || undefined,
     company_website_2: formData.get("company_website_2")?.toString() || "",
-  };
-
-  const parsed = contactSchema.safeParse(raw);
+  });
 
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};
     for (const issue of parsed.error.issues) {
       const key = issue.path[0];
-      if (typeof key === "string" && !fieldErrors[key]) {
-        fieldErrors[key] = issue.message;
-      }
+      if (typeof key === "string" && !fieldErrors[key]) fieldErrors[key] = issue.message;
     }
-    return {
-      status: "error",
-      message: "Please check the highlighted fields and try again.",
-      fieldErrors,
-    };
+    return { status: "error", messageKey: "errorFields", fieldErrors };
   }
 
   const data = parsed.data;
 
-  // Honeypot tripped — pretend success without sending anything.
-  if (data.company_website_2) {
-    return { status: "success", message: "Thank you. We'll be in touch shortly." };
-  }
+  // Honeypot tripped — accept silently without sending anything.
+  if (data.company_website_2) return { status: "success" };
 
-  const dedupeKey = data.email.toLowerCase();
-  const lastSubmitted = recentSubmissions.get(dedupeKey);
-  if (lastSubmitted && Date.now() - lastSubmitted < DUPLICATE_WINDOW_MS) {
-    return {
-      status: "error",
-      message: "We've already received a message from you moments ago. We'll be in touch shortly.",
-    };
+  const locale = routing.locales.includes(data.locale as never)
+    ? (data.locale as string)
+    : routing.defaultLocale;
+  const t = await getTranslations({ locale, namespace: "email" });
+
+  const key = await requestKey();
+  if (rateLimited(key)) return { status: "error", messageKey: "errorDuplicate" };
+
+  const dedupeKey = `${key}:${data.email.toLowerCase()}`;
+  const last = recentSubmissions.get(dedupeKey);
+  if (last && Date.now() - last < DUPLICATE_WINDOW_MS) {
+    return { status: "error", messageKey: "errorDuplicate" };
   }
 
   if (!isEmailConfigured()) {
-    console.error(
-      "[contact] Submission received but email delivery is not configured. " +
-        "Set RESEND_API_KEY and CONTACT_TO_EMAIL to enable delivery.",
-      { from: data.email, company: data.company }
-    );
-    return {
-      status: "error",
-      message: "We couldn't send your message right now. Please try again shortly.",
-    };
+    // Controlled failure — never leak configuration detail to the visitor.
+    console.error("[contact] Email delivery is not configured (RESEND_API_KEY / CONTACT_TO_EMAIL).");
+    return { status: "error", messageKey: "errorGeneric" };
   }
 
+  const toEmail = process.env.CONTACT_TO_EMAIL!;
+  const fromEmail =
+    process.env.CONTACT_FROM_EMAIL ?? "Nordgate Website <forms@send.thenordgate.com>";
+
+  const submittedAt = new Date().toISOString();
+  const topicLabel = data.topic;
+  const rows: [string, string][] = [
+    [t("labelSubmitted"), submittedAt],
+    [t("labelName"), data.name],
+    [t("labelEmail"), data.email],
+    [t("labelCompany"), data.company],
+    [t("labelTopic"), topicLabel],
+    [t("labelPage"), data.page ?? "-"],
+    [t("labelLanguage"), locale],
+  ];
+
+  const text =
+    rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\n${t("labelMessage")}:\n${data.message}`;
+  const html =
+    `<table style="font-family:system-ui,sans-serif;font-size:14px;border-collapse:collapse">` +
+    rows
+      .map(
+        ([k, v]) =>
+          `<tr><td style="padding:4px 12px 4px 0;color:#64748b">${escapeHtml(k)}</td><td style="padding:4px 0"><strong>${escapeHtml(v)}</strong></td></tr>`
+      )
+      .join("") +
+    `</table><p style="font-family:system-ui,sans-serif;font-size:14px;white-space:pre-wrap;margin-top:16px">${escapeHtml(data.message)}</p>`;
+
+  const resend = getResendClient();
+
+  // 1. Internal notification. Success is only reported once THIS is accepted.
+  const notification = await resend.emails.send({
+    from: fromEmail,
+    to: toEmail,
+    replyTo: data.email,
+    subject: t("notifySubject", { name: data.company || data.name }),
+    text,
+    html,
+  });
+
+  if (notification.error) {
+    console.error("[contact] Notification delivery failed:", notification.error.name);
+    return { status: "error", messageKey: "errorGeneric" };
+  }
+
+  recentSubmissions.set(dedupeKey, Date.now());
+
+  // 2. Visitor confirmation. A failure here must not lose the enquiry.
   try {
-    const resend = getResendClient();
-    const toEmail = process.env.CONTACT_TO_EMAIL!;
-    const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "NordGate Website <onboarding@resend.dev>";
-
-    const marketsLine = data.nordicMarkets && data.nordicMarkets.length > 0 ? data.nordicMarkets.join(", ") : "Not specified";
-
-    const { error } = await resend.emails.send({
+    const confirmation = await resend.emails.send({
       from: fromEmail,
-      to: toEmail,
-      replyTo: data.email,
-      subject: `New market entry inquiry — ${data.company}`,
-      html: `
-        <h2>New contact form submission</h2>
-        <p><strong>Name:</strong> ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-        <p><strong>Company:</strong> ${escapeHtml(data.company)}</p>
-        ${data.website ? `<p><strong>Website:</strong> ${escapeHtml(data.website)}</p>` : ""}
-        ${data.currentMarket ? `<p><strong>Current market:</strong> ${escapeHtml(data.currentMarket)}</p>` : ""}
-        <p><strong>Nordic market(s) of interest:</strong> ${escapeHtml(marketsLine)}</p>
-        <p><strong>What they're trying to achieve:</strong><br/>${escapeHtml(data.goal).replace(/\n/g, "<br/>")}</p>
-        ${data.message ? `<p><strong>Message:</strong><br/>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>` : ""}
-      `,
+      to: data.email,
+      subject: t("confirmSubject"),
+      text: `${t("confirmGreeting", { name: data.name })}\n\n${t("confirmBody")}\n\n${t("confirmSignoff")}`,
     });
-
-    if (error) {
-      console.error("[contact] Resend API error:", error);
-      return {
-        status: "error",
-        message: "We couldn't send your message right now. Please try again shortly.",
-      };
+    if (confirmation.error) {
+      console.error("[contact] Confirmation delivery failed:", confirmation.error.name);
     }
-
-    recentSubmissions.set(dedupeKey, Date.now());
-    return { status: "success", message: "Thank you. We'll be in touch shortly." };
-  } catch (err) {
-    console.error("[contact] Unexpected error sending message:", err);
-    return {
-      status: "error",
-      message: "We couldn't send your message right now. Please try again shortly.",
-    };
+  } catch {
+    console.error("[contact] Confirmation delivery threw.");
   }
+
+  return { status: "success" };
 }

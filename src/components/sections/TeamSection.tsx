@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { team } from "@/data/team";
@@ -15,6 +16,8 @@ function LinkedInIcon() {
 const clipFrame = "polygon(0 0, 88% 0, 100% 12%, 100% 100%, 12% 100%, 0 88%)";
 
 export function TeamSection({ background = "white" }: { background?: "white" | "soft" }) {
+  const t = useTranslations("about");
+
   return (
     <section
       id="team"
@@ -23,7 +26,7 @@ export function TeamSection({ background = "white" }: { background?: "white" | "
       <Container className="flex flex-col items-center text-center">
         <Reveal className="flex w-full flex-col items-center">
           <h2 className="max-w-xl text-balance font-serif text-3xl font-medium leading-[1.1] tracking-tight text-ink-900 sm:text-4xl md:text-[2.75rem]">
-            A team built for cross-border growth
+            {t("teamTitle")}
           </h2>
 
           <div className="mx-auto mt-16 grid w-full max-w-3xl grid-cols-1 gap-x-10 gap-y-16 text-left sm:grid-cols-2">
@@ -54,7 +57,7 @@ export function TeamSection({ background = "white" }: { background?: "white" | "
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${member.name} on LinkedIn`}
+                    aria-label={t("linkedinLabel", { name: member.name })}
                     className="mt-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-ink-500 transition-colors duration-200 hover:border-blue-600 hover:text-blue-600"
                   >
                     <LinkedInIcon />

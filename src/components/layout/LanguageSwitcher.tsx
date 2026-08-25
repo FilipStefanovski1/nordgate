@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Check, ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { locales, localeLabels, type Locale } from "@/i18n/routing";
@@ -19,7 +19,6 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
   const active = useLocale() as Locale;
   const pathname = usePathname();
   const params = useParams();
-  const searchParams = useSearchParams();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
@@ -48,12 +47,16 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
 
   function selectLocale(next: Locale) {
     close();
-    const query = searchParams.toString();
+    // Read query/hash at click time rather than via useSearchParams, which
+    // would force a client-side bailout and block static prerendering.
+    const search = typeof window !== "undefined" ? window.location.search : "";
     const hash = typeof window !== "undefined" ? window.location.hash : "";
+    const query = search ? Object.fromEntries(new URLSearchParams(search)) : undefined;
+
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- pathname comes from the typed route map at runtime
-        { pathname, params, query: query ? Object.fromEntries(searchParams) : undefined },
+        { pathname, params, query },
         { locale: next }
       );
       if (hash && typeof window !== "undefined") {

@@ -1,22 +1,41 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { Newspaper } from "lucide-react";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { insightArticles, insightCategories } from "@/data/insights";
 
-export const metadata: Metadata = {
-  title: "Insights",
-  description:
-    "Perspectives on Nordic market entry, sales and cross-border business development from NordGate.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.insights" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/insights", locale as Locale),
+  };
+}
 
-export default function InsightsPage() {
+export default async function InsightsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("insights");
+
   return (
     <>
       <PageHeader
-        eyebrow="Insights"
-        title="Notes from the field."
-        description="Perspectives on entering Sweden, Denmark, Norway and Finland, published as we develop them."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <section className="bg-white py-20 sm:py-24">
@@ -38,10 +57,10 @@ export default function InsightsPage() {
             <div className="mt-16 flex flex-col items-center rounded-2xl border border-dashed border-border-strong px-8 py-24 text-center">
               <Newspaper className="h-8 w-8 text-ink-400" aria-hidden="true" />
               <p className="mt-6 text-lg font-semibold text-ink-900">
-                NordGate&apos;s first insights are in progress.
+                {t("emptyTitle")}
               </p>
               <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-500">
-                Check back soon, or get in touch if you have a question we can answer directly.
+                {t("emptyBody")}
               </p>
             </div>
           ) : (

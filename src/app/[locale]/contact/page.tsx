@@ -1,22 +1,41 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { locations } from "@/data/locations";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Let's find out whether the Nordics make sense for your business. Get in touch with NordGate to discuss market entry.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.contact" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/contact", locale as Locale),
+  };
+}
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("contact");
+
   return (
     <>
       <PageHeader
-        eyebrow="Contact"
-        title="Let's test the opportunity."
-        description="Tell us what you're trying to achieve. We'll follow up to discuss whether, and how, we can help."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <section className="bg-white py-20 sm:py-24">
@@ -25,7 +44,7 @@ export default function ContactPage() {
             <ContactForm />
 
             <div>
-              <p className="eyebrow text-ink-400">Where we work</p>
+              <p className="eyebrow text-ink-400">{t("whereWeWork")}</p>
               <div className="mt-6 flex flex-col gap-6">
                 {locations.map((loc) => (
                   <div key={loc.city} className="border-b border-border-soft pb-6 last:border-0">

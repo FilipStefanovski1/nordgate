@@ -1,6 +1,9 @@
-import { partnerCriteria } from "@/data/capabilities";
+import { useTranslations } from "next-intl";
 
 export function PartnerCriteria() {
+  const t = useTranslations("capabilities");
+  const partnerCriteria = [t("criterion1"), t("criterion2"), t("criterion3"), t("criterion4")];
+
   return (
     <div className="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2">
       {partnerCriteria.map((criterion, i) => (

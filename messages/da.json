@@ -271,7 +271,11 @@
     "estimatedLifetimeValue": "Estimeret livstidsværdi",
     "months": "måneder",
     "perMonth": "/md.",
-    "cta": "Tal om jeres scenarie"
+    "returnPer": "Afkast pr. investeret {currency}",
+    "returnExplain": "Hver investeret {currency} svarer til cirka {multiple} i beregnet kundelivstidsværdi ud fra forudsætningerne til venstre.",
+    "conversionSuffix": "konvertering",
+    "disclaimer": "Dette er en fremskrivning ud fra de indtastede forudsætninger og er ingen garanti for fremtidige resultater.",
+    "ctaScenario": "Tal med Nordgate om dette scenarie"
   },
   "contact": {
     "heroEyebrow": "Kontakt",

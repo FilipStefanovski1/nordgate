@@ -1,13 +1,15 @@
 import { Phone, Mail, Share2, Users } from "lucide-react";
-
-const channels = [
-  { icon: Phone, label: "Cold calling" },
-  { icon: Mail, label: "Email outreach" },
-  { icon: Share2, label: "LinkedIn outreach" },
-  { icon: Users, label: "Physical meetings" },
-];
+import { useTranslations } from "next-intl";
 
 export function OutreachCycle() {
+  const t = useTranslations("approach");
+  const channels = [
+    { icon: Phone, label: t("channelCalling") },
+    { icon: Mail, label: t("channelEmail") },
+    { icon: Share2, label: t("channelLinkedin") },
+    { icon: Users, label: t("channelMeetings") },
+  ];
+
   return (
     <div className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">

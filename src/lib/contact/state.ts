@@ -1,10 +1,9 @@
 export type ContactFormState = {
   status: "idle" | "success" | "error";
-  message: string;
+  /** Translation key in the `contact` namespace, resolved by the client. */
+  messageKey?: string;
+  /** Field name -> translation key in the `contact` namespace. */
   fieldErrors?: Record<string, string>;
 };
 
-export const initialContactFormState: ContactFormState = {
-  status: "idle",
-  message: "",
-};
+export const initialContactFormState: ContactFormState = { status: "idle" };

@@ -271,7 +271,11 @@
     "estimatedLifetimeValue": "Estimated lifetime value",
     "months": "months",
     "perMonth": "/mo",
-    "cta": "Discuss your scenario"
+    "returnPer": "Return per {currency} invested",
+    "returnExplain": "Every {currency} invested corresponds to approximately {multiple} in projected customer lifetime value, based on the assumptions on the left.",
+    "conversionSuffix": "conversion",
+    "disclaimer": "This is a projection based on the assumptions entered and is not a guarantee of future results.",
+    "ctaScenario": "Talk to Nordgate about this scenario"
   },
   "contact": {
     "heroEyebrow": "Contact",

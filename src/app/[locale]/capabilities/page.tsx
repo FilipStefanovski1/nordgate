@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -7,34 +10,49 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CoordinationSteps } from "@/components/sections/CoordinationSteps";
 import { PartnerCriteria } from "@/components/sections/PartnerCriteria";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { capabilityCategories } from "@/data/capabilities";
 import { editorialImages } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
-  title: "Capabilities",
-  description:
-    "NordGate helps Nordic companies access vetted international service providers and operational capacity, selected, vetted and coordinated on your behalf.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.capabilities" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/capabilities", locale as Locale),
+  };
+}
 
-export default function CapabilitiesPage() {
+export default async function CapabilitiesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("capabilities");
+
   return (
     <>
       <PageHeader
-        eyebrow="International capabilities"
-        title="Capacity, without a new vendor hunt."
-        description="For Nordic companies: we identify, vet and coordinate international providers and operational capacity on your behalf."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>
           <Reveal>
-            <SectionHeading eyebrow="Where it helps" title="Capacity across four functions." />
+            <SectionHeading eyebrow={t("whereEyebrow")} title={t("whereTitle")} />
           </Reveal>
           <Reveal delay className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilityCategories.map((cat) => (
-              <div key={cat.title} className="rounded-2xl border border-border-soft p-7">
-                <p className="text-base font-semibold text-ink-900">{cat.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-ink-500">{cat.description}</p>
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="rounded-2xl border border-border-soft p-7">
+                <p className="text-base font-semibold text-ink-900">{t(`cat${n}Title`)}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-500">{t(`cat${n}Body`)}</p>
               </div>
             ))}
           </Reveal>
@@ -45,18 +63,18 @@ export default function CapabilitiesPage() {
         background="soft"
         imageSide="right"
         image={editorialImages.eventPanelSkopje}
-        eyebrow="Not a marketplace"
-        title="A coordination layer, not a directory."
-        description="Directories hand you a list and leave the evaluation to you. We stay involved — shortlisting, supporting the decision and remaining your single point of contact."
+        eyebrow={t("notMarketEyebrow")}
+        title={t("notMarketTitle")}
+        description={t("notMarketBody")}
       />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>
           <Reveal>
             <SectionHeading
-              eyebrow="How it works"
-              title="Selection and coordination, handled."
-              description="You bring the requirement. We handle the search, the evaluation and the coordination that follows."
+              eyebrow={t("howEyebrow")}
+              title={t("howTitle")}
+              description={t("howBody")}
             />
           </Reveal>
           <Reveal delay className="mt-12">
@@ -68,7 +86,7 @@ export default function CapabilitiesPage() {
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
           <Reveal>
-            <SectionHeading eyebrow="Partner quality" title="What we screen for." />
+            <SectionHeading eyebrow={t("qualityEyebrow")} title={t("qualityTitle")} />
           </Reveal>
           <Reveal delay className="mt-12">
             <PartnerCriteria />

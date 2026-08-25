@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,27 +14,43 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { editorialImages } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "NordGate is a commercial bridge between the Nordic region and Eastern Europe. Our purpose, the team behind it and where we operate.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.about" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/about", locale as Locale),
+  };
+}
 
-export default function AboutPage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("about");
+
   return (
     <>
       <PageIntro
-        eyebrow="About NordGate"
-        title="Two regions. One bridge."
-        description="We connect companies, capabilities and opportunities across the Nordics and international markets."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <ImageTextSplit
         imageSide="left"
         image={editorialImages.founders}
-        eyebrow="Why we exist"
-        title="We sell on their behalf."
-        description="Nordgate is a commercial execution partner, not only an advisory firm. We simplify cross-border growth through local market knowledge, trusted relationships and practical commercial work — and that distinction shapes how we scope every engagement."
+        eyebrow={t("whyEyebrow")}
+        title={t("whyTitle")}
+        description={t("whyBody")}
       />
 
       <TeamSection background="soft" />
@@ -47,9 +66,9 @@ export default function AboutPage() {
           <Reveal>
             <SectionHeading
               tone="light"
-              eyebrow="Where we operate"
-              title="Local presence, not a distant HQ."
-              description="From Copenhagen, Stockholm and Skopje we work across chamber networks, companies, decision-makers, agencies and service providers on both sides of the gateway."
+              eyebrow={t("whereEyebrow")}
+              title={t("whereTitle")}
+              description={t("whereBody")}
             />
           </Reveal>
           <Reveal delay className="mt-12">
@@ -61,7 +80,7 @@ export default function AboutPage() {
       <section className="bg-white py-24 sm:py-28">
         <Container>
           <Reveal>
-            <SectionHeading eyebrow="Principles" title="How we work." />
+            <SectionHeading eyebrow={t("principlesEyebrow")} title={t("principlesTitle")} />
           </Reveal>
           <Reveal delay className="mt-12">
             <PrinciplesGrid />

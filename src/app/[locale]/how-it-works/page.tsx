@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo/alternates";
+import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,19 +14,35 @@ import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { editorialImages } from "@/data/editorial-images";
 
-export const metadata: Metadata = {
-  title: "How It Works",
-  description:
-    "The NordGate process, from market assessment to onboarding, outreach execution and continuous market feedback.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.approach" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates("/how-it-works", locale as Locale),
+  };
+}
 
-export default function HowItWorksPage() {
+export default async function HowItWorksPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("approach");
+
   return (
     <>
       <PageIntro
-        eyebrow="How it works"
-        title="One process, start to finish."
-        description="A single accountable team, not a report handed over at the end of a project."
+        eyebrow={t("heroEyebrow")}
+        title={t("heroTitle")}
+        description={t("heroBody")}
       />
 
       <ProcessSection background="white" />
@@ -39,9 +58,9 @@ export default function HowItWorksPage() {
         <Container>
           <Reveal>
             <SectionHeading
-              eyebrow="Sales execution"
-              title="Outreach that keeps learning."
-              description="Every qualified meeting feeds market feedback back into targeting and messaging."
+              eyebrow={t("outreachEyebrow")}
+              title={t("outreachTitle")}
+              description={t("outreachBody")}
             />
           </Reveal>
           <Reveal delay className="mt-12">
@@ -53,7 +72,7 @@ export default function HowItWorksPage() {
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
           <Reveal>
-            <SectionHeading eyebrow="Division of work" title="What you bring. What we run." />
+            <SectionHeading eyebrow={t("splitEyebrow")} title={t("splitTitle")} />
           </Reveal>
           <Reveal delay className="mt-12">
             <ResponsibilitySplit />
