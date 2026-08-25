@@ -1,17 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils/cn";
 
 export function Logo({ variant = "color" }: { variant?: "color" | "white" }) {
+  const src = variant === "white" ? "/brand/nordgate-logo-white.png" : "/brand/nordgate-logo.png";
   return (
-    <Link
-      href="/"
-      aria-label="NordGate — home"
-      className={cn(
-        "font-serif text-2xl font-bold uppercase tracking-tight sm:text-[1.75rem]",
-        variant === "white" ? "text-white" : "text-blue-600"
-      )}
-    >
-      Nordgate
+    <Link href="/" className="flex items-center" aria-label="NordGate — home">
+      <Image
+        src={src}
+        alt="NordGate"
+        width={796}
+        height={165}
+        priority
+        sizes="(min-width: 640px) 155px, 135px"
+        className="h-7 w-auto sm:h-8"
+      />
     </Link>
   );
 }
