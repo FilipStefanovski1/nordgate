@@ -3,8 +3,8 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EditorialImage } from "@/components/ui/EditorialImage";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { OnboardingTimeline } from "@/components/timeline/OnboardingTimeline";
+import { Reveal } from "@/components/ui/Reveal";
+import { ProcessSection } from "@/components/sections/ProcessSection";
 import { OutreachCycle } from "@/components/sections/OutreachCycle";
 import { ResponsibilitySplit } from "@/components/sections/ResponsibilitySplit";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
@@ -14,7 +14,7 @@ import { editorialImages } from "@/data/editorial-images";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "The complete NordGate process, from market assessment to onboarding, outreach execution and continuous market feedback.",
+    "The NordGate process, from market assessment to onboarding, outreach execution and continuous market feedback.",
 };
 
 export default function HowItWorksPage() {
@@ -22,52 +22,42 @@ export default function HowItWorksPage() {
     <>
       <PageHeader
         eyebrow="How it works"
-        title="From market insight to a running Nordic sales motion."
-        description="A single, accountable process, not a report handed over at the end of a project."
+        title="One process, start to finish."
+        description="A single accountable team, not a report handed over at the end of a project."
       />
 
-      <ProcessSteps />
-
-      <section className="bg-bg-soft py-24 sm:py-28">
-        <Container>
-          <div>
-            <SectionHeading eyebrow="Onboarding" title="Getting from signed to selling." />
-          </div>
-          <div className="mt-16">
-            <OnboardingTimeline />
-          </div>
-        </Container>
-      </section>
+      <ProcessSection background="white" />
 
       <EditorialImage
         background="soft"
-        src={editorialImages.eventSpeaker.src}
-        alt={editorialImages.eventSpeaker.alt}
-        position={editorialImages.eventSpeaker.position}
+        src={editorialImages.eventAuditorium.src}
+        alt={editorialImages.eventAuditorium.alt}
+        position={editorialImages.eventAuditorium.position}
       />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>
-          <div>
+          <Reveal>
             <SectionHeading
               eyebrow="Sales execution"
-              title="Outreach runs across every relevant channel, continuously."
+              title="Outreach that keeps learning."
+              description="Every qualified meeting feeds market feedback back into targeting and messaging."
             />
-          </div>
-          <div className="mt-14">
+          </Reveal>
+          <Reveal delay className="mt-12">
             <OutreachCycle />
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>
-          <div>
-            <SectionHeading eyebrow="Division of work" title="What you bring. What NordGate runs." />
-          </div>
-          <div className="mt-14">
+          <Reveal>
+            <SectionHeading eyebrow="Division of work" title="What you bring. What we run." />
+          </Reveal>
+          <Reveal delay className="mt-12">
             <ResponsibilitySplit />
-          </div>
+          </Reveal>
         </Container>
       </section>
 

@@ -5,9 +5,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const readyFor = [
   "A proven offering with existing customers",
   "Commercial traction in your home market",
-  "Operational capacity to deliver on new business",
-  "International ambitions and management commitment",
-  "Willingness to adapt positioning to a new market",
+  "Capacity to deliver on new business",
+  "Management commitment to Nordic expansion",
 ];
 
 export function WhoWeWorkWith() {
@@ -19,8 +18,8 @@ export function WhoWeWorkWith() {
             <SectionHeading
               size="compact"
               eyebrow="Who we work with"
-              title="Built for companies that are ready for the next market."
-              description="NordGate works best with businesses that already know how to sell. They just don't yet know how to sell in the Nordics."
+              title="Built for the next market."
+              description="We work best with businesses that already know how to sell. They just don't yet know how to sell in the Nordics."
             />
           </div>
 
@@ -46,9 +45,8 @@ export function WhoWeWorkWith() {
                   <p className="text-sm font-semibold">Not the right fit yet</p>
                 </div>
                 <p className="mt-5 text-sm leading-relaxed text-ink-500">
-                  NordGate is not primarily designed for businesses still testing whether their
-                  basic model works. If you&apos;re validating product-market fit at home, that
-                  work needs to happen before Nordic expansion.
+                  If you&apos;re still validating product-market fit at home, that work needs to
+                  happen before Nordic expansion.
                 </p>
               </div>
             </div>

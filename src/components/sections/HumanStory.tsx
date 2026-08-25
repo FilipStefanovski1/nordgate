@@ -27,22 +27,16 @@ export function HumanStory() {
           {/* Story */}
           <Reveal className="flex flex-col justify-center">
             <Eyebrow>Built through real relationships</Eyebrow>
-            <h2 className="mt-5 max-w-lg text-balance font-serif text-3xl font-medium leading-[1.15] tracking-tight text-ink-900 sm:text-4xl">
+            <h2 className="mt-5 max-w-[16ch] text-balance font-serif text-3xl font-medium leading-[1.15] tracking-tight text-ink-900 sm:text-4xl">
               Nordgate started with a simple observation.
             </h2>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-500 sm:text-lg">
-              Companies rarely struggle to enter new markets because they lack ambition. They
-              struggle because they lack the right local context, relationships and people on the
-              ground.
+            <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-ink-500 sm:text-lg">
+              Working across European business ecosystems, we kept seeing capable companies
+              struggle to turn international interest into real opportunities. Nordgate was
+              created to close that gap.
             </p>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-500 sm:text-lg">
-              Through building communities and working across European business ecosystems, we
-              repeatedly saw promising companies struggle to turn international interest into real
-              opportunities. Nordgate was created to close that gap — starting with the Nordics.
-            </p>
-            <p className="mt-8 max-w-lg border-l-2 border-blue-700 pl-5 text-base font-medium leading-relaxed text-ink-900 sm:text-lg">
-              Nordgate is built around relationships, local understanding and the belief that
-              expansion works better when someone helps open the right doors.
+            <p className="mt-8 max-w-[54ch] border-l-2 border-blue-700 pl-5 text-base font-medium leading-relaxed text-ink-900 sm:text-lg">
+              Expansion works better when someone helps open the right doors.
             </p>
           </Reveal>
         </div>

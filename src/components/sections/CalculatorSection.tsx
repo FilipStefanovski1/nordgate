@@ -9,8 +9,8 @@ export function CalculatorSection() {
         <div>
           <SectionHeading
             eyebrow="Calculate your opportunity"
-            title="What could Nordic market entry be worth?"
-            description="Estimate the potential commercial value generated through a NordGate engagement based on your own sales assumptions."
+            title="What could this be worth?"
+            description="Estimate the commercial value of an engagement using your own sales assumptions."
           />
         </div>
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { headerCta } from "@/data/navigation";
@@ -26,12 +26,9 @@ export function FinalCta() {
             Tell us where you want to grow. We&apos;ll help assess the opportunity, identify the
             right market and define how Nordgate can execute the commercial work.
           </p>
-          <Link
-            href={headerCta.href}
-            className="btn-nordgate-inverse mt-8 inline-flex h-[50px] items-center rounded px-6 text-[15px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nordgate-blue-soft)]"
-          >
+          <Button href={headerCta.href} variant="inverse" className="mt-8" fullWidthOnMobile>
             Book a meeting
-          </Link>
+          </Button>
         </Reveal>
 
         <Reveal delay>

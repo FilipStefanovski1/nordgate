@@ -7,35 +7,29 @@ export type ServiceGroup = {
 export const marketEntryServices: ServiceGroup[] = [
   {
     title: "Market insight",
-    description: "Understand where the opportunity actually is before committing resources.",
+    description: "Find where the opportunity actually is, before committing resources.",
     items: [
-      "Initial market and opportunity assessment",
-      "Identifying the most relevant Nordic market",
-      "Country reports and industry insights",
+      "Market and opportunity assessment",
+      "Choosing the right Nordic market",
       "Competitor and positioning review",
-      "Market-entry recommendations",
     ],
   },
   {
     title: "Sales setup",
     description: "Build the commercial infrastructure before outreach begins.",
     items: [
-      "Readiness assessment",
-      "Target-group definition and ICP development",
+      "Target-group and ICP definition",
       "Target account identification",
-      "Lead generation and qualification",
       "Messaging and sales analytics",
     ],
   },
   {
     title: "Sales execution",
-    description: "NordGate executes the selling, not just the planning.",
+    description: "We run the selling, not just the planning.",
     items: [
       "Cold calling, email and LinkedIn outreach",
-      "Physical meetings and account development",
-      "Booking qualified sales meetings",
-      "Commercial follow-up",
-      "Account management",
+      "Booking qualified meetings",
+      "Account development and follow-up",
     ],
   },
 ];

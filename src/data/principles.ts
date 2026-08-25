@@ -3,26 +3,18 @@ export type Principle = { title: string; description: string };
 export const principles: Principle[] = [
   {
     title: "Local understanding",
-    description: "Every Nordic market has its own culture, expectations and decision-making process. We treat them as distinct.",
+    description: "Every Nordic market has its own culture and decision-making pace. We treat them as distinct.",
   },
   {
     title: "Relevant relationships",
-    description: "We use our networks commercially, connecting the right people rather than name-dropping contacts.",
+    description: "We use our networks commercially, connecting the right people rather than listing contacts.",
   },
   {
     title: "One point of contact",
-    description: "Even where partners are involved, NordGate remains the single commercial contact throughout.",
-  },
-  {
-    title: "Tailor-made solutions",
-    description: "No two market-entry plans look the same. We build around your product and ambition.",
+    description: "Even where partners are involved, Nordgate stays the single commercial contact.",
   },
   {
     title: "Controlled growth",
-    description: "We prioritise the right accounts over volume, so growth is sustainable rather than scattershot.",
-  },
-  {
-    title: "Long-term partnership",
-    description: "We aim to be the team you keep working with as the market matures, not a short-term project.",
+    description: "We prioritise the right accounts over volume, so growth stays sustainable.",
   },
 ];

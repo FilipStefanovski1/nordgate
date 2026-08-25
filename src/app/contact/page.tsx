@@ -15,8 +15,8 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Let's find out whether the Nordics make sense for your business."
-        description="Tell us about your company and what you're trying to achieve. We'll follow up to discuss whether, and how, NordGate can help."
+        title="Let's test the opportunity."
+        description="Tell us what you're trying to achieve. We'll follow up to discuss whether, and how, we can help."
       />
 
       <section className="bg-white py-20 sm:py-24">

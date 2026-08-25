@@ -15,12 +15,13 @@ export default function InsightsPage() {
     <>
       <PageHeader
         eyebrow="Insights"
-        title="Perspectives on Nordic market entry and sales."
-        description="Notes from the field on entering Sweden, Denmark, Norway and Finland, published as NordGate develops them."
+        title="Notes from the field."
+        description="Perspectives on entering Sweden, Denmark, Norway and Finland, published as we develop them."
       />
 
       <section className="bg-white py-20 sm:py-24">
         <Container>
+          {insightArticles.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {insightCategories.map((cat) => (
               <span
@@ -31,6 +32,7 @@ export default function InsightsPage() {
               </span>
             ))}
           </div>
+          )}
 
           {insightArticles.length === 0 ? (
             <div className="mt-16 flex flex-col items-center rounded-2xl border border-dashed border-border-strong px-8 py-24 text-center">
@@ -39,9 +41,7 @@ export default function InsightsPage() {
                 NordGate&apos;s first insights are in progress.
               </p>
               <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-500">
-                We&apos;re preparing perspectives on Nordic market entry, sales execution and
-                cross-border business development. Check back soon, or get in touch if you have a
-                question we can answer directly.
+                Check back soon, or get in touch if you have a question we can answer directly.
               </p>
             </div>
           ) : (

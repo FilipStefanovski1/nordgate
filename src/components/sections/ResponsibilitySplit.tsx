@@ -1,18 +1,16 @@
 
 const clientProvides = [
-  "A proven product or service with existing customers",
+  "A proven product with existing customers",
   "Management commitment to Nordic expansion",
-  "Delivery capacity to fulfil new business",
-  "Fast decisions on pricing and positioning questions",
-  "Openness to adapt messaging for a new market",
+  "Delivery capacity for new business",
+  "Fast decisions on pricing and positioning",
 ];
 
 const nordgateProvides = [
   "Market assessment and country prioritisation",
   "ICP, target account list and messaging",
   "Direct outreach across calls, email and LinkedIn",
-  "Qualified meetings with real decision-makers",
-  "Ongoing account development and market feedback",
+  "Qualified meetings and ongoing account development",
 ];
 
 export function ResponsibilitySplit() {

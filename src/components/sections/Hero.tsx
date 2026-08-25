@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 
 export function Hero() {
   return (
@@ -59,13 +59,9 @@ export function Hero() {
           </h1>
 
           <div className="hero-enter hero-enter-cta mt-10">
-            <Link
-              href="/contact"
-              className="btn-nordgate-inverse inline-flex h-[52px] items-center rounded px-6 text-[16px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
-              style={{ outlineColor: "var(--nordgate-blue-soft)" }}
-            >
+            <Button href="/contact" variant="inverse" fullWidthOnMobile>
               Book a market assessment
-            </Link>
+            </Button>
           </div>
         </div>
       </Container>

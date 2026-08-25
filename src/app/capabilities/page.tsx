@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { EditorialImage } from "@/components/ui/EditorialImage";
 import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
+import { Reveal } from "@/components/ui/Reveal";
 import { CoordinationSteps } from "@/components/sections/CoordinationSteps";
 import { PartnerCriteria } from "@/components/sections/PartnerCriteria";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -21,62 +21,23 @@ export default function CapabilitiesPage() {
     <>
       <PageHeader
         eyebrow="International capabilities"
-        title="Nordic company? Access the right international capabilities."
-        description="NordGate identifies, vets and coordinates international service providers, specialists and operational capacity, so you gain capacity without managing a new vendor relationship from scratch."
+        title="Capacity, without a new vendor hunt."
+        description="For Nordic companies: we identify, vet and coordinate international providers and operational capacity on your behalf."
       />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>
-          <div>
-            <SectionHeading eyebrow="Categories" title="Capacity across the functions that slow growth down." />
-          </div>
-          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal>
+            <SectionHeading eyebrow="Where it helps" title="Capacity across four functions." />
+          </Reveal>
+          <Reveal delay className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {capabilityCategories.map((cat) => (
               <div key={cat.title} className="rounded-2xl border border-border-soft p-7">
                 <p className="text-base font-semibold text-ink-900">{cat.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-500">{cat.description}</p>
-                <ul className="mt-5 flex flex-col gap-1.5">
-                  {cat.examples.map((ex) => (
-                    <li key={ex} className="text-sm text-ink-500">
-                      {ex}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-bg-soft py-24 sm:py-28">
-        <Container>
-          <div>
-            <SectionHeading
-              eyebrow="How it works"
-              title="Selection, vetting and coordination, handled for you."
-              description="You bring the requirement. NordGate handles the search, the evaluation and the ongoing coordination."
-            />
-          </div>
-          <div className="mt-14">
-            <CoordinationSteps />
-          </div>
-        </Container>
-      </section>
-
-      <EditorialImage
-        src={editorialImages.eventAuditorium.src}
-        alt={editorialImages.eventAuditorium.alt}
-        position={editorialImages.eventAuditorium.position}
-      />
-
-      <section className="bg-white py-24 sm:py-28">
-        <Container>
-          <div>
-            <SectionHeading eyebrow="Partner quality" title="What NordGate screens for before any introduction." />
-          </div>
-          <div className="mt-14">
-            <PartnerCriteria />
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -86,14 +47,34 @@ export default function CapabilitiesPage() {
         image={editorialImages.eventPanelSkopje}
         eyebrow="Not a marketplace"
         title="A coordination layer, not a directory."
-        description="Directories hand you a list and leave the evaluation to you. Recruitment agencies focus on placing individuals, not outcomes."
-      >
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-500">
-          NordGate stays involved throughout: understanding requirements, shortlisting vetted
-          partners, supporting evaluation and remaining your single point of contact for as long
-          as the cooperation runs.
-        </p>
-      </ImageTextSplit>
+        description="Directories hand you a list and leave the evaluation to you. We stay involved — shortlisting, supporting the decision and remaining your single point of contact."
+      />
+
+      <section className="bg-white py-24 sm:py-28">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow="How it works"
+              title="Selection and coordination, handled."
+              description="You bring the requirement. We handle the search, the evaluation and the coordination that follows."
+            />
+          </Reveal>
+          <Reveal delay className="mt-12">
+            <CoordinationSteps />
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="bg-bg-soft py-24 sm:py-28">
+        <Container>
+          <Reveal>
+            <SectionHeading eyebrow="Partner quality" title="What we screen for." />
+          </Reveal>
+          <Reveal delay className="mt-12">
+            <PartnerCriteria />
+          </Reveal>
+        </Container>
+      </section>
 
       <FinalCta />
     </>

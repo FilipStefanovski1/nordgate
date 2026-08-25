@@ -1,45 +1,55 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 type ButtonProps = {
   href: string;
   children: ReactNode;
   /**
-   * primary: flat navy fill, off-white text — the standard Nordgate CTA.
-   * inverse: off-white fill, navy text — for use on dark/photo backgrounds.
-   * secondary: outlined, transparent fill — lower-emphasis actions.
-   * text: underlined link, no fill — lowest-emphasis actions.
+   * primary   — flat navy fill, off-white text. Standard CTA on light pages.
+   * inverse   — off-white fill, navy text. For dark or photographic backgrounds.
+   * secondary — transparent with a 1px border, for lower-emphasis actions.
+   * text      — no container; an underline-grow link for the lowest emphasis.
    */
   variant?: "primary" | "inverse" | "secondary" | "text";
+  /** Navigation-scale height (42px) instead of the standard 50px. */
+  compact?: boolean;
+  /** Full width on mobile, natural width from `sm` up. */
+  fullWidthOnMobile?: boolean;
+  /** Optional click handler (e.g. closing the mobile menu on navigate). */
+  onClick?: () => void;
   className?: string;
-  icon?: boolean;
 };
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "btn-nordgate focus-visible:outline-[var(--nordgate-blue)] active:opacity-90",
-  inverse: "btn-nordgate-inverse focus-visible:outline-[var(--nordgate-blue)] active:opacity-90",
+  primary: "btn-nordgate focus-visible:outline-[var(--nordgate-blue)]",
+  inverse: "btn-nordgate-inverse focus-visible:outline-[var(--nordgate-blue)]",
   secondary:
-    "bg-transparent text-ink-900 border border-border-strong hover:border-blue-700 hover:text-blue-700 active:opacity-80",
-  text: "link-underline bg-transparent text-blue-700 hover:text-navy-900 px-0",
+    "bg-transparent text-ink-900 border border-border-strong transition-colors duration-200 hover:border-[var(--nordgate-navy)] hover:bg-[var(--nordgate-off-white)]",
+  text: "link-underline bg-transparent font-semibold text-blue-700 transition-colors duration-200 hover:text-navy-900",
 };
 
-export function Button({ href, children, variant = "primary", className, icon = true }: ButtonProps) {
+export function Button({
+  href,
+  children,
+  variant = "primary",
+  compact = false,
+  fullWidthOnMobile = false,
+  onClick,
+  className,
+}: ButtonProps) {
   const base =
     variant === "text"
-      ? "group inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200"
-      : "group inline-flex items-center gap-2 rounded px-6 py-3 text-sm font-semibold transition-colors duration-200";
+      ? "inline-flex items-center text-sm"
+      : cn(
+          "inline-flex items-center justify-center rounded font-semibold",
+          compact ? "h-[42px] px-5 text-sm" : "h-[50px] px-6 text-[15px]",
+          fullWidthOnMobile && "w-full sm:w-auto"
+        );
 
   return (
-    <Link href={href} className={cn(base, variants[variant], className)}>
+    <Link href={href} onClick={onClick} className={cn(base, variants[variant], className)}>
       {children}
-      {icon && (
-        <ArrowUpRight
-          className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1"
-          aria-hidden="true"
-        />
-      )}
     </Link>
   );
 }

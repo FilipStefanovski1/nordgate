@@ -6,9 +6,7 @@ const scope = [
   "Target-market assessment",
   "Competitor and opportunity mapping",
   "Ideal-customer definition",
-  "Initial prospect landscape",
   "Recommended market-entry plan",
-  "Strategy session",
 ];
 
 export function MarketReadinessSprint() {
@@ -22,8 +20,8 @@ export function MarketReadinessSprint() {
               Nordic Market Readiness Sprint
             </h2>
             <p className="mt-5 max-w-sm text-base leading-relaxed text-ink-500">
-              A focused, fixed-scope engagement to test whether the Nordics are worth pursuing —
-              before any larger commitment.
+              A fixed-scope engagement to test whether the Nordics are worth pursuing, before
+              any larger commitment.
             </p>
             <Button href="/contact" className="mt-7">
               Enquire about the Sprint

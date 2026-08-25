@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { primaryNav, headerCta } from "@/data/navigation";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
 
 const MENU_ID = "mobile-nav-menu";
@@ -121,12 +122,9 @@ export function Header() {
             ))}
           </nav>
 
-          <Link
-            href={headerCta.href}
-            className="btn-nordgate inline-flex h-[42px] items-center rounded px-5 text-sm font-semibold"
-          >
+          <Button href={headerCta.href} compact>
             {headerCta.label}
-          </Link>
+          </Button>
         </div>
 
         <button
@@ -192,13 +190,9 @@ export function Header() {
             </nav>
 
             <div className="mt-auto flex flex-col gap-4 pt-10">
-              <Link
-                href={headerCta.href}
-                onClick={closeMenu}
-                className="btn-nordgate-inverse inline-flex h-[52px] items-center justify-center rounded px-6 text-base font-semibold"
-              >
+              <Button href={headerCta.href} variant="inverse" className="w-full" onClick={closeMenu}>
                 {headerCta.label}
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
