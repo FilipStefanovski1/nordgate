@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,16 +8,16 @@ import { cn } from "@/lib/utils/cn";
 /** The onboarding funnel with a compact heading. The diagram is the section's
  *  visual — the copy above it stays deliberately short. */
 export function ProcessSection({
-  eyebrow = "Onboarding",
-  title = "From first conversation to live outreach.",
   description,
   background = "soft",
 }: {
-  eyebrow?: string;
-  title?: string;
   description?: string;
   background?: "white" | "soft";
 }) {
+  const t = useTranslations("process");
+  const eyebrow = t("eyebrow");
+  const title = t("title");
+
   return (
     <section className={cn("py-16 sm:py-20", background === "soft" ? "bg-bg-soft" : "bg-white")}>
       <Container>

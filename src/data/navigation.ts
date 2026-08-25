@@ -1,43 +1,49 @@
+import type { pathnames } from "@/i18n/routing";
+
+/** Internal (English) pathname; next-intl resolves it to the localized slug. */
+export type AppHref = keyof typeof pathnames;
+
 export type NavLink = {
-  label: string;
-  href: string;
+  /** Translation key inside the relevant namespace. */
+  key: string;
+  href: AppHref;
+  /** Optional in-page anchor, kept separate so the href stays typed. */
+  hash?: string;
 };
 
 export const primaryNav: NavLink[] = [
-  { label: "Services", href: "/nordic-market-entry" },
-  { label: "Approach", href: "/how-it-works" },
-  { label: "About", href: "/about" },
+  { key: "services", href: "/nordic-market-entry" },
+  { key: "approach", href: "/how-it-works" },
+  { key: "about", href: "/about" },
 ];
 
-export const headerCta: NavLink = {
-  label: "Book a meeting",
-  href: "/contact",
-};
+export const headerCta = { key: "bookMeeting", href: "/contact" } as const;
 
-export const footerNav: { title: string; links: NavLink[] }[] = [
+/** Footer groups: `key` resolves in the `footer` namespace. */
+export const footerNav: { titleKey: string; links: NavLink[] }[] = [
   {
-    title: "Company",
+    titleKey: "company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Team", href: "/about#team" },
-      { label: "Contact", href: "/contact" },
+      { key: "about", href: "/about" },
+      { key: "team", href: "/about", hash: "team" },
+      { key: "contact", href: "/contact" },
     ],
   },
   {
-    title: "Services",
+    titleKey: "services",
     links: [
-      { label: "Nordic Market Entry", href: "/nordic-market-entry" },
-      { label: "Sales Execution", href: "/nordic-market-entry#sales-execution" },
-      { label: "Business Development", href: "/nordic-market-entry" },
-      { label: "International Capabilities", href: "/capabilities" },
+      { key: "nordicMarketEntry", href: "/nordic-market-entry" },
+      { key: "salesExecution", href: "/nordic-market-entry", hash: "sales-execution" },
+      { key: "businessDevelopment", href: "/nordic-market-entry" },
+      { key: "internationalCapabilities", href: "/capabilities" },
     ],
   },
   {
-    title: "Resources",
+    titleKey: "resources",
     links: [
-      { label: "How It Works", href: "/how-it-works" },
-      { label: "ROI Calculator", href: "/how-it-works#calculator" },
-      { label: "Insights", href: "/insights" },
+      { key: "howItWorks", href: "/how-it-works" },
+      { key: "roiCalculator", href: "/how-it-works", hash: "calculator" },
+      { key: "insights", href: "/insights" },
     ],
   },
 ];

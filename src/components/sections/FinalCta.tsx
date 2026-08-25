@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -14,20 +15,22 @@ const preFooterImage = {
 };
 
 export function FinalCta() {
+  const t = useTranslations("home.cta");
+  const tNav = useTranslations("nav");
+
   return (
     <section className="relative overflow-hidden bg-[var(--nordgate-navy)] py-16 sm:py-24 lg:py-28">
       <Container className="relative grid grid-cols-1 gap-12 lg:grid-cols-[0.5fr_0.5fr] lg:items-center lg:gap-16">
         <Reveal>
-          <Eyebrow tone="cyan">Start a conversation</Eyebrow>
+          <Eyebrow tone="cyan">{t("eyebrow")}</Eyebrow>
           <h2 className="mt-5 max-w-md text-balance font-serif text-3xl font-medium leading-[1.2] tracking-tight text-white sm:text-4xl">
-            Ready to test the Nordic opportunity?
+            {t("title")}
           </h2>
           <p className="mt-5 max-w-md text-base leading-relaxed text-white/65">
-            Tell us where you want to grow. We&apos;ll help assess the opportunity, identify the
-            right market and define how Nordgate can execute the commercial work.
+            {t("body")}
           </p>
           <Button href={headerCta.href} variant="inverse" className="mt-8" fullWidthOnMobile>
-            Book a meeting
+            {tNav("bookMeeting")}
           </Button>
         </Reveal>
 
@@ -35,7 +38,7 @@ export function FinalCta() {
           <div className="relative aspect-[4/5] w-full overflow-hidden">
             <Image
               src={preFooterImage.src}
-              alt={preFooterImage.alt}
+              alt={t("imageAlt")}
               fill
               sizes="(min-width: 1024px) 45vw, 90vw"
               className="object-cover"

@@ -1,4 +1,4 @@
-import { processFlowStages } from "@/data/process-flow";
+import { useTranslations } from "next-intl";
 
 // A stable horizontal funnel: all six nodes sit on one shared baseline,
 // evenly spaced across six equal columns. Variation lives entirely in the
@@ -52,7 +52,12 @@ const funnelLanes: Lane[] = CONNECTION_LANE_OFFSETS.flatMap((offsets, seg) =>
 );
 
 export function HorizontalProcessFlow() {
-  const stages = processFlowStages;
+  const t = useTranslations("process");
+  const stages = [1, 2, 3, 4, 5, 6].map((n) => ({
+    index: String(n).padStart(2, "0"),
+    title: t(`stage${n}Title`),
+    description: t(`stage${n}Body`),
+  }));
 
   return (
     <div>

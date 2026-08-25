@@ -1,14 +1,16 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils/cn";
 import { companies, type Company } from "@/data/companies";
 
 export function CompanyMarquee() {
+  const t = useTranslations("home.marquee");
   if (companies.length === 0) return null;
 
   return (
     <section className="border-t border-border-soft bg-white py-16 sm:py-20">
       <Container>
-        <p className="eyebrow text-ink-400">Companies we&apos;ve supported</p>
+        <p className="eyebrow text-ink-400">{t("label")}</p>
       </Container>
 
       <div className="group relative mx-auto mt-10 max-w-3xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">

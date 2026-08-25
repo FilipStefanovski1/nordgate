@@ -51,7 +51,9 @@
       "cta": "Book a market assessment",
       "edgeLabel": "01 / NORDICS"
     },
-    "marquee": { "label": "Companies we've supported" },
+    "marquee": {
+      "label": "Companies we've supported"
+    },
     "offer": {
       "eyebrow": "What we do",
       "title": "Market entry, built around you.",
@@ -72,7 +74,8 @@
       "body": "Companies stall in the Nordics because they lack what only comes from being on the ground: context, relationships and an honest read of the market.",
       "pointOne": "Buying decisions rarely work the way a plan written elsewhere assumes.",
       "pointTwo": "Hires and infrastructure get built before anyone has proven demand.",
-      "pointThree": "Sweden, Denmark, Norway and Finland each decide at their own pace."
+      "pointThree": "Sweden, Denmark, Norway and Finland each decide at their own pace.",
+      "imageAlt": "A panel discussion in a chandelier-lit hall at a Nordgate-connected business event"
     },
     "humanStory": {
       "eyebrow": "Built through real relationships",

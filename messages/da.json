@@ -51,7 +51,9 @@
       "cta": "Book en markedsanalyse",
       "edgeLabel": "01 / NORDEN"
     },
-    "marquee": { "label": "Virksomheder vi har hjulpet" },
+    "marquee": {
+      "label": "Virksomheder vi har hjulpet"
+    },
     "offer": {
       "eyebrow": "Det gør vi",
       "title": "Etablering på jeres præmisser.",
@@ -72,7 +74,8 @@
       "body": "Virksomheder går i stå i Norden, fordi de mangler det, man kun får på stedet: kontekst, relationer og et ærligt billede af markedet.",
       "pointOne": "Købsbeslutninger fungerer sjældent, som en plan skrevet et andet sted antager.",
       "pointTwo": "Ansættelser og struktur bygges op, før nogen har bevist, at efterspørgslen findes.",
-      "pointThree": "Sverige, Danmark, Norge og Finland træffer beslutninger i hvert sit tempo."
+      "pointThree": "Sverige, Danmark, Norge og Finland træffer beslutninger i hvert sit tempo.",
+      "imageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate"
     },
     "humanStory": {
       "eyebrow": "Bygget på ægte relationer",

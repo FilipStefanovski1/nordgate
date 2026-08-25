@@ -51,7 +51,9 @@
       "cta": "Boka en marknadsanalys",
       "edgeLabel": "01 / NORDEN"
     },
-    "marquee": { "label": "Företag vi har hjälpt" },
+    "marquee": {
+      "label": "Företag vi har hjälpt"
+    },
     "offer": {
       "eyebrow": "Det här gör vi",
       "title": "Etablering på era villkor.",
@@ -72,7 +74,8 @@
       "body": "Företag kör fast i Norden för att de saknar det som bara finns på plats: sammanhang, relationer och en ärlig bild av marknaden.",
       "pointOne": "Köpbeslut fungerar sällan som en plan skriven någon annanstans förutsätter.",
       "pointTwo": "Rekrytering och struktur byggs upp innan någon bevisat att efterfrågan finns.",
-      "pointThree": "Sverige, Danmark, Norge och Finland fattar beslut i sin egen takt."
+      "pointThree": "Sverige, Danmark, Norge och Finland fattar beslut i sin egen takt.",
+      "imageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate"
     },
     "humanStory": {
       "eyebrow": "Byggt på verkliga relationer",

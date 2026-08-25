@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
 import { primaryNav, headerCta } from "@/data/navigation";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +14,7 @@ import { cn } from "@/lib/utils/cn";
 const MENU_ID = "mobile-nav-menu";
 
 export function Header() {
+  const t = useTranslations("nav");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -107,7 +109,7 @@ export function Header() {
         <Logo variant={open ? "white" : "color"} />
 
         <div className="hidden lg:flex lg:items-center lg:gap-8">
-          <nav className="flex items-center gap-8" aria-label="Primary">
+          <nav className="flex items-center gap-6" aria-label={t("primaryLabel")}>
             {primaryNav.map((entry) => (
               <Link
                 key={entry.href}
@@ -117,13 +119,15 @@ export function Header() {
                   pathname === entry.href ? "text-blue-700" : "text-ink-700 hover:text-blue-700"
                 )}
               >
-                {entry.label}
+                {t(entry.key)}
               </Link>
             ))}
           </nav>
 
+          <LanguageSwitcher />
+
           <Button href={headerCta.href} compact>
-            {headerCta.label}
+            {t("bookMeeting")}
           </Button>
         </div>
 
@@ -137,7 +141,7 @@ export function Header() {
               ? "text-white hover:bg-white/10 focus-visible:outline-white"
               : "text-navy-950 hover:bg-navy-950/5 focus-visible:outline-blue-600"
           )}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           aria-controls={MENU_ID}
         >
@@ -151,7 +155,7 @@ export function Header() {
           ref={menuPanelRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile navigation"
+          aria-label={t("mobileNavLabel")}
           className="mobile-menu-gradient lg:hidden fixed inset-x-0 bottom-0 z-40 overflow-hidden"
           style={{ top: headerHeight || undefined }}
         >
@@ -161,7 +165,7 @@ export function Header() {
             className="relative z-10 flex h-full flex-col overflow-y-auto px-6"
             style={{ paddingBottom: "calc(20px + env(safe-area-inset-bottom))" }}
           >
-            <nav aria-label="Mobile primary" className="mt-[110px] sm:mt-[130px]">
+            <nav aria-label={t("mobilePrimaryLabel")} className="mt-[110px] sm:mt-[130px]">
               <ul className="flex flex-col">
                 {primaryNav.map((entry, i) => (
                   <li key={entry.href}>
@@ -178,7 +182,7 @@ export function Header() {
                           className="text-[clamp(1.5rem,6vw,2.25rem)] font-medium leading-tight"
                           style={{ color: "var(--hero-heading)" }}
                         >
-                          {entry.label}
+                          {t(entry.key)}
                         </span>
                       </span>
                     </Link>
@@ -186,12 +190,15 @@ export function Header() {
                 ))}
               </ul>
               <div className="mt-1 border-b border-white/15" />
-              <p className="mt-5 text-sm text-white/50">Nordic market entry · Business development</p>
+              <p className="mt-5 text-sm text-white/50">{t("tagline")}</p>
             </nav>
 
             <div className="mt-auto flex flex-col gap-4 pt-10">
+              <div className="flex justify-start">
+                <LanguageSwitcher tone="light" />
+              </div>
               <Button href={headerCta.href} variant="inverse" className="w-full" onClick={closeMenu}>
-                {headerCta.label}
+                {t("bookMeeting")}
               </Button>
             </div>
           </div>

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { footerNav } from "@/data/navigation";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
@@ -28,6 +29,7 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const t = useTranslations("footer");
   const year = new Date().getFullYear();
 
   return (
@@ -38,7 +40,7 @@ export function Footer() {
           <div className="max-w-[220px]">
             <Logo variant="white" />
             <p className="mt-4 text-xs leading-relaxed text-white/45">
-              Commercial execution for companies entering and growing in the Nordics.
+              {t("tagline")}
             </p>
             <ul className="mt-5 flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -47,7 +49,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`NordGate on ${social.label}`}
+                    aria-label={t("socialLabel", { network: social.label })}
                     className="text-white/45 transition-colors duration-200 hover:text-white"
                   >
                     <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]" aria-hidden="true">
@@ -59,15 +61,15 @@ export function Footer() {
             </ul>
           </div>
 
-          <nav className="flex flex-wrap gap-x-12 gap-y-8" aria-label="Footer">
+          <nav className="flex flex-wrap gap-x-12 gap-y-8" aria-label={t("navLabel")}>
             {footerNav.map((group) => (
-              <div key={group.title}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">{group.title}</p>
+              <div key={group.titleKey}>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">{t(group.titleKey)}</p>
                 <ul className="mt-3 flex flex-col gap-2">
                   {group.links.map((link) => (
-                    <li key={link.label}>
-                      <Link href={link.href} className="text-xs text-white/60 transition-colors hover:text-white">
-                        {link.label}
+                    <li key={link.key}>
+                      <Link href={link.hash ? { pathname: link.href, hash: link.hash } : link.href} className="text-xs text-white/60 transition-colors hover:text-white">
+                        {t(link.key)}
                       </Link>
                     </li>
                   ))}
@@ -78,7 +80,7 @@ export function Footer() {
 
           {/* Official company, contact and legal details */}
           <div className="min-w-[190px]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">Address</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">{t("address")}</p>
             <address className="mt-3 flex flex-col gap-2 text-xs not-italic leading-relaxed text-white/60">
               <span className="whitespace-nowrap">
                 NordGate ApS
@@ -104,7 +106,7 @@ export function Footer() {
 
         {/* Tiny print */}
         <div className="pb-10">
-          <p className="text-[11px] text-white/25">© {year} NordGate. All rights reserved.</p>
+          <p className="text-[11px] text-white/25">{t("rights", { year })}</p>
         </div>
       </Container>
 

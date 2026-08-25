@@ -1,14 +1,17 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
 export function Hero() {
+  const t = useTranslations("home.hero");
+
   return (
     <section className="relative flex min-h-[max(620px,calc(100svh-96px))] w-full flex-col overflow-hidden bg-navy-950 pt-[68px]">
       <div className="absolute inset-0">
         <Image
           src="/event1.jpeg"
-          alt="Attendees at a cross-border business event"
+          alt={t("imageAlt")}
           fill
           priority
           sizes="100vw"
@@ -30,7 +33,7 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 [writing-mode:vertical-rl] text-[11px] tracking-[0.2em] text-white/35 lg:right-10 lg:block"
       >
-        01 / NORDICS
+        {t("edgeLabel")}
       </div>
 
       <Container className="relative flex flex-1 flex-col py-14 sm:py-16">
@@ -43,10 +46,10 @@ export function Hero() {
               letterSpacing: "-0.04em",
             }}
           >
-            Your route into
+            {t("titleLead")}
             <br />
             <span className="hero-emphasis">
-              the Nordics.
+              {t("titleEmphasis")}
               <svg
                 aria-hidden="true"
                 className="hero-underline"
@@ -60,7 +63,7 @@ export function Hero() {
 
           <div className="hero-enter hero-enter-cta mt-10">
             <Button href="/contact" variant="inverse" fullWidthOnMobile>
-              Book a market assessment
+              {t("cta")}
             </Button>
           </div>
         </div>

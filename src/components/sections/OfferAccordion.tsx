@@ -1,35 +1,20 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils/cn";
 
-const offerItems: { title: string; description: string }[] = [
-  {
-    title: "Market validation",
-    description:
-      "We test real demand in the Nordics before you commit resources.",
-  },
-  {
-    title: "Go-to-market strategy",
-    description:
-      "We define the positioning and commercial model that fits how Nordic buyers decide.",
-  },
-  {
-    title: "Buyer and partner identification",
-    description:
-      "We build the shortlist of accounts, buyers and partners worth approaching first.",
-  },
-  {
-    title: "Business development",
-    description:
-      "We run follow-up and qualification so interest turns into commercial traction.",
-  },
-];
-
 export function OfferAccordion() {
+  const t = useTranslations("home.offer");
+  const offerItems = [
+    { title: t("validationTitle"), description: t("validationBody") },
+    { title: t("gtmTitle"), description: t("gtmBody") },
+    { title: t("buyersTitle"), description: t("buyersBody") },
+    { title: t("bizdevTitle"), description: t("bizdevBody") },
+  ];
   const [openIndex, setOpenIndex] = useState(0);
   const baseId = useId();
 
@@ -38,13 +23,12 @@ export function OfferAccordion() {
       <Container>
         <div className="offer-grid">
           <Reveal className="offer-copy max-w-2xl">
-            <p className="eyebrow text-blue-600">What we do</p>
+            <p className="eyebrow text-blue-600">{t("eyebrow")}</p>
             <h2 className="mt-4 max-w-md text-balance font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl">
-              Market entry, built around you.
+              {t("title")}
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-ink-500">
-              We help B2B companies understand the Nordic opportunity before committing to it —
-              then run the commercial work that turns it into real conversations.
+              {t("body")}
             </p>
           </Reveal>
 
@@ -107,7 +91,7 @@ export function OfferAccordion() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded">
               <Image
                 src="/event2.jpeg"
-                alt="A panel discussion in a chandelier-lit hall at a Nordgate-connected business event"
+                alt={t("imageAlt")}
                 fill
                 sizes="(min-width: 1024px) 500px, 90vw"
                 className="object-cover"
