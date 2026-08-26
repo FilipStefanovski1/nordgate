@@ -298,11 +298,17 @@ body {
     opacity var(--motion-slow) var(--ease-out-expo),
     transform var(--motion-slow) var(--ease-out-expo);
 }
-html.js .reveal {
-  opacity: 0;
-  transform: translateY(16px);
+/* Hidden only where JS can actually reveal it and motion is welcome.
+   `scripting: enabled` replaces the old JS-added `html.js` class, so no
+   blocking inline script is needed; browsers without support simply skip
+   the rule and show the content outright. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 }
-html.js .reveal.is-visible {
+.reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

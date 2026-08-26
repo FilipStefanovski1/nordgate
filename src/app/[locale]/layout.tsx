@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Fraunces } from "next/font/google";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -57,22 +56,10 @@ export default async function LocaleLayout({
   return (
     <html
       lang={localeHreflang[locale as Locale]}
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        {/* Progressive-enhancement flag for the reveal system: only hide
-            .reveal content pre-animation once JS is confirmed running and
-            the visitor hasn't asked for reduced motion. Content stays fully
-            visible by default otherwise. Runs before hydration/paint. */}
-        <Script
-          id="reveal-js-flag"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js');}}catch(e){}",
-          }}
-        />
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>
