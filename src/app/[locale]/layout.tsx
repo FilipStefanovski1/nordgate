@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL("https://thenordgate.com"),
-    title: { default: t("title"), template: `%s | NordGate` },
+    title: { default: t("title"), template: `NordGate | %s` },
     description: t("description"),
     alternates: buildAlternates("/", locale as Locale),
     openGraph: {
