@@ -11,6 +11,15 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "en";
 
+/** Flag shown beside each label in the switcher. Decorative — the text
+ *  label is what screen readers announce. */
+export const localeFlags: Record<Locale, string> = {
+  en: "\u{1F1EC}\u{1F1E7}",
+  sv: "\u{1F1F8}\u{1F1EA}",
+  da: "\u{1F1E9}\u{1F1F0}",
+  nb: "\u{1F1F3}\u{1F1F4}",
+};
+
 /** Public-facing label for the language switcher, in its own language. */
 export const localeLabels: Record<Locale, string> = {
   en: "English",

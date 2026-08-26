@@ -3,51 +3,29 @@ import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
+/**
+ * Two deliberate areas: a solid cobalt canvas carrying the whole message,
+ * then a full-bleed photograph flush beneath it. The canvas height leaves
+ * the top of the photograph visible on a typical desktop viewport, so the
+ * page invites a scroll rather than ending at a fold.
+ */
 export function Hero() {
   const t = useTranslations("home.hero");
 
   return (
-    <section className="relative flex min-h-[max(620px,calc(100svh-96px))] w-full flex-col overflow-hidden bg-navy-950 pt-[68px]">
-      <div className="absolute inset-0">
-        <Image
-          src="/event1.jpeg"
-          alt={t("imageAlt")}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[68%_38%] [filter:saturate(0.9)_contrast(1.02)]"
-        />
-      </div>
+    <>
+      <section className="hero-canvas flex items-center">
+        <Container className="flex flex-col items-center text-center">
 
-      {/* Readability gradient — darkest behind the copy, fading toward the
-          photograph's brighter right side. Stronger, top-heavy on mobile
-          since the content spans the full width there. */}
-      <div aria-hidden="true" className="hero-overlay pointer-events-none absolute inset-0" />
-      <div aria-hidden="true" className="hero-overlay-bottom pointer-events-none absolute inset-0" />
-      {/* Noise — full-surface density, kept subtle via low opacity. Sits above
-          the gradients and below the content. */}
-      <div aria-hidden="true" className="hero-noise" />
-
-      {/* Vertical edge detail */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 [writing-mode:vertical-rl] text-[11px] tracking-[0.2em] text-white/35 lg:right-10 lg:block"
-      >
-        {t("edgeLabel")}
-      </div>
-
-      <Container className="relative flex flex-1 flex-col py-14 sm:py-16">
-        <div className="flex max-w-[900px] flex-1 flex-col justify-center">
           <h1
-            className="hero-enter text-balance font-bold text-[var(--nordgate-off-white)]"
+            className="hero-enter hero-enter-title max-w-[16ch] text-balance font-serif font-medium text-[var(--nordgate-off-white)]"
             style={{
-              fontSize: "clamp(3rem, 6.2vw, 6rem)",
-              lineHeight: 0.92,
-              letterSpacing: "-0.04em",
+              fontSize: "clamp(3rem, 8vw, 8.5rem)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
             }}
           >
-            {t("titleLead")}
-            <br />
+            {t("titleLead")}{" "}
             <span className="hero-emphasis">
               {t("titleEmphasis")}
               <svg
@@ -59,15 +37,32 @@ export function Hero() {
                 <path pathLength={1} d="M2,7 C38,2.5 74,8.5 112,4.5 C144,1.5 176,6.5 198,3.5" />
               </svg>
             </span>
+            .
           </h1>
 
-          <div className="hero-enter hero-enter-cta mt-10">
-            <Button href="/contact" variant="inverse" fullWidthOnMobile>
-              {t("cta")}
-            </Button>
+          <p className="hero-enter hero-enter-cta mt-8 max-w-[58ch] text-base leading-relaxed text-[var(--nordgate-blue-pale)] sm:text-lg">
+            {t("supporting")}
+          </p>
+
+          <div className="hero-enter hero-enter-cta mt-9">
+            <Button href="/contact">{t("cta")}</Button>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+
+      {/* Full-bleed event photograph — no overlay, no text, flush to the canvas. */}
+      <div className="hero-photo">
+        <Image
+          src="/event1.jpeg"
+          alt={t("imageAlt")}
+          fill
+          priority
+          sizes="100vw"
+          // Keeps the speaker and seated audience in frame; the wide crop would
+          // otherwise land on the ceiling. Mobile sits slightly tighter.
+          className="object-cover object-[54%_72%] sm:object-[60%_66%]"
+        />
+      </div>
+    </>
   );
 }

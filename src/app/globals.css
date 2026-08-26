@@ -44,6 +44,9 @@
   --nordgate-navy: #07172f;
   --nordgate-navy-hover: #102a50;
   --nordgate-blue: #1f5fc4;
+  /* Confident royal/cobalt canvas — refined from --blue-700 (#003d9e) so a
+     full-bleed field reads vivid rather than murky. 8.4:1 against off-white. */
+  --nordgate-cobalt: #0a3fb0;
   --nordgate-blue-soft: #8eb8ee;
   --nordgate-blue-pale: #dceaff;
   --nordgate-off-white: #f7f9fc;
@@ -221,45 +224,9 @@ body {
   color: transparent;
 }
 
-/* Hero readability overlay — controlled deep-navy directional gradient.
-   Darkest behind the copy; the right side keeps the photograph's real
-   warmth and detail (painting, flags, room lighting) visible. */
-.hero-overlay {
-  background: linear-gradient(
-    90deg,
-    rgba(7, 23, 47, 0.92) 0%,
-    rgba(7, 23, 47, 0.72) 38%,
-    rgba(7, 23, 47, 0.34) 68%,
-    rgba(7, 23, 47, 0.12) 100%
-  );
-}
 
-@media (max-width: 640px) {
-  .hero-overlay {
-    background: linear-gradient(
-      165deg,
-      rgba(7, 23, 47, 0.92) 0%,
-      rgba(7, 23, 47, 0.8) 45%,
-      rgba(7, 23, 47, 0.5) 75%,
-      rgba(7, 23, 47, 0.32) 100%
-    );
-  }
-}
 
-.hero-overlay-bottom {
-  background: linear-gradient(0deg, rgba(7, 23, 47, 0.28) 0%, rgba(7, 23, 47, 0) 42%);
-}
 
-/* Noise sits between the readability gradient and the content — full-surface
-   coverage (density), kept visually subtle via low opacity. */
-.hero-noise {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  pointer-events: none;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
 
 /* Mobile menu — deep Nordgate navy, diagonal for a full-screen surface. */
 .mobile-menu-gradient {
@@ -349,13 +316,63 @@ html.js .reveal.is-visible {
   transform: translateY(12px);
   animation: hero-enter var(--motion-slow) var(--ease-out-expo) forwards;
 }
+.hero-enter-eyebrow {
+  animation-delay: 0ms;
+}
+.hero-enter-title {
+  animation-delay: 90ms;
+}
 .hero-enter-cta {
-  animation-delay: 80ms;
+  animation-delay: 220ms;
 }
 @keyframes hero-enter {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Hero — a solid cobalt opening canvas, then a full-bleed photograph.
+   The canvas carries the fixed header, so its top padding clears it. */
+.hero-canvas {
+  background: var(--nordgate-cobalt);
+  min-height: 74svh;
+  padding-top: calc(68px + clamp(3.5rem, 7vw, 6rem));
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+@media (max-width: 1024px) {
+  .hero-canvas {
+    min-height: 70svh;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-canvas {
+    /* Auto height on mobile — generous padding, no dead space. */
+    min-height: 0;
+    padding-top: calc(64px + 3.5rem);
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* Full-bleed photograph, flush against the canvas above it. */
+.hero-photo {
+  position: relative;
+  width: 100%;
+  height: 82svh;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .hero-photo {
+    height: 70svh;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-photo {
+    height: 62svh;
   }
 }
 
@@ -379,14 +396,14 @@ html.js .reveal.is-visible {
 
 .hero-underline path {
   fill: none;
-  stroke: var(--nordgate-blue-soft);
+  stroke: var(--nordgate-blue-pale);
   stroke-width: 2.5;
   stroke-linecap: round;
   /* Keeps the stroke an even weight despite the non-uniform viewBox scale. */
   vector-effect: non-scaling-stroke;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: hero-underline-draw 850ms var(--ease-out-expo) 620ms forwards;
+  animation: hero-underline-draw 850ms var(--ease-out-expo) 760ms forwards;
 }
 
 @keyframes hero-underline-draw {

@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { Check, ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { locales, localeLabels, type Locale } from "@/i18n/routing";
+import { locales, localeLabels, localeFlags, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils/cn";
 
 /**
@@ -85,6 +85,7 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
             : "text-ink-700 hover:text-blue-700 focus-visible:outline-blue-600"
         )}
       >
+        <span aria-hidden="true">{localeFlags[active]}</span>
         {localeLabels[active]}
         <ChevronDown
           className={cn("h-3.5 w-3.5 transition-transform duration-200", open && "rotate-180")}
@@ -117,7 +118,10 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
                     current && (light ? "text-white" : "text-blue-700")
                   )}
                 >
-                  {localeLabels[l]}
+                  <span className="flex items-center gap-2">
+                    <span aria-hidden="true">{localeFlags[l]}</span>
+                    {localeLabels[l]}
+                  </span>
                   {current && <Check className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
                 </button>
               </li>

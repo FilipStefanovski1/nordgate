@@ -46,10 +46,10 @@
   "home": {
     "hero": {
       "titleLead": "Your route into",
-      "titleEmphasis": "the Nordics.",
-      "imageAlt": "Attendees at a cross-border business event",
+      "titleEmphasis": "the Nordics",
+      "imageAlt": "Attendees at a cross-border business event hosted with Nordgate",
       "cta": "Book a market assessment",
-      "edgeLabel": "01 / NORDICS"
+      "supporting": "Validate demand, reach the right buyers and build commercial traction across the Nordic market."
     },
     "marquee": {
       "label": "Companies we've supported"

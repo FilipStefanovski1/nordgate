@@ -22,6 +22,8 @@ export function Header() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  // On the homepage the header sits on the cobalt canvas until scrolled.
+  const onCanvas = pathname === "/" && !scrolled && !open;
 
   const closeMenu = useCallback(() => {
     setOpen(false);
@@ -101,12 +103,16 @@ export function Header() {
       ref={headerRef}
       className={cn(
         "fixed inset-x-0 top-0 z-50 w-full border-b transition-[padding,background-color] duration-300",
-        open ? "mobile-menu-gradient border-white/10" : "border-border-soft bg-white",
+        open
+          ? "mobile-menu-gradient border-white/10"
+          : onCanvas
+            ? "border-white/15 bg-transparent"
+            : "border-border-soft bg-white",
         scrolled ? "py-2.5" : "py-3.5"
       )}
     >
       <Container className="relative flex items-center justify-between gap-6">
-        <Logo variant={open ? "white" : "color"} />
+        <Logo variant={open || onCanvas ? "white" : "color"} />
 
         <div className="hidden lg:flex lg:items-center lg:gap-8">
           <nav className="flex items-center gap-6" aria-label={t("primaryLabel")}>
@@ -116,7 +122,13 @@ export function Header() {
                 href={entry.href}
                 className={cn(
                   "link-underline text-sm font-medium transition-colors duration-200",
-                  pathname === entry.href ? "text-blue-700" : "text-ink-700 hover:text-blue-700"
+                  onCanvas
+                    ? pathname === entry.href
+                      ? "text-white"
+                      : "text-white/75 hover:text-white"
+                    : pathname === entry.href
+                      ? "text-blue-700"
+                      : "text-ink-700 hover:text-blue-700"
                 )}
               >
                 {t(entry.key)}
@@ -124,9 +136,9 @@ export function Header() {
             ))}
           </nav>
 
-          <LanguageSwitcher />
+          <LanguageSwitcher tone={onCanvas ? "light" : "dark"} />
 
-          <Button href={headerCta.href} compact>
+          <Button href={headerCta.href} compact variant={onCanvas ? "inverse" : "primary"}>
             {t("bookMeeting")}
           </Button>
         </div>
@@ -137,7 +149,7 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           className={cn(
             "lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-            open
+            open || onCanvas
               ? "text-white hover:bg-white/10 focus-visible:outline-white"
               : "text-navy-950 hover:bg-navy-950/5 focus-visible:outline-blue-600"
           )}

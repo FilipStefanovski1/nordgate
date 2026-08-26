@@ -46,10 +46,10 @@
   "home": {
     "hero": {
       "titleLead": "Vägen in i",
-      "titleEmphasis": "Norden.",
-      "imageAlt": "Deltagare på ett gränsöverskridande affärsevenemang",
+      "titleEmphasis": "Norden",
+      "imageAlt": "Deltagare på ett gränsöverskridande affärsevenemang med Nordgate",
       "cta": "Boka en marknadsanalys",
-      "edgeLabel": "01 / NORDEN"
+      "supporting": "Testa efterfrågan, nå rätt köpare och bygg kommersiell fart på den nordiska marknaden."
     },
     "marquee": {
       "label": "Företag vi har hjälpt"
