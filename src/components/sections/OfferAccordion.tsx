@@ -14,6 +14,7 @@ export function OfferAccordion() {
     { title: t("gtmTitle"), description: t("gtmBody") },
     { title: t("buyersTitle"), description: t("buyersBody") },
     { title: t("bizdevTitle"), description: t("bizdevBody") },
+    { title: t("balkanTitle"), description: t("balkanBody") },
   ];
   const [openIndex, setOpenIndex] = useState(0);
   const baseId = useId();

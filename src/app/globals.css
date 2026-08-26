@@ -44,9 +44,10 @@
   --nordgate-navy: #07172f;
   --nordgate-navy-hover: #102a50;
   --nordgate-blue: #1f5fc4;
-  /* Confident royal/cobalt canvas — refined from --blue-700 (#003d9e) so a
-     full-bleed field reads vivid rather than murky. 8.4:1 against off-white. */
-  --nordgate-cobalt: #0a3fb0;
+  /* The hero canvas is the logo's own blue — the exact --blue-700 sampled
+     from /brand/nordgate-logo.png. Aliased rather than re-declared so the
+     canvas and the wordmark can never drift apart. 9.2:1 against off-white. */
+  --nordgate-brand-blue: var(--blue-700);
   --nordgate-blue-soft: #8eb8ee;
   --nordgate-blue-pale: #dceaff;
   --nordgate-off-white: #f7f9fc;
@@ -366,10 +367,10 @@ body {
   }
 }
 
-/* Hero — a solid cobalt opening canvas, then a full-bleed photograph.
+/* Hero — a solid brand-blue opening canvas, then a full-bleed photograph.
    The canvas carries the fixed header, so its top padding clears it. */
 .hero-canvas {
-  background: var(--nordgate-cobalt);
+  background: var(--nordgate-brand-blue);
   min-height: 74svh;
   padding-top: calc(68px + clamp(3.5rem, 7vw, 6rem));
   padding-bottom: clamp(3.5rem, 7vw, 6rem);

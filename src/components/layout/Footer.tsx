@@ -111,8 +111,8 @@ export function Footer() {
       </Container>
 
       {/* The final visual moment of the site — enormous wordmark, cropped through its lower half */}
-      <div className="relative h-[clamp(1.9rem,9.5vw,8rem)] w-full overflow-hidden" aria-hidden="true">
-        <p className="text-gradient-noise absolute inset-x-0 top-0 select-none whitespace-nowrap text-center text-[clamp(3.4rem,18vw,15rem)] font-bold leading-none tracking-tight opacity-60">
+      <div className="relative h-[clamp(1.3rem,6.6vw,5.6rem)] w-full overflow-hidden" aria-hidden="true">
+        <p className="text-gradient-noise absolute inset-x-0 top-0 select-none whitespace-nowrap text-center text-[clamp(2.4rem,12.5vw,10.5rem)] font-bold leading-none tracking-tight opacity-60">
           NORDGATE
         </p>
       </div>

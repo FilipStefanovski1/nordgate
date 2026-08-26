@@ -2,7 +2,7 @@
   "metadata": {
     "home": {
       "title": "NordGate | Vejen ind i Norden",
-      "description": "Nordgate hjælper etablerede internationale virksomheder med at komme ind på, sælge på og vokse i de nordiske markeder – med lokal markedsindsigt og praktisk kommerciel eksekvering."
+      "description": "Nordgate hjælper etablerede internationale virksomheder med at komme ind på, sælge på og vokse på fem nordiske markeder – med lokal markedsindsigt og praktisk kommerciel eksekvering."
     },
     "services": {
       "title": "Ind på det nordiske marked",
@@ -56,8 +56,8 @@
     },
     "offer": {
       "eyebrow": "Det gør vi",
-      "title": "Etablering på jeres præmisser.",
-      "body": "Vi hjælper B2B-virksomheder med at forstå det nordiske potentiale, før de satser – og driver derefter det kommercielle arbejde, der gør det til rigtige samtaler.",
+      "title": "Vækst i begge retninger.",
+      "body": "NordGate forbinder Norden og Balkan. Vi hjælper internationale virksomheder med at komme ind på og vokse på de nordiske markeder – og hjælper nordiske virksomheder med at få adgang til dygtige teams, outsourcing og nearshoring på Balkan.",
       "imageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate",
       "validationTitle": "Markedsvalidering",
       "validationBody": "Vi tester reel efterspørgsel i Norden, før I binder ressourcer.",
@@ -66,7 +66,9 @@
       "buyersTitle": "Købere og partnere",
       "buyersBody": "Vi opbygger listen over de kunder, købere og partnere, det bedst kan betale sig at kontakte først.",
       "bizdevTitle": "Forretningsudvikling",
-      "bizdevBody": "Vi står for opfølgning og kvalificering, så interesse bliver til forretning."
+      "bizdevBody": "Vi står for opfølgning og kvalificering, så interesse bliver til forretning.",
+      "balkanTitle": "Teams og nearshoring på Balkan",
+      "balkanBody": "For nordiske virksomheder: vi finder, gennemgår og koordinerer dygtige teams og nearshoring-kapacitet på Balkan."
     },
     "problem": {
       "eyebrow": "Derfor betyder lokal indsigt noget",
@@ -74,7 +76,7 @@
       "body": "Virksomheder går i stå i Norden, fordi de mangler det, man kun får på stedet: kontekst, relationer og et ærligt billede af markedet.",
       "pointOne": "Købsbeslutninger fungerer sjældent, som en plan skrevet et andet sted antager.",
       "pointTwo": "Ansættelser og struktur bygges op, før nogen har bevist, at efterspørgslen findes.",
-      "pointThree": "Sverige, Danmark, Norge og Finland træffer beslutninger i hvert sit tempo.",
+      "pointThree": "Sverige, Danmark, Norge, Finland og Island træffer beslutninger i hvert sit tempo.",
       "imageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate"
     },
     "humanStory": {
@@ -122,8 +124,8 @@
     "fit3": "Kapacitet til at levere på ny forretning",
     "fit4": "Ledelsens opbakning til nordisk ekspansion",
     "localEyebrow": "Derfor betyder det lokale noget",
-    "localTitle": "Fire markeder, fire måder at beslutte på.",
-    "localBody": "Sverige, Danmark, Norge og Finland har hver sin forretningskultur og købsrytme. At behandle dem som ét marked er der, hvor de fleste etableringer går i stå.",
+    "localTitle": "Fem markeder, fem måder at beslutte på.",
+    "localBody": "Sverige, Danmark, Norge, Finland og Island har hver sin forretningskultur og købsrytme. At behandle dem som ét marked er der, hvor de fleste etableringer går i stå.",
     "localImageAlt": "En taler foran et publikum til et erhvervsarrangement forbundet med Nordgate",
     "phasesEyebrow": "Det indgår",
     "phasesTitle": "Tre faser. Én partner.",
@@ -242,7 +244,7 @@
   "insights": {
     "heroEyebrow": "Indsigter",
     "heroTitle": "Noter fra marken.",
-    "heroBody": "Perspektiver på etablering i Sverige, Danmark, Norge og Finland – udgivet, efterhånden som vi skriver dem.",
+    "heroBody": "Perspektiver på etablering i Sverige, Danmark, Norge, Finland og Island – udgivet, efterhånden som vi skriver dem.",
     "emptyTitle": "Nordgates første indsigter er på vej.",
     "emptyBody": "Kig forbi igen snart, eller skriv til os, hvis I har et spørgsmål, vi kan svare på direkte."
   },

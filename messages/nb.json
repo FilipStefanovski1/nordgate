@@ -2,7 +2,7 @@
   "metadata": {
     "home": {
       "title": "NordGate | Veien inn i Norden",
-      "description": "Nordgate hjelper etablerte internasjonale selskaper med å etablere seg, selge og vokse i Norden – med lokal markedskunnskap og praktisk kommersielt arbeid."
+      "description": "Nordgate hjelper etablerte internasjonale selskaper med å etablere seg, selge og vokse i fem nordiske markeder – med lokal markedskunnskap og praktisk kommersielt arbeid."
     },
     "services": {
       "title": "Etablering i Norden",
@@ -56,8 +56,8 @@
     },
     "offer": {
       "eyebrow": "Dette gjør vi",
-      "title": "Etablering på deres premisser.",
-      "body": "Vi hjelper B2B-selskaper med å forstå mulighetene i Norden før de satser – og driver deretter det kommersielle arbeidet som gjør dem til reelle samtaler.",
+      "title": "Vekst i begge retninger.",
+      "body": "NordGate forbinder Norden og Balkan. Vi hjelper internasjonale selskaper med å etablere seg og vokse i de nordiske markedene – og hjelper nordiske selskaper med å nå dyktige team, outsourcing og nearshoring på Balkan.",
       "imageAlt": "En paneldebatt i en sal opplyst av lysekroner på et næringslivsarrangement knyttet til Nordgate",
       "validationTitle": "Markedsvalidering",
       "validationBody": "Vi tester reell etterspørsel i Norden før dere binder opp ressurser.",
@@ -66,7 +66,9 @@
       "buyersTitle": "Kjøpere og partnere",
       "buyersBody": "Vi lager listen over kundene, kjøperne og partnerne det er verdt å kontakte først.",
       "bizdevTitle": "Forretningsutvikling",
-      "bizdevBody": "Vi står for oppfølging og kvalifisering slik at interesse blir til forretning."
+      "bizdevBody": "Vi står for oppfølging og kvalifisering slik at interesse blir til forretning.",
+      "balkanTitle": "Team og nearshoring på Balkan",
+      "balkanBody": "For nordiske selskaper: vi finner, vurderer og koordinerer dyktige team og nearshoring-kapasitet på Balkan."
     },
     "problem": {
       "eyebrow": "Derfor betyr lokal forståelse noe",
@@ -74,7 +76,7 @@
       "body": "Selskaper stopper opp i Norden fordi de mangler det man bare får ved å være til stede: kontekst, relasjoner og et ærlig bilde av markedet.",
       "pointOne": "Kjøpsbeslutninger fungerer sjelden slik en plan skrevet et annet sted forutsetter.",
       "pointTwo": "Ansettelser og struktur bygges opp før noen har bevist at etterspørselen finnes.",
-      "pointThree": "Sverige, Danmark, Norge og Finland tar beslutninger i sitt eget tempo.",
+      "pointThree": "Sverige, Danmark, Norge, Finland og Island tar beslutninger i sitt eget tempo.",
       "imageAlt": "En paneldebatt i en sal opplyst av lysekroner på et næringslivsarrangement knyttet til Nordgate"
     },
     "humanStory": {
@@ -122,8 +124,8 @@
     "fit3": "Kapasitet til å levere på ny forretning",
     "fit4": "Ledelsens forankring for nordisk ekspansjon",
     "localEyebrow": "Derfor betyr det lokale noe",
-    "localTitle": "Fire markeder, fire måter å bestemme på.",
-    "localBody": "Sverige, Danmark, Norge og Finland har hver sin forretningskultur og kjøpsrytme. Å behandle dem som ett marked er der de fleste etableringer stopper opp.",
+    "localTitle": "Fem markeder, fem måter å bestemme på.",
+    "localBody": "Sverige, Danmark, Norge, Finland og Island har hver sin forretningskultur og kjøpsrytme. Å behandle dem som ett marked er der de fleste etableringer stopper opp.",
     "localImageAlt": "En taler foran et publikum på et næringslivsarrangement knyttet til Nordgate",
     "phasesEyebrow": "Dette inngår",
     "phasesTitle": "Tre faser. Én partner.",
@@ -242,7 +244,7 @@
   "insights": {
     "heroEyebrow": "Innsikt",
     "heroTitle": "Notater fra feltet.",
-    "heroBody": "Perspektiver på etablering i Sverige, Danmark, Norge og Finland – publisert etter hvert som vi utvikler dem.",
+    "heroBody": "Perspektiver på etablering i Sverige, Danmark, Norge, Finland og Island – publisert etter hvert som vi utvikler dem.",
     "emptyTitle": "Nordgates første innsikter er på vei.",
     "emptyBody": "Stikk innom igjen snart, eller ta kontakt hvis dere har et spørsmål vi kan svare på direkte."
   },

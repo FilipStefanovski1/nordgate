@@ -2,7 +2,7 @@
   "metadata": {
     "home": {
       "title": "NordGate | Vägen in i Norden",
-      "description": "Nordgate hjälper etablerade internationella företag att etablera sig, sälja och växa i Norden – med lokal marknadskunskap och operativt kommersiellt arbete."
+      "description": "Nordgate hjälper etablerade internationella företag att etablera sig, sälja och växa på fem nordiska marknader – med lokal marknadskunskap och operativt kommersiellt arbete."
     },
     "services": {
       "title": "Etablering i Norden",
@@ -56,8 +56,8 @@
     },
     "offer": {
       "eyebrow": "Det här gör vi",
-      "title": "Etablering på era villkor.",
-      "body": "Vi hjälper B2B-företag att förstå den nordiska möjligheten innan de satsar – och driver sedan det kommersiella arbetet som gör den till riktiga samtal.",
+      "title": "Tillväxt i båda riktningar.",
+      "body": "NordGate förbinder Norden och Balkan. Vi hjälper internationella företag att etablera sig och växa på de nordiska marknaderna – och hjälper nordiska företag att nå kompetenta team, outsourcing och nearshoring på Balkan.",
       "imageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate",
       "validationTitle": "Marknadsvalidering",
       "validationBody": "Vi testar verklig efterfrågan i Norden innan ni binder upp resurser.",
@@ -66,7 +66,9 @@
       "buyersTitle": "Köpare och partner",
       "buyersBody": "Vi tar fram listan över de kunder, köpare och partner som är värda att kontakta först.",
       "bizdevTitle": "Affärsutveckling",
-      "bizdevBody": "Vi sköter uppföljning och kvalificering så att intresse blir till affärer."
+      "bizdevBody": "Vi sköter uppföljning och kvalificering så att intresse blir till affärer.",
+      "balkanTitle": "Team och nearshoring på Balkan",
+      "balkanBody": "För nordiska företag: vi identifierar, granskar och samordnar kompetenta team och nearshoring-kapacitet på Balkan."
     },
     "problem": {
       "eyebrow": "Därför spelar lokal förståelse roll",
@@ -74,7 +76,7 @@
       "body": "Företag kör fast i Norden för att de saknar det som bara finns på plats: sammanhang, relationer och en ärlig bild av marknaden.",
       "pointOne": "Köpbeslut fungerar sällan som en plan skriven någon annanstans förutsätter.",
       "pointTwo": "Rekrytering och struktur byggs upp innan någon bevisat att efterfrågan finns.",
-      "pointThree": "Sverige, Danmark, Norge och Finland fattar beslut i sin egen takt.",
+      "pointThree": "Sverige, Danmark, Norge, Finland och Island fattar beslut i sin egen takt.",
       "imageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate"
     },
     "humanStory": {
@@ -122,8 +124,8 @@
     "fit3": "Kapacitet att leverera på nya affärer",
     "fit4": "Ledningens engagemang för nordisk expansion",
     "localEyebrow": "Därför spelar det lokala roll",
-    "localTitle": "Fyra marknader, fyra sätt att besluta.",
-    "localBody": "Sverige, Danmark, Norge och Finland har var sin affärskultur och köprytm. Att behandla dem som en marknad är där de flesta etableringar kör fast.",
+    "localTitle": "Fem marknader, fem sätt att besluta.",
+    "localBody": "Sverige, Danmark, Norge, Finland och Island har var sin affärskultur och köprytm. Att behandla dem som en marknad är där de flesta etableringar kör fast.",
     "localImageAlt": "En talare inför en publik på ett affärsevenemang kopplat till Nordgate",
     "phasesEyebrow": "Det här ingår",
     "phasesTitle": "Tre faser. En partner.",
@@ -242,7 +244,7 @@
   "insights": {
     "heroEyebrow": "Insikter",
     "heroTitle": "Anteckningar från fältet.",
-    "heroBody": "Perspektiv på etablering i Sverige, Danmark, Norge och Finland – publicerade allt eftersom vi tar fram dem.",
+    "heroBody": "Perspektiv på etablering i Sverige, Danmark, Norge, Finland och Island – publicerade allt eftersom vi tar fram dem.",
     "emptyTitle": "Nordgates första insikter är på väg.",
     "emptyBody": "Titta in snart igen, eller hör av er om ni har en fråga vi kan svara på direkt."
   },

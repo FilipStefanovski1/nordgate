@@ -2,7 +2,7 @@
   "metadata": {
     "home": {
       "title": "NordGate | Your route into the Nordics",
-      "description": "Nordgate helps established international companies enter, sell and grow across the Nordics through local market knowledge and hands-on commercial execution."
+      "description": "Nordgate helps established international companies enter, sell and grow across five Nordic markets through local market knowledge and hands-on commercial execution."
     },
     "services": {
       "title": "Nordic Market Entry",
@@ -56,8 +56,8 @@
     },
     "offer": {
       "eyebrow": "What we do",
-      "title": "Market entry, built around you.",
-      "body": "We help B2B companies understand the Nordic opportunity before committing to it — then run the commercial work that turns it into real conversations.",
+      "title": "Growth in both directions.",
+      "body": "NordGate connects the Nordics and the Balkans. We help international companies enter and grow across Nordic markets while helping Nordic businesses access skilled teams, outsourcing and nearshoring opportunities in the Balkans.",
       "imageAlt": "A panel discussion in a chandelier-lit hall at a Nordgate-connected business event",
       "validationTitle": "Market validation",
       "validationBody": "We test real demand in the Nordics before you commit resources.",
@@ -66,7 +66,9 @@
       "buyersTitle": "Buyer and partner identification",
       "buyersBody": "We build the shortlist of accounts, buyers and partners worth approaching first.",
       "bizdevTitle": "Business development",
-      "bizdevBody": "We run follow-up and qualification so interest turns into commercial traction."
+      "bizdevBody": "We run follow-up and qualification so interest turns into commercial traction.",
+      "balkanTitle": "Balkan teams and nearshoring",
+      "balkanBody": "For Nordic companies: we identify, vet and coordinate skilled teams and nearshoring capacity in the Balkans."
     },
     "problem": {
       "eyebrow": "Why local understanding matters",
@@ -74,7 +76,7 @@
       "body": "Companies stall in the Nordics because they lack what only comes from being on the ground: context, relationships and an honest read of the market.",
       "pointOne": "Buying decisions rarely work the way a plan written elsewhere assumes.",
       "pointTwo": "Hires and infrastructure get built before anyone has proven demand.",
-      "pointThree": "Sweden, Denmark, Norway and Finland each decide at their own pace.",
+      "pointThree": "Sweden, Denmark, Norway, Finland and Iceland each decide at their own pace.",
       "imageAlt": "A panel discussion in a chandelier-lit hall at a Nordgate-connected business event"
     },
     "humanStory": {
@@ -122,8 +124,8 @@
     "fit3": "Capacity to deliver on new business",
     "fit4": "Management commitment to Nordic expansion",
     "localEyebrow": "Why local matters",
-    "localTitle": "Four markets, four ways of deciding.",
-    "localBody": "Sweden, Denmark, Norway and Finland each have their own commercial culture and buying rhythm. Treating them as one market is where most entries stall.",
+    "localTitle": "Five markets, five ways of deciding.",
+    "localBody": "Sweden, Denmark, Norway, Finland and Iceland each have their own commercial culture and buying rhythm. Treating them as one market is where most entries stall.",
     "localImageAlt": "A speaker addressing an audience at a Nordgate-connected business event",
     "phasesEyebrow": "What's included",
     "phasesTitle": "Three phases. One partner.",
@@ -242,7 +244,7 @@
   "insights": {
     "heroEyebrow": "Insights",
     "heroTitle": "Notes from the field.",
-    "heroBody": "Perspectives on entering Sweden, Denmark, Norway and Finland, published as we develop them.",
+    "heroBody": "Perspectives on entering Sweden, Denmark, Norway, Finland and Iceland, published as we develop them.",
     "emptyTitle": "Nordgate's first insights are in progress.",
     "emptyBody": "Check back soon, or get in touch if you have a question we can answer directly."
   },
