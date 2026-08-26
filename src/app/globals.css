@@ -310,22 +310,50 @@ html.js .reveal.is-visible {
   transition-delay: 80ms;
 }
 
-/* Hero entrance — label+headline, then CTA group. */
-.hero-enter {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: hero-enter var(--motion-slow) var(--ease-out-expo) forwards;
+/* Hero entrance — headline rises from behind a mask, then the supporting
+   copy and CTA fade up behind it. Runs once on load; CSS only, so there is
+   nothing to re-trigger on hydration or scroll. */
+.hero-title-mask {
+  display: block;
+  overflow: hidden;
+  /* Room for the underline inside the clip, cancelled so layout is unchanged. */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
 }
-.hero-enter-eyebrow {
-  animation-delay: 0ms;
+
+.hero-title-rise {
+  display: block;
+  animation: hero-rise 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero-enter-title {
-  animation-delay: 90ms;
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.hero-enter-cta {
-  animation-delay: 220ms;
+
+.hero-fade {
+  animation: hero-fade-up 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-@keyframes hero-enter {
+/* Starts once the headline is under way. */
+.hero-fade-support {
+  animation-delay: 180ms;
+}
+/* And the CTA a beat after that. */
+.hero-fade-cta {
+  animation-delay: 280ms;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -387,11 +415,16 @@ html.js .reveal.is-visible {
 .hero-underline {
   position: absolute;
   left: 0;
-  bottom: -0.1em;
+  bottom: -0.12em;
   width: 100%;
-  height: 0.16em;
+  height: 0.18em;
   overflow: visible;
   pointer-events: none;
+  /* Revealed by a clip that grows left to right. The stroke itself is never
+     dashed — a repeating dasharray is what previously broke it into
+     fragments. The vertical inset keeps the non-scaling stroke from being
+     clipped along its length. */
+  animation: hero-underline-wipe 1000ms cubic-bezier(0.22, 1, 0.36, 1) 650ms both;
 }
 
 .hero-underline path {
@@ -399,16 +432,17 @@ html.js .reveal.is-visible {
   stroke: var(--nordgate-blue-pale);
   stroke-width: 2.5;
   stroke-linecap: round;
-  /* Keeps the stroke an even weight despite the non-uniform viewBox scale. */
+  stroke-linejoin: round;
+  /* Even weight despite the non-uniform viewBox scale. */
   vector-effect: non-scaling-stroke;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: hero-underline-draw 850ms var(--ease-out-expo) 760ms forwards;
 }
 
-@keyframes hero-underline-draw {
+@keyframes hero-underline-wipe {
+  from {
+    clip-path: inset(-40% 100% -40% 0);
+  }
   to {
-    stroke-dashoffset: 0;
+    clip-path: inset(-40% 0 -40% 0);
   }
 }
 
@@ -454,16 +488,16 @@ html.js .reveal.is-visible {
   .photo-zoom img {
     transition: none !important;
   }
-  .hero-enter,
-  .hero-enter-cta {
+  .hero-title-rise,
+  .hero-fade {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
-  /* Show the finished underline rather than hiding it. */
-  .hero-underline path {
+  /* Show the finished, continuous underline rather than wiping it in. */
+  .hero-underline {
     animation: none !important;
-    stroke-dashoffset: 0 !important;
+    clip-path: none !important;
   }
   .reveal {
     opacity: 1 !important;

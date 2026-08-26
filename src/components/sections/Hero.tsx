@@ -18,35 +18,41 @@ export function Hero() {
         <Container className="flex flex-col items-center text-center">
 
           <h1
-            className="hero-enter hero-enter-title max-w-[16ch] text-balance font-serif font-medium text-[var(--nordgate-off-white)]"
+            className="hero-title-mask max-w-[16ch] text-balance font-serif font-medium text-[var(--nordgate-off-white)]"
             style={{
               fontSize: "clamp(3rem, 8vw, 8.5rem)",
               lineHeight: 0.95,
               letterSpacing: "-0.03em",
             }}
           >
-            {t("titleLead")}{" "}
-            <span className="hero-emphasis">
-              {t("titleEmphasis")}
-              <svg
-                aria-hidden="true"
-                className="hero-underline"
-                viewBox="0 0 200 10"
-                preserveAspectRatio="none"
-              >
-                <path pathLength={1} d="M2,7 C38,2.5 74,8.5 112,4.5 C144,1.5 176,6.5 198,3.5" />
-              </svg>
+            <span className="hero-title-rise">
+              {t("titleLead")}{" "}
+              <span className="hero-emphasis">
+                {t("titleEmphasis")}
+                {/* One solid stroke — never dashed. The wrapper is wiped in
+                    left-to-right by CSS, and stretches to whatever the
+                    translated phrase measures. */}
+                <svg
+                  aria-hidden="true"
+                  className="hero-underline"
+                  viewBox="0 0 200 12"
+                  preserveAspectRatio="none"
+                >
+                  <path d="M3,8 C40,3 78,9.5 118,5 C150,1.5 178,7 197,4" />
+                </svg>
+              </span>
+              .
             </span>
-            .
           </h1>
 
-          <p className="hero-enter hero-enter-cta mt-8 max-w-[58ch] text-base leading-relaxed text-[var(--nordgate-blue-pale)] sm:text-lg">
+          <p className="hero-fade hero-fade-support mt-8 max-w-[58ch] text-base leading-relaxed text-[var(--nordgate-blue-pale)] sm:text-lg">
             {t("supporting")}
           </p>
 
-          <div className="hero-enter hero-enter-cta mt-9">
+          <div className="hero-fade hero-fade-cta mt-9">
             <Button href="/contact">{t("cta")}</Button>
           </div>
+
         </Container>
       </section>
 
