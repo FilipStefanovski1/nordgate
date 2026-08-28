@@ -201,7 +201,7 @@ export function ContactForm() {
           required
           aria-invalid={errors.consent ? true : undefined}
           aria-describedby={errors.consent ? `${consentId}-error` : undefined}
-          className="mt-1 h-4 w-4 shrink-0 accent-[var(--nordgate-navy)]"
+          className="mt-1 h-4 w-4 shrink-0 accent-[var(--nordgate-brand-blue)]"
         />
         <div>
           <label htmlFor={consentId} className="text-sm leading-relaxed text-ink-700">

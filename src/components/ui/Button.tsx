@@ -6,8 +6,9 @@ type ButtonProps = {
   href: string;
   children: ReactNode;
   /**
-   * primary   — flat navy fill, off-white text. Standard CTA on light pages.
-   * inverse   — off-white fill, navy text. For dark or photographic backgrounds.
+   * primary   — flat brand-blue fill, off-white text. Standard CTA on light pages.
+   * inverse   — off-white fill, brand-blue text. For dark or photographic
+   *             backgrounds, and for the brand-blue hero canvas.
    * secondary — transparent with a 1px border, for lower-emphasis actions.
    * text      — no container; an underline-grow link for the lowest emphasis.
    */
@@ -25,7 +26,7 @@ const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary: "btn-nordgate focus-visible:outline-[var(--nordgate-blue)]",
   inverse: "btn-nordgate-inverse focus-visible:outline-[var(--nordgate-blue)]",
   secondary:
-    "bg-transparent text-ink-900 border border-border-strong transition-colors duration-200 hover:border-[var(--nordgate-navy)] hover:bg-[var(--nordgate-off-white)]",
+    "bg-transparent text-ink-900 border border-border-strong transition-colors duration-200 hover:border-[var(--nordgate-brand-blue)] hover:bg-[var(--nordgate-off-white)]",
   text: "link-underline bg-transparent font-semibold text-blue-700 transition-colors duration-200 hover:text-navy-900",
 };
 

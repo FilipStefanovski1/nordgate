@@ -50,7 +50,7 @@ export function Hero() {
           </p>
 
           <div className="hero-fade hero-fade-cta mt-9">
-            <Button href="/contact">{t("cta")}</Button>
+            <Button href="/contact" variant="inverse">{t("cta")}</Button>
           </div>
 
         </Container>

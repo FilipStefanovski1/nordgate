@@ -39,14 +39,18 @@
   --hero-heading: var(--nordgate-off-white);
   --hero-accent: var(--nordgate-blue-soft);
 
-  /* Nordgate button/CTA system — deep navy, off-white and one controlled
-     desaturated blue. No purple, no cyan, no neon. */
+  /* Nordgate button/CTA system. Blue-filled controls all resolve to
+     --nordgate-brand-blue below; --nordgate-navy is a dark *surface* colour
+     only (mobile menu, closing CTA band), never a button fill. */
   --nordgate-navy: #07172f;
   --nordgate-navy-hover: #102a50;
+  /* Focus-ring blue only. Deliberately lighter than the brand blue so a ring
+     drawn around a brand-blue button stays visible against the page. */
   --nordgate-blue: #1f5fc4;
-  /* The hero canvas is the logo's own blue — the exact --blue-700 sampled
-     from /brand/nordgate-logo.png. Aliased rather than re-declared so the
-     canvas and the wordmark can never drift apart. 9.2:1 against off-white. */
+  /* The single brand blue: every blue fill on the site — hero canvas, buttons,
+     brand-blue controls — resolves here. It is the exact --blue-700 sampled
+     from /brand/nordgate-logo.png, aliased rather than re-declared so a fill
+     and the wordmark can never drift apart. 9.2:1 against off-white. */
   --nordgate-brand-blue: var(--blue-700);
   --nordgate-blue-soft: #8eb8ee;
   --nordgate-blue-pale: #dceaff;
@@ -184,25 +188,33 @@ body {
 /* Standard Nordgate button fill — flat deep navy, no gradient, no glow.
    Shared by the nav CTA, the contact-form submit button and small
    in-flow badges that use the same brand fill. */
+/* Every blue-filled control on the site resolves here, so there is exactly one
+   button blue and it is the logo's. --nordgate-navy is no longer a button fill;
+   it survives only as a dark *surface* colour (mobile menu, closing CTA band). */
 .btn-nordgate {
-  background: var(--nordgate-navy);
+  background: var(--nordgate-brand-blue);
   color: var(--nordgate-off-white);
-  transition: background-color 200ms ease;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
+/* The fill is identical in every state — hover is carried by a tight ring in
+   the same blue, so no second brand blue can creep in behind an interaction. */
 .btn-nordgate:hover {
-  background: var(--nordgate-navy-hover);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nordgate-brand-blue) 24%, transparent);
 }
 
 .btn-nordgate:active {
   transform: translateY(1px);
 }
 
-/* Inverse of .btn-nordgate — off-white fill, navy text. Used for the hero
-   primary CTA, sitting on a dark photograph rather than a light page. */
+/* Inverse of .btn-nordgate — off-white fill, brand-blue text. This is the
+   variant for dark photography and for the brand-blue hero canvas, where a
+   blue-filled button would disappear into its own background. */
 .btn-nordgate-inverse {
   background: var(--nordgate-off-white);
-  color: var(--nordgate-navy);
+  color: var(--nordgate-brand-blue);
   transition: background-color 200ms ease;
 }
 
