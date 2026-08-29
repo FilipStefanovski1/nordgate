@@ -9,13 +9,25 @@ export type NavLink = {
   href: AppHref;
   /** Optional in-page anchor, kept separate so the href stays typed. */
   hash?: string;
+  /** Other internal pathnames that belong to this tab's route family and
+   *  should also mark it active (e.g. Capabilities is part of Services). */
+  activeOn?: AppHref[];
 };
 
 export const primaryNav: NavLink[] = [
-  { key: "services", href: "/nordic-market-entry" },
+  { key: "services", href: "/nordic-market-entry", activeOn: ["/capabilities"] },
   { key: "approach", href: "/how-it-works" },
   { key: "about", href: "/about" },
 ];
+
+/**
+ * Single source of truth for which primary-nav tab is active, shared by the
+ * desktop and mobile menus so the route-family mapping above is defined
+ * exactly once. `pathname` is next-intl's internal (locale-agnostic) path.
+ */
+export function isNavLinkActive(pathname: string, entry: NavLink): boolean {
+  return pathname === entry.href || (entry.activeOn?.includes(pathname as AppHref) ?? false);
+}
 
 /** External Google Calendar booking page — every "Book a meeting" CTA opens
  *  this directly, in a new tab, rather than routing to the contact form. */

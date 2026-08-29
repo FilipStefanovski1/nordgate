@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
-import { primaryNav, headerCta } from "@/data/navigation";
+import { primaryNav, headerCta, isNavLinkActive } from "@/data/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
@@ -116,24 +116,28 @@ export function Header() {
 
         <div className="hidden lg:flex lg:items-center lg:gap-8">
           <nav className="flex items-center gap-6" aria-label={t("primaryLabel")}>
-            {primaryNav.map((entry) => (
-              <Link
-                key={entry.href}
-                href={entry.href}
-                className={cn(
-                  "link-underline text-sm font-medium transition-colors duration-200",
-                  onCanvas
-                    ? pathname === entry.href
-                      ? "text-white"
-                      : "text-white/75 hover:text-white"
-                    : pathname === entry.href
-                      ? "text-blue-700"
-                      : "text-ink-700 hover:text-blue-700"
-                )}
-              >
-                {t(entry.key)}
-              </Link>
-            ))}
+            {primaryNav.map((entry) => {
+              const active = isNavLinkActive(pathname, entry);
+              return (
+                <Link
+                  key={entry.href}
+                  href={entry.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "nav-link text-sm font-medium transition-colors duration-200",
+                    onCanvas
+                      ? active
+                        ? "text-white [--nav-underline:var(--nordgate-blue-soft)]"
+                        : "text-white/75 hover:text-white"
+                      : active
+                        ? "text-blue-700"
+                        : "text-ink-700 hover:text-blue-700"
+                  )}
+                >
+                  {t(entry.key)}
+                </Link>
+              );
+            })}
           </nav>
 
           <LanguageSwitcher tone={onCanvas ? "light" : "dark"} />
@@ -179,27 +183,34 @@ export function Header() {
           >
             <nav aria-label={t("mobilePrimaryLabel")} className="mt-[110px] sm:mt-[130px]">
               <ul className="flex flex-col">
-                {primaryNav.map((entry, i) => (
-                  <li key={entry.href}>
-                    <Link
-                      href={entry.href}
-                      onClick={closeMenu}
-                      className="group flex items-center justify-between gap-4 py-3.5"
-                    >
-                      <span className="flex items-baseline gap-4">
-                        <span className="coord-label" style={{ color: "var(--hero-accent)" }}>
-                          {String(i + 1).padStart(2, "0")}
+                {primaryNav.map((entry, i) => {
+                  const active = isNavLinkActive(pathname, entry);
+                  return (
+                    <li key={entry.href}>
+                      <Link
+                        href={entry.href}
+                        onClick={closeMenu}
+                        aria-current={active ? "page" : undefined}
+                        className={cn(
+                          "mobile-nav-link group flex items-center justify-between gap-4 py-3.5 pl-4 pr-2 transition-colors duration-200",
+                          active && "bg-white/[0.06]"
+                        )}
+                      >
+                        <span className="flex items-baseline gap-4">
+                          <span className="coord-label" style={{ color: "var(--hero-accent)" }}>
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span
+                            className="text-[clamp(1.5rem,6vw,2.25rem)] font-medium leading-tight"
+                            style={{ color: "var(--hero-heading)" }}
+                          >
+                            {t(entry.key)}
+                          </span>
                         </span>
-                        <span
-                          className="text-[clamp(1.5rem,6vw,2.25rem)] font-medium leading-tight"
-                          style={{ color: "var(--hero-heading)" }}
-                        >
-                          {t(entry.key)}
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
               <div className="mt-1 border-b border-white/15" />
               <p className="mt-5 text-sm text-white/50">{t("tagline")}</p>

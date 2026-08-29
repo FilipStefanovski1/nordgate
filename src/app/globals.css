@@ -485,6 +485,56 @@ body {
   right: 0;
 }
 
+/* Primary desktop navigation. Shares the same hover-grow mechanic as
+   .link-underline, but the current page keeps its underline permanently
+   drawn via [aria-current="page"] rather than a colour change alone. The
+   active rule is declared last so it wins the specificity tie against
+   :hover/:focus-visible and can't be re-animated by hovering the current
+   tab. Colour normally follows the link's own currentColor; --nav-underline
+   overrides it only where the active colour must differ from the active
+   text colour (the white hero canvas). */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -6px;
+  height: 2px;
+  background: var(--nav-underline, currentColor);
+  transition: right var(--motion-fast) var(--ease-standard);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  right: 0;
+}
+.nav-link[aria-current="page"]::after {
+  right: 0;
+  transition: none;
+}
+
+/* Full-screen mobile menu — the current row gets a persistent left
+   indicator bar. Painted via `background`, not `border`, since the site's
+   global `* { border-color: var(--border-soft) }` reset is unlayered and
+   would otherwise silently repaint any border-color utility grey. */
+.mobile-nav-link {
+  position: relative;
+}
+.mobile-nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+}
+.mobile-nav-link[aria-current="page"]::before {
+  background: var(--hero-accent);
+}
+
 /* Editorial photography — subtle zoom for genuinely clickable images only. */
 .photo-zoom {
   overflow: hidden;
