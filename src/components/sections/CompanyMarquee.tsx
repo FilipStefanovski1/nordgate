@@ -43,9 +43,9 @@ function LogoItem({ company, interactive }: { company: Company; interactive: boo
     />
   );
 
-  // A few source logos (e.g. SMCC's pale yellow crowns) read as nearly
-  // invisible once grayscaled against the marquee's white background —
-  // give just those a small dark chip for contrast, in both states.
+  // A pale source logo can read as nearly invisible once grayscaled against
+  // the marquee's white background — give just those a small dark chip for
+  // contrast, in both states.
   const image = company.needsDarkChip ? (
     <span className="group/logo flex h-9 shrink-0 items-center rounded-sm bg-navy-950 px-2.5 sm:h-10">
       {/* eslint-disable-next-line @next/next/no-img-element */}

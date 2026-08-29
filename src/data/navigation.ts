@@ -17,7 +17,12 @@ export const primaryNav: NavLink[] = [
   { key: "about", href: "/about" },
 ];
 
-export const headerCta = { key: "bookMeeting", href: "/contact" } as const;
+/** External Google Calendar booking page — every "Book a meeting" CTA opens
+ *  this directly, in a new tab, rather than routing to the contact form. */
+export const headerCta = {
+  key: "bookMeeting",
+  href: "https://calendar.app.google/KGMrBcRV6UitHaDb6",
+} as const;
 
 /** Footer groups: `key` resolves in the `footer` namespace. */
 export const footerNav: { titleKey: string; links: NavLink[] }[] = [

@@ -48,6 +48,23 @@ export function Button({
           fullWidthOnMobile && "w-full sm:w-auto"
         );
 
+  // An absolute URL (the Google Calendar booking page) leaves the site, so it
+  // gets a plain anchor with the new-tab/opener protections rather than
+  // next/link's client-side routing.
+  if (/^https?:\/\//.test(href)) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onClick}
+        className={cn(base, variants[variant], className)}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link href={href} onClick={onClick} className={cn(base, variants[variant], className)}>
       {children}

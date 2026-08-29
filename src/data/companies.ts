@@ -32,11 +32,6 @@ export const companies: Company[] = [
     alt: "BPF Group logo",
   },
   {
-    name: "codeSTREETS",
-    logo: "/images/company-logos/codestreets.png",
-    alt: "codeSTREETS logo",
-  },
-  {
     name: "EaseAccess",
     logo: "/images/company-logos/easeaccess24.svg",
     alt: "EaseAccess logo",
@@ -50,6 +45,5 @@ export const companies: Company[] = [
     name: "Swedish–Macedonian Chamber of Commerce",
     logo: "/images/company-logos/smcc.png",
     alt: "Swedish–Macedonian Chamber of Commerce logo",
-    needsDarkChip: true,
   },
 ];

@@ -45,6 +45,24 @@ export default async function AboutPage({
         description={t("heroBody")}
       />
 
+      <section className="bg-white py-24 sm:py-28">
+        <Container>
+          <Reveal>
+            <SectionHeading eyebrow={t("visionMissionEyebrow")} title={t("visionMissionTitle")} />
+          </Reveal>
+          <Reveal delay className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border-soft p-8 sm:p-10">
+              <p className="eyebrow text-blue-600">{t("visionLabel")}</p>
+              <p className="mt-4 text-lg leading-relaxed text-ink-700">{t("visionBody")}</p>
+            </div>
+            <div className="rounded-2xl border border-border-soft p-8 sm:p-10">
+              <p className="eyebrow text-blue-600">{t("missionLabel")}</p>
+              <p className="mt-4 text-lg leading-relaxed text-ink-700">{t("missionBody")}</p>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
       <ImageTextSplit
         imageSide="left"
         image={editorialImages.founders}
