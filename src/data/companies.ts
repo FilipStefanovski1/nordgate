@@ -46,4 +46,9 @@ export const companies: Company[] = [
     logo: "/images/company-logos/smcc.png",
     alt: "Swedish–Macedonian Chamber of Commerce logo",
   },
+  {
+    name: "Blockchain Skopje",
+    logo: "/images/company-logos/blockchain-skopje.png",
+    alt: "Blockchain Skopje logo",
+  },
 ];
