@@ -5,13 +5,11 @@ import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceGroups } from "@/components/sections/ServiceGroups";
 import { WhoWeWorkWith } from "@/components/sections/WhoWeWorkWith";
 import { MarketReadinessSprint } from "@/components/sections/MarketReadinessSprint";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { editorialImages } from "@/data/editorial-images";
 
 export async function generateMetadata({
   params,
@@ -46,13 +44,17 @@ export default async function NordicMarketEntryPage({
 
       <WhoWeWorkWith />
 
-      <ImageTextSplit
-        imageSide="left"
-        image={editorialImages.eventSpeaker}
-        eyebrow={t("localEyebrow")}
-        title={t("localTitle")}
-        description={t("localBody")}
-      />
+      <section className="bg-white py-24 sm:py-28">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow={t("localEyebrow")}
+              title={t("localTitle")}
+              description={t("localBody")}
+            />
+          </Reveal>
+        </Container>
+      </section>
 
       <section className="bg-bg-soft py-24 sm:py-28">
         <Container>

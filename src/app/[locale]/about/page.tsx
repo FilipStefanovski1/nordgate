@@ -5,7 +5,6 @@ import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { EditorialImage } from "@/components/ui/EditorialImage";
 import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { Reveal } from "@/components/ui/Reveal";
 import { LocationsGrid } from "@/components/sections/LocationsGrid";
@@ -72,12 +71,6 @@ export default async function AboutPage({
       />
 
       <TeamSection background="soft" />
-
-      <EditorialImage
-        src={editorialImages.eventAuditorium.src}
-        alt={editorialImages.eventAuditorium.alt}
-        position={editorialImages.eventAuditorium.position}
-      />
 
       <section className="bg-navy-950 py-24 sm:py-28">
         <Container>

@@ -5,14 +5,12 @@ import type { Locale } from "@/i18n/routing";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { OutreachCycle } from "@/components/sections/OutreachCycle";
 import { ResponsibilitySplit } from "@/components/sections/ResponsibilitySplit";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { editorialImages } from "@/data/editorial-images";
 
 export async function generateMetadata({
   params,
@@ -46,13 +44,6 @@ export default async function HowItWorksPage({
       />
 
       <ProcessSection background="white" />
-
-      <EditorialImage
-        background="soft"
-        src={editorialImages.eventAuditorium.src}
-        alt={editorialImages.eventAuditorium.alt}
-        position={editorialImages.eventAuditorium.position}
-      />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>

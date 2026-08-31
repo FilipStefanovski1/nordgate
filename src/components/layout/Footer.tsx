@@ -26,6 +26,13 @@ const socialLinks = [
       <path d="M18.9 2h3.1l-6.79 7.77L23.16 22h-6.25l-4.9-6.4L6.3 22H3.2l7.26-8.3L1 2h6.41l4.43 5.85L18.9 2zm-1.09 18h1.72L7.28 3.9H5.43L17.81 20z" />
     ),
   },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/thenordgate/",
+    icon: (
+      <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-4.35.2-6.78 2.62-6.98 6.98C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.35 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.41-10.44a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z" />
+    ),
+  },
 ];
 
 export function Footer() {
@@ -111,8 +118,8 @@ export function Footer() {
       </Container>
 
       {/* The final visual moment of the site — enormous wordmark, cropped through its lower half */}
-      <div className="relative h-[clamp(1.3rem,6.6vw,5.6rem)] w-full overflow-hidden" aria-hidden="true">
-        <p className="text-gradient-noise absolute inset-x-0 top-0 select-none whitespace-nowrap text-center text-[clamp(2.4rem,12.5vw,10.5rem)] font-bold leading-none tracking-tight opacity-60">
+      <div className="relative h-[clamp(1.45rem,7.4vw,6.3rem)] w-full overflow-hidden" aria-hidden="true">
+        <p className="text-gradient-noise absolute inset-x-0 top-0 select-none whitespace-nowrap text-center text-[clamp(2.7rem,14vw,12rem)] font-bold leading-none tracking-tight opacity-60">
           NORDGATE
         </p>
       </div>

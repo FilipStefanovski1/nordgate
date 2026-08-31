@@ -47,7 +47,6 @@
     "hero": {
       "titleLead": "Vägen in i",
       "titleEmphasis": "Norden",
-      "imageAlt": "Deltagare på ett gränsöverskridande affärsevenemang med Nordgate",
       "cta": "Boka en marknadsanalys",
       "supporting": "Testa efterfrågan, nå rätt köpare och bygg kommersiell fart på den nordiska marknaden."
     },
@@ -58,7 +57,6 @@
       "eyebrow": "Det här gör vi",
       "title": "Tillväxt i båda riktningar.",
       "body": "NordGate förbinder Norden och Balkan. Vi hjälper internationella företag att etablera sig och växa på de nordiska marknaderna – och hjälper nordiska företag att nå kompetenta team, outsourcing och nearshoring på Balkan.",
-      "imageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate",
       "validationTitle": "Marknadsvalidering",
       "validationBody": "Vi testar verklig efterfrågan i Norden innan ni binder upp resurser.",
       "gtmTitle": "Go-to-market-strategi",
@@ -76,8 +74,7 @@
       "body": "Företag kör fast i Norden för att de saknar det som bara finns på plats: sammanhang, relationer och en ärlig bild av marknaden.",
       "pointOne": "Köpbeslut fungerar sällan som en plan skriven någon annanstans förutsätter.",
       "pointTwo": "Rekrytering och struktur byggs upp innan någon bevisat att efterfrågan finns.",
-      "pointThree": "Sverige, Danmark, Norge, Finland och Island fattar beslut i sin egen takt.",
-      "imageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate"
+      "pointThree": "Sverige, Danmark, Norge, Finland och Island fattar beslut i sin egen takt."
     },
     "humanStory": {
       "eyebrow": "Byggt på verkliga relationer",
@@ -89,8 +86,7 @@
     "cta": {
       "eyebrow": "Inled ett samtal",
       "title": "Redo att testa den nordiska möjligheten?",
-      "body": "Berätta var ni vill växa. Vi hjälper er att bedöma möjligheten, hitta rätt marknad och lägga fast hur Nordgate kan driva det kommersiella arbetet.",
-      "imageAlt": "En bärbar dator som visar ett foto från ett affärsevenemang kopplat till Nordgate"
+      "body": "Berätta var ni vill växa. Vi hjälper er att bedöma möjligheten, hitta rätt marknad och lägga fast hur Nordgate kan driva det kommersiella arbetet."
     }
   },
   "process": {
@@ -126,7 +122,6 @@
     "localEyebrow": "Därför spelar det lokala roll",
     "localTitle": "Fem marknader, fem sätt att besluta.",
     "localBody": "Sverige, Danmark, Norge, Finland och Island har var sin affärskultur och köprytm. Att behandla dem som en marknad är där de flesta etableringar kör fast.",
-    "localImageAlt": "En talare inför en publik på ett affärsevenemang kopplat till Nordgate",
     "phasesEyebrow": "Det här ingår",
     "phasesTitle": "Tre faser. En partner.",
     "phasesBody": "Insikt visar var ni ska spela. Uppbyggnaden skapar strukturen. Genomförandet gör den till möten.",
@@ -158,7 +153,6 @@
     "heroEyebrow": "Så arbetar vi",
     "heroTitle": "En process, hela vägen.",
     "heroBody": "Ett ansvarigt team – inte en rapport som lämnas över när projektet är slut.",
-    "imageAlt": "En publik som fyller en aula med röda stolar på ett branschevenemang kopplat till Nordgate",
     "outreachEyebrow": "Säljgenomförande",
     "outreachTitle": "Bearbetning som lär sig hela tiden.",
     "outreachBody": "Varje kvalificerat möte ger återkoppling som skärper målgrupp och budskap.",
@@ -193,7 +187,6 @@
     "whyTitle": "Vi säljer å deras vägnar.",
     "whyBody": "Nordgate är en operativ kommersiell partner, inte bara ett rådgivningsbolag. Vi förenklar gränsöverskridande tillväxt genom lokal marknadskunskap, förtroendefulla relationer och praktiskt kommersiellt arbete – och den skillnaden präglar hur vi lägger upp varje uppdrag.",
     "teamTitle": "Ett team byggt för gränsöverskridande tillväxt",
-    "imageAlt": "En publik som fyller en aula med röda stolar på ett branschevenemang kopplat till Nordgate",
     "whereEyebrow": "Där vi finns",
     "whereTitle": "Lokal närvaro, inte ett avlägset huvudkontor.",
     "whereBody": "Från Köpenhamn, Stockholm och Skopje arbetar vi med handelskammarnätverk, företag, beslutsfattare, byråer och leverantörer på båda sidor av porten.",
@@ -228,7 +221,6 @@
     "notMarketEyebrow": "Ingen marknadsplats",
     "notMarketTitle": "Ett samordnande lager, inte en katalog.",
     "notMarketBody": "Kataloger ger er en lista och lämnar utvärderingen till er. Vi är kvar i arbetet – tar fram urvalet, stöttar beslutet och förblir er enda kontaktpunkt.",
-    "notMarketImageAlt": "En paneldiskussion i en sal upplyst av kristallkronor på ett affärsevenemang kopplat till Nordgate",
     "howEyebrow": "Så går det till",
     "howTitle": "Urval och samordning, skött åt er.",
     "howBody": "Ni kommer med behovet. Vi sköter sökningen, utvärderingen och samordningen som följer.",

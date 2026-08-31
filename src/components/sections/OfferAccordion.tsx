@@ -2,7 +2,6 @@
 
 import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils/cn";
@@ -22,8 +21,8 @@ export function OfferAccordion() {
   return (
     <section className="bg-white py-24 sm:py-28">
       <Container>
-        <div className="offer-grid">
-          <Reveal className="offer-copy max-w-2xl">
+        <div className="flex flex-col gap-10">
+          <Reveal className="max-w-2xl">
             <p className="eyebrow text-blue-600">{t("eyebrow")}</p>
             <h2 className="mt-4 max-w-md text-balance font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl">
               {t("title")}
@@ -33,7 +32,7 @@ export function OfferAccordion() {
             </p>
           </Reveal>
 
-          <Reveal className="offer-accordion-col max-w-3xl border-t border-border-soft">
+          <Reveal className="max-w-3xl border-t border-border-soft">
           {offerItems.map((item, i) => {
             const open = openIndex === i;
             const triggerId = `${baseId}-trigger-${i}`;
@@ -86,19 +85,6 @@ export function OfferAccordion() {
               </div>
             );
           })}
-          </Reveal>
-
-          <Reveal delay className="offer-image">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded">
-              <Image
-                src="/event2.jpeg"
-                alt={t("imageAlt")}
-                fill
-                sizes="(min-width: 1024px) 500px, 90vw"
-                className="object-cover"
-                style={{ objectPosition: "center 45%" }}
-              />
-            </div>
           </Reveal>
         </div>
       </Container>

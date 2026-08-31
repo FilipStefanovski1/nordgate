@@ -47,7 +47,6 @@
     "hero": {
       "titleLead": "Vejen ind i",
       "titleEmphasis": "Norden",
-      "imageAlt": "Deltagere til et grænseoverskridende erhvervsarrangement med Nordgate",
       "cta": "Book en markedsanalyse",
       "supporting": "Test efterspørgslen, nå de rigtige købere og opbyg kommerciel fremdrift på det nordiske marked."
     },
@@ -58,7 +57,6 @@
       "eyebrow": "Det gør vi",
       "title": "Vækst i begge retninger.",
       "body": "NordGate forbinder Norden og Balkan. Vi hjælper internationale virksomheder med at komme ind på og vokse på de nordiske markeder – og hjælper nordiske virksomheder med at få adgang til dygtige teams, outsourcing og nearshoring på Balkan.",
-      "imageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate",
       "validationTitle": "Markedsvalidering",
       "validationBody": "Vi tester reel efterspørgsel i Norden, før I binder ressourcer.",
       "gtmTitle": "Go-to-market-strategi",
@@ -76,8 +74,7 @@
       "body": "Virksomheder går i stå i Norden, fordi de mangler det, man kun får på stedet: kontekst, relationer og et ærligt billede af markedet.",
       "pointOne": "Købsbeslutninger fungerer sjældent, som en plan skrevet et andet sted antager.",
       "pointTwo": "Ansættelser og struktur bygges op, før nogen har bevist, at efterspørgslen findes.",
-      "pointThree": "Sverige, Danmark, Norge, Finland og Island træffer beslutninger i hvert sit tempo.",
-      "imageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate"
+      "pointThree": "Sverige, Danmark, Norge, Finland og Island træffer beslutninger i hvert sit tempo."
     },
     "humanStory": {
       "eyebrow": "Bygget på ægte relationer",
@@ -89,8 +86,7 @@
     "cta": {
       "eyebrow": "Start en samtale",
       "title": "Klar til at teste det nordiske potentiale?",
-      "body": "Fortæl os, hvor I vil vokse. Vi hjælper med at vurdere potentialet, finde det rette marked og fastlægge, hvordan Nordgate kan drive det kommercielle arbejde.",
-      "imageAlt": "En bærbar computer, der viser et foto fra et erhvervsarrangement forbundet med Nordgate"
+      "body": "Fortæl os, hvor I vil vokse. Vi hjælper med at vurdere potentialet, finde det rette marked og fastlægge, hvordan Nordgate kan drive det kommercielle arbejde."
     }
   },
   "process": {
@@ -126,7 +122,6 @@
     "localEyebrow": "Derfor betyder det lokale noget",
     "localTitle": "Fem markeder, fem måder at beslutte på.",
     "localBody": "Sverige, Danmark, Norge, Finland og Island har hver sin forretningskultur og købsrytme. At behandle dem som ét marked er der, hvor de fleste etableringer går i stå.",
-    "localImageAlt": "En taler foran et publikum til et erhvervsarrangement forbundet med Nordgate",
     "phasesEyebrow": "Det indgår",
     "phasesTitle": "Tre faser. Én partner.",
     "phasesBody": "Indsigt viser, hvor I skal spille. Opsætningen skaber strukturen. Eksekveringen gør den til møder.",
@@ -158,7 +153,6 @@
     "heroEyebrow": "Vores tilgang",
     "heroTitle": "Én proces, hele vejen.",
     "heroBody": "Ét ansvarligt team – ikke en rapport, der afleveres, når projektet slutter.",
-    "imageAlt": "Et publikum, der fylder en auditorium med røde stole til et brancheevent forbundet med Nordgate",
     "outreachEyebrow": "Salgseksekvering",
     "outreachTitle": "Opsøgende salg, der hele tiden lærer.",
     "outreachBody": "Hvert kvalificeret møde giver feedback, der skærper målgruppe og budskaber.",
@@ -193,7 +187,6 @@
     "whyTitle": "Vi sælger på deres vegne.",
     "whyBody": "Nordgate er en eksekverende kommerciel partner, ikke kun et rådgivningshus. Vi gør grænseoverskridende vækst enklere gennem lokal markedsindsigt, tillidsfulde relationer og praktisk kommercielt arbejde – og den forskel præger, hvordan vi skruer hver opgave sammen.",
     "teamTitle": "Et team bygget til grænseoverskridende vækst",
-    "imageAlt": "Et publikum, der fylder en auditorium med røde stole til et brancheevent forbundet med Nordgate",
     "whereEyebrow": "Hvor vi arbejder",
     "whereTitle": "Lokal tilstedeværelse, ikke et fjernt hovedkontor.",
     "whereBody": "Fra København, Stockholm og Skopje arbejder vi med handelskammernetværk, virksomheder, beslutningstagere, bureauer og leverandører på begge sider af porten.",
@@ -228,7 +221,6 @@
     "notMarketEyebrow": "Ikke en markedsplads",
     "notMarketTitle": "Et koordinerende lag, ikke et katalog.",
     "notMarketBody": "Kataloger giver jer en liste og overlader vurderingen til jer. Vi bliver i arbejdet – laver udvælgelsen, støtter beslutningen og forbliver jeres eneste kontaktpunkt.",
-    "notMarketImageAlt": "En paneldebat i en sal oplyst af lysekroner til et erhvervsarrangement forbundet med Nordgate",
     "howEyebrow": "Sådan foregår det",
     "howTitle": "Udvælgelse og koordinering, klaret.",
     "howBody": "I kommer med behovet. Vi står for søgningen, vurderingen og koordineringen bagefter.",
