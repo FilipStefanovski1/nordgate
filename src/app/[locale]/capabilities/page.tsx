@@ -5,10 +5,12 @@ import type { Locale } from "@/i18n/routing";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { Reveal } from "@/components/ui/Reveal";
 import { CoordinationSteps } from "@/components/sections/CoordinationSteps";
 import { PartnerCriteria } from "@/components/sections/PartnerCriteria";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { editorialImages } from "@/data/editorial-images";
 
 export async function generateMetadata({
   params,
@@ -57,17 +59,14 @@ export default async function CapabilitiesPage({
         </Container>
       </section>
 
-      <section className="bg-bg-soft py-24 sm:py-28">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow={t("notMarketEyebrow")}
-              title={t("notMarketTitle")}
-              description={t("notMarketBody")}
-            />
-          </Reveal>
-        </Container>
-      </section>
+      <ImageTextSplit
+        background="soft"
+        imageSide="right"
+        image={editorialImages.stockholmSkeppsbron}
+        eyebrow={t("notMarketEyebrow")}
+        title={t("notMarketTitle")}
+        description={t("notMarketBody")}
+      />
 
       <section className="bg-white py-24 sm:py-28">
         <Container>

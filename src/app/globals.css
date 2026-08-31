@@ -568,6 +568,58 @@ body {
   background: linear-gradient(135deg, #202226 0%, #182334 52%, #102b61 100%);
 }
 
+/* Offer accordion — two-column layout with a single portrait photograph.
+   Mobile/tablet stack in order: copy, accordion, image. Desktop places the
+   image in its own column, vertically centred against the full
+   copy + accordion height. */
+.offer-grid {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.offer-copy {
+  order: 1;
+}
+
+.offer-accordion-col {
+  order: 2;
+}
+
+.offer-image {
+  order: 3;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .offer-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    column-gap: clamp(4rem, 7vw, 6rem);
+    row-gap: 3rem;
+    align-items: start;
+  }
+
+  .offer-copy {
+    grid-column: 1;
+    grid-row: 1;
+    order: initial;
+  }
+
+  .offer-accordion-col {
+    grid-column: 1;
+    grid-row: 2;
+    order: initial;
+  }
+
+  .offer-image {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    order: initial;
+    /* Vertically centred against the full copy + accordion column. */
+    align-self: center;
+    max-width: 500px;
+    margin-inline: auto;
+  }
+}
 
 /* Horizontal process flow — parallel information lanes between the six
    onboarding nodes. Base and current layers share identical geometry; each

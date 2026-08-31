@@ -55,6 +55,7 @@
     },
     "offer": {
       "eyebrow": "What we do",
+      "imageAlt": "Two colleagues discussing work at a desk in a bright office",
       "title": "Growth in both directions.",
       "body": "NordGate connects the Nordics and the Balkans. We help international companies enter and grow across Nordic markets while helping Nordic businesses access skilled teams, outsourcing and nearshoring opportunities in the Balkans.",
       "validationTitle": "Market validation",
@@ -74,7 +75,8 @@
       "body": "Companies stall in the Nordics because they lack what only comes from being on the ground: context, relationships and an honest read of the market.",
       "pointOne": "Buying decisions rarely work the way a plan written elsewhere assumes.",
       "pointTwo": "Hires and infrastructure get built before anyone has proven demand.",
-      "pointThree": "Sweden, Denmark, Norway, Finland and Iceland each decide at their own pace."
+      "pointThree": "Sweden, Denmark, Norway, Finland and Iceland each decide at their own pace.",
+      "imageAlt": "Historic waterfront buildings and boats along Skeppsbron in Stockholm"
     },
     "humanStory": {
       "eyebrow": "Built through real relationships",
@@ -86,7 +88,8 @@
     "cta": {
       "eyebrow": "Start a conversation",
       "title": "Ready to test the Nordic opportunity?",
-      "body": "Tell us where you want to grow. We'll help assess the opportunity, identify the right market and define how Nordgate can execute the commercial work."
+      "body": "Tell us where you want to grow. We'll help assess the opportunity, identify the right market and define how Nordgate can execute the commercial work.",
+      "imageAlt": "A laptop displaying a photograph from a Nordgate-connected business event"
     }
   },
   "process": {
