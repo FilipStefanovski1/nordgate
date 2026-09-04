@@ -52,6 +52,13 @@ export function TeamSection({ background = "white" }: { background?: "white" | "
                 </div>
                 <p className="mt-6 text-xl font-semibold text-ink-900">{member.name}</p>
                 <p className="mt-1 text-sm text-ink-500">{member.role}</p>
+                <div className="mt-4 flex flex-col gap-2">
+                  {member.bio.map((line) => (
+                    <p key={line} className="text-sm leading-relaxed text-ink-500">
+                      {line}
+                    </p>
+                  ))}
+                </div>
                 {member.linkedin && (
                   <a
                     href={member.linkedin}

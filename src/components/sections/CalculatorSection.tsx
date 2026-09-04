@@ -18,7 +18,12 @@ export function CalculatorSection() {
         </div>
 
         <div className="mt-14">
-          <RoiCalculator />
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
+            {t("scopeLabel")}
+          </p>
+          <div className="mt-4">
+            <RoiCalculator />
+          </div>
         </div>
       </Container>
     </section>

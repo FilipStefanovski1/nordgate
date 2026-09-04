@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { Reveal } from "@/components/ui/Reveal";
+import { Link } from "@/i18n/navigation";
 import { CoordinationSteps } from "@/components/sections/CoordinationSteps";
 import { PartnerCriteria } from "@/components/sections/PartnerCriteria";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -91,6 +92,20 @@ export default async function CapabilitiesPage({
           <Reveal delay className="mt-12">
             <PartnerCriteria />
           </Reveal>
+        </Container>
+      </section>
+
+      <section className="border-t border-border-soft bg-white py-10">
+        <Container>
+          <p className="text-center text-sm text-ink-500">
+            {t.rich("crossLinkBody", {
+              link: (chunks) => (
+                <Link href="/nordic-market-entry" className="link-underline font-semibold text-blue-700 hover:text-navy-900">
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
         </Container>
       </section>
 

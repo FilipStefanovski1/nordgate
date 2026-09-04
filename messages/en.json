@@ -150,7 +150,8 @@
     "sprint1": "Target-market assessment",
     "sprint2": "Competitor and opportunity mapping",
     "sprint3": "Ideal-customer definition",
-    "sprint4": "Recommended market-entry plan"
+    "sprint4": "Recommended market-entry plan",
+    "crossLinkBody": "Looking for the reverse direction? Explore <link>outsourcing and nearshoring</link> opportunities in the Balkans."
   },
   "approach": {
     "heroEyebrow": "How it works",
@@ -210,7 +211,7 @@
   "capabilities": {
     "heroEyebrow": "International capabilities",
     "heroTitle": "Capacity, without a new vendor hunt.",
-    "heroBody": "For Nordic companies: we identify, vet and coordinate international providers and operational capacity on your behalf.",
+    "heroBody": "For Nordic companies: we identify, vet and coordinate skilled teams and operational capacity in the Balkans.",
     "whereEyebrow": "Where it helps",
     "whereTitle": "Capacity across four functions.",
     "cat1Title": "Technology",
@@ -240,7 +241,8 @@
     "criterion1": "Competence and relevant industry experience",
     "criterion2": "Verifiable references and previous work",
     "criterion3": "Delivery capacity and reliability",
-    "criterion4": "Cultural compatibility with Nordic working practices"
+    "criterion4": "Cultural compatibility with Nordic working practices",
+    "crossLinkBody": "Looking to enter and grow in Nordic markets? Explore <link>Nordic Market Entry</link>."
   },
   "insights": {
     "heroEyebrow": "Insights",
@@ -253,6 +255,7 @@
     "eyebrow": "Calculate your opportunity",
     "title": "What could this be worth?",
     "description": "Estimate the commercial value of an engagement using your own sales assumptions.",
+    "scopeLabel": "For Nordic market-entry engagements",
     "scenarioInputs": "Scenario inputs",
     "yourAssumptions": "Your assumptions",
     "currency": "Currency",
@@ -341,8 +344,7 @@
     "contact": "Contact",
     "nordicMarketEntry": "Nordic Market Entry",
     "salesExecution": "Sales Execution",
-    "businessDevelopment": "Business Development",
-    "internationalCapabilities": "International Capabilities",
+    "outsourcingNearshoring": "Outsourcing & Nearshoring",
     "howItWorks": "How It Works",
     "roiCalculator": "ROI Calculator",
     "insights": "Insights",
@@ -352,6 +354,7 @@
     "navLabel": "Footer"
   },
   "errors": {
+    "notFoundEyebrow": "404",
     "notFoundTitle": "Page not found",
     "notFoundBody": "The page you're looking for doesn't exist or has moved.",
     "backHome": "Back to home"

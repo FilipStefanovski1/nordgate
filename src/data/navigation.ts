@@ -51,8 +51,7 @@ export const footerNav: { titleKey: string; links: NavLink[] }[] = [
     links: [
       { key: "nordicMarketEntry", href: "/nordic-market-entry" },
       { key: "salesExecution", href: "/nordic-market-entry", hash: "sales-execution" },
-      { key: "businessDevelopment", href: "/nordic-market-entry" },
-      { key: "internationalCapabilities", href: "/capabilities" },
+      { key: "outsourcingNearshoring", href: "/capabilities" },
     ],
   },
   {

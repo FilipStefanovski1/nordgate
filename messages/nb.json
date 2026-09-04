@@ -150,7 +150,8 @@
     "sprint1": "Analyse av målmarkedet",
     "sprint2": "Kartlegging av konkurrenter og muligheter",
     "sprint3": "Definisjon av idealkunden",
-    "sprint4": "Anbefalt etableringsplan"
+    "sprint4": "Anbefalt etableringsplan",
+    "crossLinkBody": "Ser dere etter den motsatte retningen? Utforsk <link>outsourcing og nearshoring</link> på Balkan."
   },
   "approach": {
     "heroEyebrow": "Slik jobber vi",
@@ -210,7 +211,7 @@
   "capabilities": {
     "heroEyebrow": "Internasjonal kapasitet",
     "heroTitle": "Kapasitet uten ny leverandørjakt.",
-    "heroBody": "For nordiske selskaper: vi finner, vurderer og koordinerer internasjonale leverandører og operativ kapasitet for dere.",
+    "heroBody": "For nordiske selskaper: vi finner, vurderer og koordinerer dyktige team og operativ kapasitet på Balkan.",
     "whereEyebrow": "Her hjelper det",
     "whereTitle": "Kapasitet på tvers av fire funksjoner.",
     "cat1Title": "Teknologi",
@@ -240,7 +241,8 @@
     "criterion1": "Kompetanse og relevant bransjeerfaring",
     "criterion2": "Etterprøvbare referanser og tidligere arbeid",
     "criterion3": "Leveringskapasitet og pålitelighet",
-    "criterion4": "Kulturell match med nordisk arbeidsmåte"
+    "criterion4": "Kulturell match med nordisk arbeidsmåte",
+    "crossLinkBody": "Vil dere etablere dere og vokse i det nordiske markedet? Utforsk <link>etablering i Norden</link>."
   },
   "insights": {
     "heroEyebrow": "Innsikt",
@@ -253,6 +255,7 @@
     "eyebrow": "Regn på muligheten",
     "title": "Hva kan dette være verdt?",
     "description": "Estimer den kommersielle verdien av et oppdrag ut fra deres egne salgsforutsetninger.",
+    "scopeLabel": "Gjelder etablering i det nordiske markedet",
     "scenarioInputs": "Inndata",
     "yourAssumptions": "Deres forutsetninger",
     "currency": "Valuta",
@@ -341,8 +344,7 @@
     "contact": "Kontakt",
     "nordicMarketEntry": "Etablering i Norden",
     "salesExecution": "Salgsgjennomføring",
-    "businessDevelopment": "Forretningsutvikling",
-    "internationalCapabilities": "Internasjonal kapasitet",
+    "outsourcingNearshoring": "Outsourcing og nearshoring",
     "howItWorks": "Slik jobber vi",
     "roiCalculator": "ROI-kalkulator",
     "insights": "Innsikt",
@@ -352,6 +354,7 @@
     "navLabel": "Bunntekst"
   },
   "errors": {
+    "notFoundEyebrow": "404",
     "notFoundTitle": "Fant ikke siden",
     "notFoundBody": "Siden dere leter etter finnes ikke eller har flyttet.",
     "backHome": "Til forsiden"

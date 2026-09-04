@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ImageTextSplit } from "@/components/ui/ImageTextSplit";
 import { Reveal } from "@/components/ui/Reveal";
+import { Link } from "@/i18n/navigation";
 import { ServiceGroups } from "@/components/sections/ServiceGroups";
 import { WhoWeWorkWith } from "@/components/sections/WhoWeWorkWith";
 import { MarketReadinessSprint } from "@/components/sections/MarketReadinessSprint";
@@ -70,6 +71,21 @@ export default async function NordicMarketEntryPage({
       </section>
 
       <MarketReadinessSprint />
+
+      <section className="border-t border-border-soft bg-white py-10">
+        <Container>
+          <p className="text-center text-sm text-ink-500">
+            {t.rich("crossLinkBody", {
+              link: (chunks) => (
+                <Link href="/capabilities" className="link-underline font-semibold text-blue-700 hover:text-navy-900">
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
+        </Container>
+      </section>
+
       <FinalCta />
     </>
   );

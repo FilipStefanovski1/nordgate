@@ -150,7 +150,8 @@
     "sprint1": "Analys av målmarknaden",
     "sprint2": "Kartläggning av konkurrenter och möjligheter",
     "sprint3": "Definition av idealkund",
-    "sprint4": "Rekommenderad etableringsplan"
+    "sprint4": "Rekommenderad etableringsplan",
+    "crossLinkBody": "Letar ni efter den omvända riktningen? Utforska <link>outsourcing och nearshoring</link> på Balkan."
   },
   "approach": {
     "heroEyebrow": "Så arbetar vi",
@@ -210,7 +211,7 @@
   "capabilities": {
     "heroEyebrow": "Internationell kapacitet",
     "heroTitle": "Kapacitet utan ny leverantörsjakt.",
-    "heroBody": "För nordiska företag: vi identifierar, granskar och samordnar internationella leverantörer och operativ kapacitet åt er.",
+    "heroBody": "För nordiska företag: vi identifierar, granskar och samordnar kompetenta team och operativ kapacitet på Balkan.",
     "whereEyebrow": "Här hjälper det",
     "whereTitle": "Kapacitet inom fyra funktioner.",
     "cat1Title": "Teknik",
@@ -240,7 +241,8 @@
     "criterion1": "Kompetens och relevant branscherfarenhet",
     "criterion2": "Kontrollerbara referenser och tidigare arbeten",
     "criterion3": "Leveranskapacitet och pålitlighet",
-    "criterion4": "Kulturell samsyn med nordiskt arbetssätt"
+    "criterion4": "Kulturell samsyn med nordiskt arbetssätt",
+    "crossLinkBody": "Vill ni etablera er och växa på de nordiska marknaderna? Utforska <link>etablering i Norden</link>."
   },
   "insights": {
     "heroEyebrow": "Insikter",
@@ -253,6 +255,7 @@
     "eyebrow": "Räkna på möjligheten",
     "title": "Vad kan det här vara värt?",
     "description": "Uppskatta det kommersiella värdet av ett uppdrag utifrån era egna säljantaganden.",
+    "scopeLabel": "Gäller etablering i Norden",
     "scenarioInputs": "Indata",
     "yourAssumptions": "Era antaganden",
     "currency": "Valuta",
@@ -341,8 +344,7 @@
     "contact": "Kontakt",
     "nordicMarketEntry": "Etablering i Norden",
     "salesExecution": "Säljgenomförande",
-    "businessDevelopment": "Affärsutveckling",
-    "internationalCapabilities": "Internationell kapacitet",
+    "outsourcingNearshoring": "Outsourcing och nearshoring",
     "howItWorks": "Så arbetar vi",
     "roiCalculator": "ROI-kalkylator",
     "insights": "Insikter",
@@ -352,6 +354,7 @@
     "navLabel": "Sidfot"
   },
   "errors": {
+    "notFoundEyebrow": "404",
     "notFoundTitle": "Sidan hittades inte",
     "notFoundBody": "Sidan du söker finns inte eller har flyttat.",
     "backHome": "Till startsidan"

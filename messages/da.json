@@ -150,7 +150,8 @@
     "sprint1": "Analyse af målmarkedet",
     "sprint2": "Kortlægning af konkurrenter og muligheder",
     "sprint3": "Definition af idealkunden",
-    "sprint4": "Anbefalet etableringsplan"
+    "sprint4": "Anbefalet etableringsplan",
+    "crossLinkBody": "Leder I efter den omvendte retning? Udforsk <link>outsourcing og nearshoring</link> på Balkan."
   },
   "approach": {
     "heroEyebrow": "Vores tilgang",
@@ -210,7 +211,7 @@
   "capabilities": {
     "heroEyebrow": "International kapacitet",
     "heroTitle": "Kapacitet uden ny leverandørjagt.",
-    "heroBody": "For nordiske virksomheder: vi finder, gennemgår og koordinerer internationale leverandører og operationel kapacitet for jer.",
+    "heroBody": "For nordiske virksomheder: vi finder, gennemgår og koordinerer dygtige teams og operationel kapacitet på Balkan.",
     "whereEyebrow": "Her hjælper det",
     "whereTitle": "Kapacitet på tværs af fire funktioner.",
     "cat1Title": "Teknologi",
@@ -240,7 +241,8 @@
     "criterion1": "Kompetencer og relevant brancheerfaring",
     "criterion2": "Kontrollerbare referencer og tidligere arbejde",
     "criterion3": "Leveringskapacitet og pålidelighed",
-    "criterion4": "Kulturelt match med nordisk arbejdsform"
+    "criterion4": "Kulturelt match med nordisk arbejdsform",
+    "crossLinkBody": "Vil I ind på og vokse på det nordiske marked? Udforsk <link>etablering i Norden</link>."
   },
   "insights": {
     "heroEyebrow": "Indsigter",
@@ -253,6 +255,7 @@
     "eyebrow": "Regn på potentialet",
     "title": "Hvad kan det være værd?",
     "description": "Estimér den kommercielle værdi af et forløb ud fra jeres egne salgsforudsætninger.",
+    "scopeLabel": "Gælder etablering på det nordiske marked",
     "scenarioInputs": "Inputdata",
     "yourAssumptions": "Jeres forudsætninger",
     "currency": "Valuta",
@@ -341,8 +344,7 @@
     "contact": "Kontakt",
     "nordicMarketEntry": "Nordisk markedsetablering",
     "salesExecution": "Salgseksekvering",
-    "businessDevelopment": "Forretningsudvikling",
-    "internationalCapabilities": "International kapacitet",
+    "outsourcingNearshoring": "Outsourcing og nearshoring",
     "howItWorks": "Vores tilgang",
     "roiCalculator": "ROI-beregner",
     "insights": "Indsigter",
@@ -352,6 +354,7 @@
     "navLabel": "Sidefod"
   },
   "errors": {
+    "notFoundEyebrow": "404",
     "notFoundTitle": "Siden blev ikke fundet",
     "notFoundBody": "Siden, I leder efter, findes ikke eller er flyttet.",
     "backHome": "Til forsiden"
