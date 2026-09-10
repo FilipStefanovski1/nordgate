@@ -8,7 +8,11 @@ export function PrinciplesGrid() {
   }));
 
   return (
-    <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border-soft bg-border-soft sm:grid-cols-2 lg:grid-cols-3">
+    // Four items across four tracks — a 3-track grid left the last card
+    // orphaned on its own row, and the container's hairline background showed
+    // through the two empty cells as a grey block. Matches CoordinationSteps,
+    // which uses this same card treatment for the same number of items.
+    <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border-soft bg-border-soft sm:grid-cols-2 lg:grid-cols-4">
       {principles.map((p, i) => (
         <div key={p.title} className="bg-white p-8">
           <span className="coord-label text-blue-600">{String(i + 1).padStart(2, "0")}</span>
