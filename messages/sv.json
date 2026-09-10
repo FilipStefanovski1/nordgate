@@ -27,6 +27,14 @@
     "contact": {
       "title": "Kontakt",
       "description": "Låt oss ta reda på om Norden är rätt marknad för er. Hör av er till Nordgate för att prata om etablering."
+    },
+    "privacy": {
+      "title": "Integritetspolicy",
+      "description": "Hur NordGate samlar in, använder och skyddar personuppgifter som lämnas via den här webbplatsen."
+    },
+    "terms": {
+      "title": "Användarvillkor",
+      "description": "Villkoren som gäller för din användning av NordGates webbplats."
     }
   },
   "nav": {
@@ -334,6 +342,14 @@
     "labelPage": "Skickat från",
     "labelLanguage": "Språk"
   },
+  "legal": {
+    "eyebrow": "Juridisk information",
+    "privacyTitle": "Integritetspolicy",
+    "termsTitle": "Användarvillkor",
+    "lastUpdated": "Senast uppdaterad {date}",
+    "languageNotice": "Publicerad på engelska",
+    "companyDetails": "Företagsuppgifter"
+  },
   "footer": {
     "tagline": "Operativt kommersiellt arbete för företag som etablerar sig och växer i Norden.",
     "company": "Företag",
@@ -348,10 +364,11 @@
     "howItWorks": "Så arbetar vi",
     "roiCalculator": "ROI-kalkylator",
     "insights": "Insikter",
-    "address": "Adress",
     "rights": "© {year} NordGate. Alla rättigheter förbehållna.",
     "socialLabel": "Nordgate på {network}",
-    "navLabel": "Sidfot"
+    "navLabel": "Sidfot",
+    "privacy": "Integritetspolicy",
+    "terms": "Användarvillkor"
   },
   "errors": {
     "notFoundEyebrow": "404",

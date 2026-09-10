@@ -4,7 +4,15 @@ import { footerNav } from "@/data/navigation";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/Container";
 
-const socialLinks = [
+type SocialLink = {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+  /** Optional optical-size override where a mark's glyph doesn't fill its box. */
+  size?: string;
+};
+
+const socialLinks: SocialLink[] = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/thenordgate",
@@ -20,10 +28,16 @@ const socialLinks = [
     ),
   },
   {
-    label: "X (Twitter)",
+    label: "X",
     href: "https://x.com/thenordgate",
+    // Official X mark geometry, not an approximation — the previous path had
+    // uneven stroke weights that read as slightly crooked next to the others.
+    // Its glyph is inset in the 24px box (~81% fill) where the other three
+    // run edge to edge, so it needs a nudge up in size to look the same
+    // weight in the row.
+    size: "h-5 w-5",
     icon: (
-      <path d="M18.9 2h3.1l-6.79 7.77L23.16 22h-6.25l-4.9-6.4L6.3 22H3.2l7.26-8.3L1 2h6.41l4.43 5.85L18.9 2zm-1.09 18h1.72L7.28 3.9H5.43L17.81 20z" />
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     ),
   },
   {
@@ -42,14 +56,13 @@ export function Footer() {
   return (
     <footer className="bg-navy-950 text-white">
       <Container>
-        {/* Compact, secondary company/navigation cluster — deliberately small and asymmetric */}
-        <div className="flex flex-col gap-10 pb-12 pt-20 sm:pt-24 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:pt-28">
-          <div className="max-w-[220px]">
+        {/* One grid rather than three free-floating blocks — the columns share
+            a track width, so they can't drift apart into uneven gaps. */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 pb-14 pt-20 sm:grid-cols-3 sm:pt-24 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-x-12 lg:pt-28">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1 lg:max-w-[280px]">
             <Logo variant="white" />
-            <p className="mt-4 text-xs leading-relaxed text-white/45">
-              {t("tagline")}
-            </p>
-            <ul className="mt-5 flex items-center gap-4">
+            <p className="mt-5 text-sm leading-relaxed text-white/55">{t("tagline")}</p>
+            <ul className="mt-6 flex items-center gap-5">
               {socialLinks.map((social) => (
                 <li key={social.label}>
                   <a
@@ -57,9 +70,14 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={t("socialLabel", { network: social.label })}
-                    className="text-white/45 transition-colors duration-200 hover:text-white"
+                    className="block text-white/55 transition-colors duration-200 hover:text-white"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={social.size ?? "h-[18px] w-[18px]"}
+                      aria-hidden="true"
+                    >
                       {social.icon}
                     </svg>
                   </a>
@@ -68,52 +86,47 @@ export function Footer() {
             </ul>
           </div>
 
-          <nav className="flex flex-wrap gap-x-12 gap-y-8" aria-label={t("navLabel")}>
-            {footerNav.map((group) => (
-              <div key={group.titleKey}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">{t(group.titleKey)}</p>
-                <ul className="mt-3 flex flex-col gap-2">
-                  {group.links.map((link) => (
-                    <li key={link.key}>
-                      <Link href={link.hash ? { pathname: link.href, hash: link.hash } : link.href} className="text-xs text-white/60 transition-colors hover:text-white">
-                        {t(link.key)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
-
-          {/* Official company, contact and legal details */}
-          <div className="min-w-[190px]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/30">{t("address")}</p>
-            <address className="mt-3 flex flex-col gap-2 text-xs not-italic leading-relaxed text-white/60">
-              <span className="whitespace-nowrap">
-                NordGate ApS
-                <br />
-                Rødovre Parkvej 301, 2.
-                <br />
-                2610 Rødovre
-                <br />
-                Denmark
-              </span>
-              <span className="flex flex-col gap-1">
-                <a href="tel:+4552586580" className="whitespace-nowrap transition-colors hover:text-white">
-                  +45 52 58 65 80
-                </a>
-                <a href="mailto:info@thenordgate.com" className="whitespace-nowrap transition-colors hover:text-white">
-                  info@thenordgate.com
-                </a>
-              </span>
-              <span className="text-white/40">CVR: 44931214</span>
-            </address>
-          </div>
+          {footerNav.map((group) => (
+            <nav key={group.titleKey} aria-label={t(group.titleKey)}>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50">
+                {t(group.titleKey)}
+              </p>
+              <ul className="mt-5 flex flex-col gap-3">
+                {group.links.map((link) => (
+                  <li key={link.key}>
+                    <Link
+                      href={link.hash ? { pathname: link.href, hash: link.hash } : link.href}
+                      className="text-sm text-white/65 transition-colors duration-200 hover:text-white"
+                    >
+                      {t(link.key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
-        {/* Tiny print */}
-        <div className="pb-10">
-          <p className="text-[11px] text-white/25">{t("rights", { year })}</p>
+        <div className="flex flex-col gap-4 border-t border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/55">{t("rights", { year })}</p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <li>
+              <Link
+                href="/privacy"
+                className="text-xs text-white/55 transition-colors duration-200 hover:text-white"
+              >
+                {t("privacy")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terms"
+                className="text-xs text-white/55 transition-colors duration-200 hover:text-white"
+              >
+                {t("terms")}
+              </Link>
+            </li>
+          </ul>
         </div>
       </Container>
 

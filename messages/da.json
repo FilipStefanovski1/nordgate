@@ -27,6 +27,14 @@
     "contact": {
       "title": "Kontakt",
       "description": "Lad os finde ud af, om Norden er det rigtige marked for jer. Kontakt Nordgate for at tale om markedsetablering."
+    },
+    "privacy": {
+      "title": "Privatlivspolitik",
+      "description": "Hvordan NordGate indsamler, bruger og beskytter persondata, der sendes via dette website."
+    },
+    "terms": {
+      "title": "Vilkår og betingelser",
+      "description": "De vilkår, der gælder for din brug af NordGates website."
     }
   },
   "nav": {
@@ -334,6 +342,14 @@
     "labelPage": "Sendt fra",
     "labelLanguage": "Sprog"
   },
+  "legal": {
+    "eyebrow": "Juridisk information",
+    "privacyTitle": "Privatlivspolitik",
+    "termsTitle": "Vilkår og betingelser",
+    "lastUpdated": "Senest opdateret {date}",
+    "languageNotice": "Udgivet på engelsk",
+    "companyDetails": "Virksomhedsoplysninger"
+  },
   "footer": {
     "tagline": "Kommerciel eksekvering for virksomheder, der etablerer sig og vokser i Norden.",
     "company": "Virksomhed",
@@ -348,10 +364,11 @@
     "howItWorks": "Vores tilgang",
     "roiCalculator": "ROI-beregner",
     "insights": "Indsigter",
-    "address": "Adresse",
     "rights": "© {year} NordGate. Alle rettigheder forbeholdes.",
     "socialLabel": "Nordgate på {network}",
-    "navLabel": "Sidefod"
+    "navLabel": "Sidefod",
+    "privacy": "Privatlivspolitik",
+    "terms": "Vilkår og betingelser"
   },
   "errors": {
     "notFoundEyebrow": "404",

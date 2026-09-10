@@ -27,6 +27,14 @@
     "contact": {
       "title": "Contact",
       "description": "Let's find out whether the Nordics make sense for your business. Get in touch with Nordgate to discuss market entry."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "How NordGate collects, uses and protects personal data submitted through this website."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "The terms that apply to your use of the NordGate website."
     }
   },
   "nav": {
@@ -334,6 +342,14 @@
     "labelPage": "Submitted from",
     "labelLanguage": "Language"
   },
+  "legal": {
+    "eyebrow": "Legal",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms of Service",
+    "lastUpdated": "Last updated {date}",
+    "languageNotice": "Published in English",
+    "companyDetails": "Company details"
+  },
   "footer": {
     "tagline": "Commercial execution for companies entering and growing in the Nordics.",
     "company": "Company",
@@ -348,10 +364,11 @@
     "howItWorks": "How It Works",
     "roiCalculator": "ROI Calculator",
     "insights": "Insights",
-    "address": "Address",
     "rights": "© {year} NordGate. All rights reserved.",
     "socialLabel": "Nordgate on {network}",
-    "navLabel": "Footer"
+    "navLabel": "Footer",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   },
   "errors": {
     "notFoundEyebrow": "404",

@@ -85,6 +85,18 @@ export const pathnames = {
     da: "/kontakt",
     nb: "/kontakt",
   },
+  "/privacy": {
+    en: "/privacy",
+    sv: "/integritetspolicy",
+    da: "/privatlivspolitik",
+    nb: "/personvern",
+  },
+  "/terms": {
+    en: "/terms",
+    sv: "/anvandarvillkor",
+    da: "/vilkaar",
+    nb: "/vilkaar",
+  },
 } as const;
 
 export const routing = defineRouting({
