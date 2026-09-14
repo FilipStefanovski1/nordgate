@@ -314,7 +314,7 @@
     "successTitle": "Thank you. We'll be in touch shortly.",
     "successBody": "A member of the Nordgate team will review your details and reach out to discuss next steps.",
     "errorGeneric": "We couldn't send your message right now. Please try again shortly.",
-    "errorFallback": "You can also reach us at {email} or {phone}.",
+    "errorFallback": "You can also reach us at <email></email> or <phone></phone>.",
     "errorFields": "Please check the highlighted fields and try again.",
     "errorDuplicate": "We've already received a message from you moments ago. We'll be in touch shortly.",
     "validationName": "Name is required",

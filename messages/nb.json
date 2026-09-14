@@ -314,7 +314,7 @@
     "successTitle": "Takk. Vi tar kontakt snart.",
     "successBody": "Noen i Nordgate-teamet går gjennom opplysningene deres og tar kontakt om neste steg.",
     "errorGeneric": "Vi fikk ikke sendt meldingen deres nå. Prøv igjen om litt.",
-    "errorFallback": "Dere når oss også på {email} eller {phone}.",
+    "errorFallback": "Dere når oss også på <email></email> eller <phone></phone>.",
     "errorFields": "Sjekk de markerte feltene og prøv igjen.",
     "errorDuplicate": "Vi har allerede mottatt en melding fra dere for et øyeblikk siden. Vi tar kontakt snart.",
     "validationName": "Navn må fylles ut",

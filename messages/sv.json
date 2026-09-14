@@ -314,7 +314,7 @@
     "successTitle": "Tack. Vi hör av oss inom kort.",
     "successBody": "Någon i Nordgates team går igenom era uppgifter och återkommer för att prata om nästa steg.",
     "errorGeneric": "Vi kunde inte skicka ert meddelande just nu. Försök igen om en liten stund.",
-    "errorFallback": "Ni når oss också på {email} eller {phone}.",
+    "errorFallback": "Ni når oss också på <email></email> eller <phone></phone>.",
     "errorFields": "Kontrollera de markerade fälten och försök igen.",
     "errorDuplicate": "Vi har redan tagit emot ett meddelande från er alldeles nyss. Vi hör av oss inom kort.",
     "validationName": "Namn måste anges",

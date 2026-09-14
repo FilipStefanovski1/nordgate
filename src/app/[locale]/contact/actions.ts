@@ -121,17 +121,24 @@ export async function submitContactForm(
   const resend = getResendClient();
 
   // 1. Internal notification. Success is only reported once THIS is accepted.
-  const notification = await resend.emails.send({
-    from: fromEmail,
-    to: toEmail,
-    replyTo: data.email,
-    subject: t("notifySubject", { name: data.company || data.name }),
-    text,
-    html,
-  });
+  // The SDK reports API errors in `error`, but a network failure still throws —
+  // catch it so the visitor gets the error state instead of a crashed action.
+  try {
+    const notification = await resend.emails.send({
+      from: fromEmail,
+      to: toEmail,
+      replyTo: data.email,
+      subject: t("notifySubject", { name: data.company || data.name }),
+      text,
+      html,
+    });
 
-  if (notification.error) {
-    console.error("[contact] Notification delivery failed:", notification.error.name);
+    if (notification.error) {
+      console.error("[contact] Notification delivery failed:", notification.error.name);
+      return { status: "error", messageKey: "errorGeneric" };
+    }
+  } catch {
+    console.error("[contact] Notification delivery threw.");
     return { status: "error", messageKey: "errorGeneric" };
   }
 

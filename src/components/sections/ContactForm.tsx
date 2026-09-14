@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useId, useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { startTransition, useActionState, useEffect, useId, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { Check, Loader2, TriangleAlert } from "lucide-react";
@@ -65,9 +64,13 @@ function Field({
   );
 }
 
-function SubmitButton() {
+/**
+ * Pending state comes from `useActionState` rather than `useFormStatus`: the
+ * form dispatches from `onSubmit` (see below), and `useFormStatus` only tracks
+ * submissions made through the native form action.
+ */
+function SubmitButton({ pending }: { pending: boolean }) {
   const t = useTranslations("contact");
-  const { pending } = useFormStatus();
   return (
     <button
       type="submit"
@@ -90,11 +93,15 @@ export function ContactForm() {
   const t = useTranslations("contact");
   const locale = useLocale();
   const pathname = usePathname();
-  const [state, formAction] = useActionState<ContactFormState, FormData>(
+  const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(
     submitContactForm,
     initialContactFormState
   );
   const statusRef = useRef<HTMLDivElement>(null);
+  // Guards against a double submit landing before `isPending` has re-rendered
+  // the button as disabled. A queued second action would hit the server's
+  // duplicate check and replace the success state with an error.
+  const submittingRef = useRef(false);
   const consentId = useId();
 
   const [values, setValues] = useState({
@@ -112,6 +119,10 @@ export function ContactForm() {
   useEffect(() => {
     if (state.status !== "idle") statusRef.current?.focus();
   }, [state.status]);
+
+  useEffect(() => {
+    if (!isPending) submittingRef.current = false;
+  }, [isPending]);
 
   if (state.status === "success") {
     return (
@@ -132,7 +143,25 @@ export function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10" noValidate>
+    <form
+      // Kept so the form still posts when JavaScript is unavailable.
+      action={formAction}
+      // With JavaScript, dispatch manually. React auto-resets a form after its
+      // `action` resolves — and returning an error state still counts as
+      // resolving — which wiped the chosen topic and the consent tick on a
+      // failed send, so a visitor retrying had to fill them in again.
+      // Preventing the native submit and dispatching inside a transition is
+      // React's opt-out from that reset.
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (submittingRef.current) return;
+        submittingRef.current = true;
+        const formData = new FormData(event.currentTarget);
+        startTransition(() => formAction(formData));
+      }}
+      className="rounded-2xl border border-border-soft bg-white p-8 sm:p-10"
+      noValidate
+    >
       {/* Context for the notification email */}
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="page" value={pathname} />
@@ -238,7 +267,7 @@ export function ContactForm() {
         </div>
       )}
 
-      <SubmitButton />
+      <SubmitButton pending={isPending} />
     </form>
   );
 }

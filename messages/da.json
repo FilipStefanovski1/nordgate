@@ -314,7 +314,7 @@
     "successTitle": "Tak. Vi vender tilbage snarest.",
     "successBody": "En fra Nordgates team gennemgår jeres oplysninger og kontakter jer om næste skridt.",
     "errorGeneric": "Vi kunne ikke sende jeres besked lige nu. Prøv igen om lidt.",
-    "errorFallback": "I kan også fange os på {email} eller {phone}.",
+    "errorFallback": "I kan også fange os på <email></email> eller <phone></phone>.",
     "errorFields": "Tjek de markerede felter, og prøv igen.",
     "errorDuplicate": "Vi har allerede modtaget en besked fra jer for et øjeblik siden. Vi vender tilbage snarest.",
     "validationName": "Navn skal udfyldes",
